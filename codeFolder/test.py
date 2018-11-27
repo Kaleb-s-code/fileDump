@@ -3,3 +3,5 @@ print("Hello there")
 # for line in in1
 print("Hello")
 print("It took me the entire night to get my path situatuated..FML")
+print("Now, I shouldn't have anymore path problems, and all my extensions should work")
+print("Done and done son.")
