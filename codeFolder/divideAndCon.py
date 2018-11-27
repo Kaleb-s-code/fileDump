@@ -13,7 +13,3 @@ while letter < len(cc):
     letter += 1
 in1.close()
 #out1.close()
-
-
-
-
