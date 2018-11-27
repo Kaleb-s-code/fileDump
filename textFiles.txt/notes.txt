@@ -324,5 +324,21 @@ print(list4[9])
 #     l1.sort()
 #     l2.sort()
 #     return l1 == l2
-# main()
+#     main()
 
+############################
+# Notes for class 11/26
+############################
+
+ Used grades.txt to use as index 
+ Ref histoProgram.py which is based on the histogram program in 
+ the slides
+ for project 2 the accuracy should be %80
+ This class was mainly about counter lists ref divideAndCon.py
+ Check out the list parameter question 
+
+
+ Final programming project
+ ##########################
+ ref voice memo 
+ 

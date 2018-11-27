@@ -1,0 +1,7 @@
+Filename charcounter.py
+Create a hardcoded string in your Python script and set up a list of size 26 that contains all zeros.
+For each character in a string, update an appropriate list counter (hint: function ord can be used to look at the underlying integer representation)
+For each element in a counter list
+Print a letter to a screen followed by the frequency (list element)
+Add file reading sample input file ìCharacterCnt.txtî in Canvas
+Add file writing ñ write to a csv file where the first column is the letter, the second is actual frequency
