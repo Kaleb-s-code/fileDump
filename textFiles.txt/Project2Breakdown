@@ -1,0 +1,24 @@
+openinputfile- train.csv
+setup counters (healthy and ill counters) and accumulators (healthy and ill totals as lists)
+As you will be calling a function to acquire and return the counters and healthy/ill totals lists, the lists can be updated in a function with the updates returning through the parameters. However, the counters individually will not return with their updated values. Python does allow multiple values to be returned in return statements but, most languages do not provide such a mechanism. For this reason, the counters could be implemented in a two element list where the element at index 0 represents healthy counts and the element at index 1 represents ill counts. This two element counter list can then be passed to a function which will update their values and returned through the parameter.
+getHealthyIllTotals – pass the two lists (healthy and ill), the counters list, and the opened input file close input file
+get the totalPatients by adding the two counters
+displayCounts – pass the counters and the totalPatients count
+get healthy and ill averages – use the same function for each. For example: healthyAverages = getAverages(healthyTotals, healthyIllCounts[0]) illAverages = getAverages(illTotals, healthyIllCounts[1])
+get the separation values. For example:
+sepValues = getSeparationValues(healthyAverages, illAverages)
+Display the 3 lists on the console. Use a single function that receives a list and a message. For example: displayList(healthyAverages, "Healthy patients' averages:")
+displayList(illAverages, "Ill patients' averages:")
+displayList(sepValues, "Separation Values:")
+Check your accuracy by making diagnosis on the same input file Openinputfile- train.csv Checkaccuracy-returnthetotalofcorrectdiagnosis. Forexample: diagCnt = checkAccuracy(in1, sepValues)
+Close input file
+Display your accuracy – i.e diagCnt / totalPatients
+Make diagnosis on new input file "cleveland.csv" and write findings to output file "clevelanddiag.csv"
+For example:
+ 
+in1 = open("cleveland.csv", "r")
+out1 = open("clevelanddiag.csv", "w") writeDiagnosis(in1, out1, sepValues) Close input and output files
+Refine the details of each function using a similar process as above.
+To avoid complexity issues, I strongly suggest getting your program to run correctly up to (but not including) the check for accuracy, i.e. the display of the three lists (healthy averages, ill averages, separation values).
+Once successful with the processing of the three lists, add the accuracy check function and run your program to assure you get an accuracy of 0.80 (80%).
+Finally, write the diagnosis function for a new file.
