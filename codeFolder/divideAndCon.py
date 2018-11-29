@@ -1,4 +1,4 @@
-in1 = open("char.cnt", 'r')
+in1 = open("textFiles.txt\char.cnt", 'r')
 #out1 = open("ch.csv", 'w')
 cc = [0] * 26
 for line in in1:
