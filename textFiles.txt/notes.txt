@@ -342,3 +342,33 @@ print(list4[9])
  ##########################
  ref voice memo 
  
+ ############################
+# Notes for class 11/28
+############################
+He mentioned being able to trace functions without running them on the final
+
+healthytotal = [0] # 13
+ if healthy:
+    total h
+    counts[0] += 1
+else:
+    tot i
+    counts[1] + 1
+print(htot, illtot)
+
+pass a the totals and the specific index into average function
+
+then get seperation vals (hAvs, iAvs)
+
+it needs to look exactly like in the examples
+
+get the accuracy(seperation values, in1)
+
+increments counters for checking if the values above the test values are greater than 0 then the person is unhealthy, otherwise, they are healthy.
+
+if things match, then you have made a correct diagnosis, otherwise its wrong. This is how you get the diagnosis percentage. So divide the counter in the end which should be less than 303 that should produce about .8
+
+Last function for the cleaveland file:
+
+open the in1 and send the stuff to an outfile
+send to it the seperation values 
