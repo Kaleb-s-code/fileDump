@@ -1,18 +1,18 @@
 def main():
     # Need to figure out how to send functions to grab data without 
     # Part one: Open the file
-    in1 = open("/Users/adminuser/Code/codeDumpingGround/fileDump/csvFiles.csv/train.csv", 'r')
+    in1 = open("train.csv", 'r')
     # Get the total healthy and ill people
     healthyIll = countersAccumulators(in1)
     in1.close()
     # print("Total healthy, Total Ill")
     # print(healthyIll)
-    in1 = open("/Users/adminuser/Code/codeDumpingGround/fileDump/csvFiles.csv/train.csv", 'r')
+    in1 = open("train.csv", 'r')
     patientTotal = totalPatients(in1)
     # print("Patient total")
     # print(patientTotal)
     in1.close()
-    in1 = open("/Users/adminuser/Code/codeDumpingGround/fileDump/csvFiles.csv/train.csv", 'r')
+    in1 = open("train.csv", 'r')
     getTotals(in1)
     in1.close()
 def countersAccumulators(a):
@@ -53,12 +53,8 @@ def getTotals(a):
     for item in container:
         another += item
     healthyAverages.append(another / count)
-    
-    
     print(container)
     print(healthyAverages)
-
-
 main()
 # while idx < 14:
     # idx += 1
