@@ -9,7 +9,7 @@ for line in in1:
 print(cc)
 letter = 0
 while letter < len(cc):
-    print("{0:a},{1:d}\n".format(chr(ord("a")) + letter, cc[letter]))
+    print("{},{},{}\n".format(chr(ord("a")), letter, cc[letter]))
     letter += 1
 in1.close()
 #out1.close()

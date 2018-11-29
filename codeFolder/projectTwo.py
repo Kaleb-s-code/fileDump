@@ -41,43 +41,29 @@ def totalPatients(a):
         lineCounter += 1
     return lineCounter
 def getHealthyAverage(a):
-    totalsContainer = [0] * 14
+    totalsContainer = [0] * 13
     container = []
     iterations = 0
     healthyCount = 0
-    idx = 0
+    idx = 1
     # This is supposed to get the totals of healthy people into a list
-    done = False
-    while done == False:
-        for line in a:
-            var = line.split(",")
-            if line[-2] == '0':
+    for line in a:
+        var = line.split(",")
+        if line[-2] == '0':
+            container.append(var[idx])
+            # This checks for questionmarks and replaces them with str 0
+            if var[idx] == '?':
+                var[idx] = var[idx].replace("?", '0')
                 container.append(var[idx])
-                # This checks for questionmarks and replaces them with str 0
-                if var[idx] == '?':
-                    # print(container.index("?"))
-                    var[idx] = var[idx].replace("?", '0')
-                    container.append(var[idx])
-                    container.remove("?")
-                    # print("sex",container.index("0"))
-                healthyCount += 1
-                while iterations < healthyCount:
-                    if var[idx]:
-                        totalsContainer[idx] += float(var[idx])
-                        iterations += 1
-                        done = True
-        if done == True:
-            idx += 1
-            done = False
-        # print(idx)
-        
-        # idx += 1
-                    
-    print("healthy",healthyCount)
+                container.remove("?")
+            healthyCount += 1
+            while iterations < healthyCount:
+                if var[idx]:
+                    totalsContainer[idx] += float(var[idx])
+                    iterations += 1       
     print(totalsContainer)
     print(container)
     print("iterations",iterations)
     print("idx",idx)
-    print(done)
 main() 
 
