@@ -18,3 +18,7 @@
     #                 elseCount += 1
     #         if idx < 12:
     #             idx += 1
+
+        # for idx in range(12):
+        #print(idx)
+        #print(totalsContainer)
