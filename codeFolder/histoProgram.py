@@ -1,6 +1,6 @@
 def main():
     # open up input
-    infile = open("scores.txt", 'r')
+    infile = open("textFiles.txt\scores.txt", 'r')
     # create counters list
     stuff = create_lists(infile)
     # display histogram
