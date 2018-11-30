@@ -43,42 +43,17 @@ def totalPatients(a):
 def getHealthyAverage(a):
     totalsContainer = [0] * 13
     c1 = 0
-    num = 0
     idx = 0
-    test = []
-
-    
     for line in a:
         var = line.split(",")
         if line[-2] == '0':
             c1 += 1
-            print("\ntop\n",idx)
             if var[idx] == '?':
                 var[idx] = var[idx].replace("?", '0')
                 totalsContainer[idx] += float(var[idx])
             else:
                 totalsContainer[idx] += float(var[idx])
-                print("\nbottom\n",idx)
                 done = True
-
-        # print(idx)
-
-        
-                
-            
-
-
-    
-    # for item in totalsContainer:
-    #     test.append(round(item / c1))
-    
-
     print(totalsContainer)
- 
-
-                
-                    
-
-
 main() 
      
