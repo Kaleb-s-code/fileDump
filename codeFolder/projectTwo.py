@@ -88,7 +88,6 @@ def getClassSeps(a, b):
         seps.append(round(item / 2, 2))
     return seps 
 def compareData(a, b):
-    questionMarks = 0
     sickPeople = 0
     idx = 0
     atRisk = 0
@@ -96,20 +95,32 @@ def compareData(a, b):
     out1 = open("clevelanddiag.csv", "w")
     test = []
     test2 = []
+    count = 0
     combine = []
     value = 0
+    # This is just splitting up the line and adding index zero to the test list
     for line in a:
         var = line.split(",")
         var[-1] = var[-1].strip("\n")
         test.append(var[0])
+        # This is just incrementing the at risk counter 
         for idx in range(13):
-            if var[idx] == '?':
-                var[idx] = var[idx].replace("?", '0')
+            if var[idx] == "?":
+                var[idx] = var[idx].replace("?", "0")
             if float(var[idx]) > b[idx]:
                 atRisk += 1
-        if line[-2] > '0':
-            actuallySick += 1
-        if atRisk > 7:
+        # Now we have left the for loop in range 13
+        # This is checking to see what file we are dealing with 
+        if "0" in var[-2]:
+            if var[-2] > "0":
+                actuallySick += 1
+        else:
+            actuallySick = 124
+        # This is where we determine if the person is sick or not, and add it to the list that will be sent to a csv file. This is where things are going wrong I think
+        if atRisk > 6:
+            count += 1
+            print(atRisk)
+            print(count)
             atRisk = 0
             sickPeople += 1
             test2.append("1")
@@ -124,9 +135,11 @@ def compareData(a, b):
     for item in combine:
         out1.write(item)
     somevar = (actuallySick / sickPeople) * 100
+    print(test2)
+    print("-" * 50)
     print("sick prediction:", sickPeople)
     print("actually sick:", actuallySick)
-    print("prediction rate (train.csv): %{0:.2f}".format(somevar))
+    print("prediction rate: %{0:.2f}".format(somevar))
     print("-" * 50)
     return somevar
 
