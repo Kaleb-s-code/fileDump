@@ -12,11 +12,11 @@ def main():
     unHealthyAvs = getUnhealthyAverages(in1)
     in1.close()
     classSeps = getClassSeps(healthyAvs, unHealthyAvs)
-    in1 = open("codeFolder/train.csv", 'r')
-    # # in1 = open("csvFiles/cleveland.csv", 'r')
-    newData = compareNewData(in1, classSeps)
+    # in1 = open("codeFolder/train.csv", 'r')
+    in1 = open("csvFiles/cleveland.csv", 'r')
+    newData = compareData(in1, classSeps)
     in1.close()
-    present = getProperPresentation(patientTotal, healthyIll[0], healthyIll[1],healthyAvs, unHealthyAvs, classSeps)
+    getProperPresentation(patientTotal, healthyIll[0], healthyIll[1],healthyAvs, unHealthyAvs, classSeps,newData)
 def countersAccumulators(a):
     # This function can return the total of healthy people and ill people (in that order), and the total numneber of files processed. 
     statusContainer = []
@@ -87,28 +87,51 @@ def getClassSeps(a, b):
     for item in container:
         seps.append(round(item / 2, 2))
     return seps 
-def compareNewData(a, b):
+def compareData(a, b):
     questionMarks = 0
     sickPeople = 0
     idx = 0
     atRisk = 0
+    actuallySick = 0
+    out1 = open("clevelanddiag.csv", "w")
+    test = []
+    test2 = []
+    combine = []
+    value = 0
     for line in a:
         var = line.split(",")
         var[-1] = var[-1].strip("\n")
+        test.append(var[0])
         for idx in range(13):
             if var[idx] == '?':
                 var[idx] = var[idx].replace("?", '0')
             if float(var[idx]) > b[idx]:
                 atRisk += 1
+        if line[-2] > '0':
+            actuallySick += 1
         if atRisk > 7:
             atRisk = 0
             sickPeople += 1
-    # 139 is the total sick in train.csv
-    somevar = (139 / sickPeople) * 100
-    print("sick people counted: ",sickPeople)
+            test2.append("1")
+        else:
+            test2.append("0")
+    while value < len(test):
+        combine.append(test[value])
+        combine.append(",")
+        combine.append(test2[value])
+        combine.append("\n")
+        value += 1
+    for item in combine:
+        out1.write(item)
+    somevar = (actuallySick / sickPeople) * 100
+    print("sick prediction:", sickPeople)
+    print("actually sick:", actuallySick)
     print("prediction rate (train.csv): %{0:.2f}".format(somevar))
     print("-" * 50)
-def getProperPresentation(tot, hel, ill, havs, unhavs, seps):
+    return somevar
+
+    out1.close()
+def getProperPresentation(tot, hel, ill, havs, unhavs, seps, data):
     templist = []
     templist2 = []
     for item in havs:
@@ -124,4 +147,5 @@ def getProperPresentation(tot, hel, ill, havs, unhavs, seps):
     print("Averages of Healthy Patients:\n{}".format(templist[1:-1]))
     print("Averages of Ill Patients:\n{}".format(templist2[1:-1]))
     print("Seperation Values are:\n{}".format(seps[1:-1]))
+    print("Accuracy of The Model: %{0:.2f}".format(data))
 main() 
