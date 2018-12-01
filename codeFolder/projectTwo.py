@@ -1,17 +1,9 @@
-# There are 14 attributes 
 def main():
-    # Need to figure out how to send functions to grab data without 
-    # Part one: Open the file
     in1 = open("codeFolder/train.csv", 'r')
-    # Get the total healthy and ill people
     healthyIll = countersAccumulators(in1)
     in1.close()
-    # print("Total healthy, Total Ill")
-    # print(healthyIll)
     in1 = open("codeFolder/train.csv", 'r')
     patientTotal = totalPatients(in1)
-    # print("Patient total")
-    # print(patientTotal)
     in1.close()
     in1 = open("codeFolder/train.csv", 'r')
     healthyAvs = getHealthyAverage(in1)
@@ -20,10 +12,11 @@ def main():
     unHealthyAvs = getUnhealthyAverages(in1)
     in1.close()
     classSeps = getClassSeps(healthyAvs, unHealthyAvs)
-    print(classSeps)
-    in1 = open("csvFiles/cleveland.csv", 'r')
+    in1 = open("codeFolder/train.csv", 'r')
+    # # in1 = open("csvFiles/cleveland.csv", 'r')
     newData = compareNewData(in1, classSeps)
-    in1.close
+    in1.close()
+    present = getProperPresentation(patientTotal, healthyIll[0], healthyIll[1],healthyAvs, unHealthyAvs, classSeps)
 def countersAccumulators(a):
     # This function can return the total of healthy people and ill people (in that order), and the total numneber of files processed. 
     statusContainer = []
@@ -95,30 +88,40 @@ def getClassSeps(a, b):
         seps.append(round(item / 2, 2))
     return seps 
 def compareNewData(a, b):
-    c1 = 0
-    c2 = 0
-    c3 = 0
+    questionMarks = 0
+    sickPeople = 0
     idx = 0
-    val = 0
+    atRisk = 0
     for line in a:
-        c2Before = c2
         var = line.split(",")
         var[-1] = var[-1].strip("\n")
         for idx in range(13):
-                if var[idx] == '?':
-                    var[idx] = var[idx].replace("?", '0')
-                    if var[idx] > b[idx]:
-                        c2 += 2
-                        if c2 > (len(var) / 2):
-                            c3 += 1
-                else:
-                    if float(var[idx]) > b[idx]:
-                        print(True)
-                        c2 += 1
-                    else:
-                        print(False)
-                        val += 1
-        if (c2 - c2Before) > 6:
-            c3 += 1
-    print(c1, c2, c3, val)
+            if var[idx] == '?':
+                var[idx] = var[idx].replace("?", '0')
+            if float(var[idx]) > b[idx]:
+                atRisk += 1
+        if atRisk > 7:
+            atRisk = 0
+            sickPeople += 1
+    # 139 is the total sick in train.csv
+    somevar = (139 / sickPeople) * 100
+    print("sick people counted: ",sickPeople)
+    print("prediction rate (train.csv): %{0:.2f}".format(somevar))
+    print("-" * 50)
+def getProperPresentation(tot, hel, ill, havs, unhavs, seps):
+    templist = []
+    templist2 = []
+    for item in havs:
+        templist.append(round(item,2))
+    templist = str(templist)
+    for item in unhavs:
+        templist2.append(round(item,2))
+    templist2 = str(templist2)
+    seps = str(seps)
+    print("Total Lines Processed: {}".format(tot))
+    print("Total Healthy Count: {}".format(hel))
+    print("Total Ill Count: {}".format(ill))
+    print("Averages of Healthy Patients:\n{}".format(templist[1:-1]))
+    print("Averages of Ill Patients:\n{}".format(templist2[1:-1]))
+    print("Seperation Values are:\n{}".format(seps[1:-1]))
 main() 

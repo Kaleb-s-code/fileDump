@@ -22,3 +22,12 @@
         # for idx in range(12):
         #print(idx)
         #print(totalsContainer)
+in1 = open("codeFolder/train.csv", 'r')
+count = 0
+for line in in1:
+    line.split(",")
+    print(line[-2])
+    if line[-2] > '0':
+        count += 1
+in1.close()
+print(count)
