@@ -1,8 +1,8 @@
-def ex3a(num):
+#def ex3a(num):
 
-def ex3b(num):
+#def ex3b(num):
 
-def ex3c(word):
+#def ex3c(word):
     
 def main():
     num = int(input('Enter a number of terms: '))
