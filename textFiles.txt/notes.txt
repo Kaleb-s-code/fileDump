@@ -372,3 +372,8 @@ Last function for the cleaveland file:
 
 open the in1 and send the stuff to an outfile
 send to it the seperation values 
+
+##############################
+# Java 
+##############################
+Everything is in a class 

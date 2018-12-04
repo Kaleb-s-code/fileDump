@@ -26,7 +26,7 @@
 #     counter = sum(someList)
 # print(counter)
 
-while count < len(someList):
-    count += 1
-    for i in 
+# while count < len(someList):
+#     count += 1
+#     for i in 
     
