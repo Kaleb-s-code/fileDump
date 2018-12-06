@@ -1,5 +1,10 @@
+# Kaleb Moreno
+# 1873583
+
+# This is my main function header housing all 
+# of my defined functions and input files
+# *** Functions are annotated above the definition ***
 def main():
-    # getFiles()
     in1 = open("codeFolder/train.csv", 'r')
     healthyIll = countersAccumulators(in1)
     in1.close()
@@ -18,8 +23,8 @@ def main():
     newData = compareData(in1, classSeps)
     in1.close()
     getProperPresentation(patientTotal, healthyIll[0], healthyIll[1],healthyAvs, unHealthyAvs, classSeps,newData)
+# This function accepts an input file as "a" and returns the total of healthy and ill in it.
 def countersAccumulators(a):
-    # This function can return the total of healthy people and ill people (in that order), and the total numneber of files processed. 
     statusContainer = []
     healthy = []
     ill = []
@@ -36,12 +41,15 @@ def countersAccumulators(a):
     statusContainer.append(len(healthy))
     statusContainer.append(len(ill))
     return statusContainer
+# This function accepts an input file as "a" 
+# and returns the total patient count in the file
 def totalPatients(a):
-    # This function returns the total patient count in the file
     lineCounter = 0
     for line in a:
         lineCounter += 1
     return lineCounter
+# This function accpets an input file as "a" 
+# and returns the averages for healthy patients 
 def getHealthyAverage(a):
     totalsContainer = [0] * 13
     test = []
@@ -61,6 +69,8 @@ def getHealthyAverage(a):
     for item in totalsContainer:
         test.append(item / c1)
     return test
+# This function accpets an input file as "a" 
+# and returns the averages for unhealthy patients 
 def getUnhealthyAverages(a):
     totalsContainer = [0] * 13
     test = []
@@ -80,6 +90,8 @@ def getUnhealthyAverages(a):
     for item in totalsContainer:
         test.append(item / c1)
     return test
+# This function accepts healthy averages as "a", 
+# unhealthy averages as "b" and returns the seperation values
 def getClassSeps(a, b):
     container = [0] * 13
     seps = []
@@ -88,6 +100,11 @@ def getClassSeps(a, b):
     for item in container:
         seps.append(round(item / 2, 2))
     return seps 
+# This function accepts an input file as "a" 
+# and the class seperation values as "b"
+# This function is where an output file is written to 
+# with the patient IDs and diagnosis
+# This function returns the accuracy reading
 def compareData(a, b):
     sickPeople = 0
     idx = 0
@@ -134,17 +151,13 @@ def compareData(a, b):
     for item in combine:
         out1.write(item)
     somevar = (actuallySick / sickPeople) * 100
-    print("-" * 50)
-    if difFile == True:
-        print("Reading from Clevlend.csv")
-    else:
-        print("Reading from train.csv")
-    print("sick prediction:", sickPeople)
-    print("actually sick:", actuallySick)
-    print("prediction rate: %{0:.2f}".format(somevar))
-    print("-" * 50)
     return somevar
     out1.close()
+# This function accepts the total patient count, 
+# total healthy, total ill, healthy averages
+# unhealthy averages, seperation values, 
+# and the accuracy reading as "data"
+# This prints these all to the screen and returns nothing 
 def getProperPresentation(tot, hel, ill, havs, unhavs, seps, data):
     templist = []
     templist2 = []
@@ -162,4 +175,4 @@ def getProperPresentation(tot, hel, ill, havs, unhavs, seps, data):
     print("Averages of Ill Patients:\n{}".format(templist2[1:-1]))
     print("Seperation Values are:\n{}".format(seps[1:-1]))
     print("Accuracy of The Model: %{0:.2f}".format(data))
-main() 
+main()
