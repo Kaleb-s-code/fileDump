@@ -119,7 +119,7 @@ def transactionData(in1):
             date1 = date1.strip()
         date2 = input("Enter the end date (dd/mm/yyyy): ")
         date2 = date2.strip()
-        while date2 not in dateContainer and date2 < date1 and len(date2) < 10 and date2[2] != "/" and date2[5] != "/":
+        while date2 not in dateContainer and date2 < date1 and len(date2) < 10:
             date2 = input("Try again: ")
             date2 = date2.strip()
         dateRanges(date1, date2)
@@ -139,7 +139,6 @@ def dateRanges(d1, d2):
             transactionRange.append(var[0])
             transactionRange.append(var[3:])
     print("\nBetween {0} and {1} you spent ${2:,.2f}".format(d1[0:5], d2[0:5], count))
-        
     in1.close()
 def findBills(in1):
 	for line in in1:
