@@ -2,31 +2,31 @@
   # Ask predefined options 
   
   # show transactions
-   # display file name, and total date range 
-   # include option to show all totals in
-   # full range
-   # get total transactions in date range
-   # get total spent in date range
-   # get highest transaction 
-   # get lowest transaction
-   # get category totals in range 
-   # get average money spent in a month 
-   # get average money spent in a week 
+    # display file name, and total date range :)
+    # include option to show all totals in :)
+    # full range :)
+    # get total transactions in date range :) 
+    # get total spent in date range :) 
+    # get highest transaction :)
+    # get lowest transaction :)
+    # get category totals in range
+    # get average money spent in a month 
+    # get average money spent in a week
   # find bills
-   # import fnmatch? or re 
-   # ask for bill name input 
-   # search file for bill and return 
-   # date last paid and amount
-   # return previous payment dates and prices
-   # upon user request
-  # find out total in versus total out 
-   # find for a given date range 
-   # find for the year to date 
+    # import fnmatch? or re 
+    # ask for bill name input 
+    # search file for bill and return 
+    # date last paid and amount
+    # return previous payment dates and prices
+    # upon user request
+    # find out total in versus total out 
+    # find for a given date range 
+    # find for the year to date 
   # make projections for coming months 
-   # based on averages find likely spending 
-   # per week, per month 
-   # project total needed income to be able to 
-   # save a user defined amount per month 
+    # based on averages find likely spending 
+    # per week, per month 
+    # project total needed income to be able to 
+    # save a user defined amount per month 
 def main():
     infile = open("C:/Users/Kaleb/Documents/fileDump/csvFiles/transactions.csv")
     initial = getInitialResponse()
@@ -89,6 +89,8 @@ def mainMenuValidation(res1):
 	    			if done == True:
 	    				return 3
 def transactionData(in1):
+## Needs input validation for the back to menu step
+## Needs input validation for Entering a number when making a menu choice
     print("=" * 25)
     print("\nYou are viewing transactions from:\n{}\n".format(in1.name))
     in1.readline()
@@ -163,7 +165,27 @@ def transactionData(in1):
             print("\n")
             if repeat in yesList:
                 response2 = 0
-def dateRanges(d1, d2):
+        elif response2 == 4:
+            print("\n")
+            print("Input the date you would like to begin the search")
+            print("=" * 25)
+            while date1 not in dateContainer:
+                date1 = input("Enter a date: ")
+                date1 = date1.strip()
+            print("\nInput the date you would like to end the search")
+            print("=" * 25)
+            while date2 not in dateContainer:
+                date2 = input("Enter a date: ")
+                if date2 < date1:
+                    date2 = ""
+            dateRanges(date1, date2, 4)
+            repeat = input("Back to menu?: ")
+            print("\n")
+            if repeat in yesList:
+                response2 = 0
+        date1 = ""
+        date2 = ""
+def dateRanges(d1, d2, tellNum):
     in1 = open("C:/Users/Kaleb/Documents/fileDump/csvFiles/transactions.csv")
     in1.readline()
     transactionRange = []
@@ -172,6 +194,8 @@ def dateRanges(d1, d2):
     transCount = 0
     idx = 0
     idx2 = 0
+    # totals = [0] * 25
+    # expenses = []
     for line in in1:
         var = line.split(",")
         var[-1] = var[-1].strip("\n").strip("$").strip('""')
@@ -184,25 +208,51 @@ def dateRanges(d1, d2):
                 transCount += 1
                 transactionRange.append(var[0])
                 transactionRange.append(var[3:])
+                if tellNum == 4:
+                print("\nTotals for all categories")
+                #     print("=" * 25)
+                #     for idx in range(len(expenseList)):
+                #         print("{:<25} ${:.2f}".format(expenseList[idx], totals[idx]))
+        
+        
+        # if var[3] not in nonExpenseList:
+        #     expenses.append(var[3])
+        #     amounts.append(float(var[-1]))
+        #     count += float(var[-1])
+        #     for idx in range(len(expenseList)):
+        #         if var[3] == expenseList[idx]:
+        #             totals[idx] += float(var[-1])
+        #   idx += 1  
+
+            # print("\nTotals for all categories")
+            # print("=" * 25)
+            # for idx in range(len(expenseList)):
+            #     print("{:<25} ${:.2f}".format(expenseList[idx], totals[idx]))
+    
+    
     print("\n")
     print("=" * 25)
     print("Transaction summary")
     print("=" * 25)
-    if d1 != d2:
-        print("\nBetween {0} and {1} you spent ${2:,.2f}".format(d1[0:5], d2[0:5], count))
-        print("There were a total of {} transactions\n".format(transCount))
-        print("=" * 25)
-        while idx2 < len(transactionRange):
-            breakUp = transactionRange[idx2 + 1]
-            print("{:<10} {:<20} ${:^}".format(transactionRange[idx2], breakUp[0], breakUp[1]))
-            # print(transactionRange[idx2], ", ".join(transactionRange[idx2 + 1]))
-            idx2 += 2
+    
+    if tellNum != 4:
+        if d1 != d2:
+            print("\nBetween {0} and {1} you spent ${2:,.2f}".format(d1[0:5], d2[0:5], count))
+            print("There were a total of {} transactions\n".format(transCount))
+            print("=" * 25)
+            while idx2 < len(transactionRange):
+                breakUp = transactionRange[idx2 + 1]
+                print("{:<10} {:<20} ${:^}".format(transactionRange[idx2], breakUp[0], breakUp[1]))
+                idx2 += 2
+        else:
+            print("\nOn {0} you spent ${1:,.2f}".format(d1[0:5], count))
+            print("There were a total of {} transactions\n".format(transCount))
+            while idx2 < len(transactionRange):
+                breakUp = transactionRange[idx2 + 1]
+                print("{:<10} {:<20} ${:^}".format(transactionRange[idx2], breakUp[0], breakUp[1]))
+                idx2 += 2
     else:
-        print("\nOn {0} you spent ${1:,.2f}".format(d1[0:5], count))
-        print("There were a total of {} transactions\n".format(transCount))
-        while idx2 < len(transactionRange):
-            print(transactionRange[idx2], ", ".join(transactionRange[idx2 + 1]))
-            idx2 += 2
+        pass
     in1.close()
 def findBills(in1):
 	for line in in1:
