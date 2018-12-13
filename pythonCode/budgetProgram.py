@@ -94,7 +94,7 @@ def transactionData(in1):
     in1.readline()
     count = 0
     idx = 0
-    test = [0] * 25
+    totals = [0] * 25
     response2 = 0
     dateContainer = []
     expenses = []
@@ -105,7 +105,6 @@ def transactionData(in1):
     date1 = ""
     date2 = ""
     maximumMinimumDates = []
-# This loop needs to increase a value in test based on the index and prescense
     for line in in1:
         var = line.split(",")
         var[-1] = var[-1].strip("\n").strip("$").strip('""')
@@ -115,7 +114,12 @@ def transactionData(in1):
             expenses.append(var[3])
             amounts.append(float(var[-1]))
             count += float(var[-1])
+            for idx in range(len(expenseList)):
+                if var[3] == expenseList[idx]:
+                    totals[idx] += float(var[-1])
+        idx += 1    
         dateContainer.append(var[0])
+    idx = 0
     maximumMinimumDates.append(max(dateContainer))
     maximumMinimumDates.append(min(dateContainer))
     maxAmountIndex = amounts.index(max(amounts))
@@ -151,7 +155,14 @@ def transactionData(in1):
             if repeat in yesList:
                 response2 = 0
         elif response2 == 3:
-            print(test)
+            print("\nTotals for all categories")
+            print("=" * 25)
+            for idx in range(len(expenseList)):
+                print("{:<25} ${:.2f}".format(expenseList[idx], totals[idx]))
+            repeat = input("Back to menu?: ")
+            print("\n")
+            if repeat in yesList:
+                response2 = 0
 def dateRanges(d1, d2):
     in1 = open("C:/Users/Kaleb/Documents/fileDump/csvFiles/transactions.csv")
     in1.readline()
@@ -180,8 +191,11 @@ def dateRanges(d1, d2):
     if d1 != d2:
         print("\nBetween {0} and {1} you spent ${2:,.2f}".format(d1[0:5], d2[0:5], count))
         print("There were a total of {} transactions\n".format(transCount))
+        print("=" * 25)
         while idx2 < len(transactionRange):
-            print(transactionRange[idx2], ", ".join(transactionRange[idx2 + 1]))
+            breakUp = transactionRange[idx2 + 1]
+            print("{:<10} {:<20} ${:^}".format(transactionRange[idx2], breakUp[0], breakUp[1]))
+            # print(transactionRange[idx2], ", ".join(transactionRange[idx2 + 1]))
             idx2 += 2
     else:
         print("\nOn {0} you spent ${1:,.2f}".format(d1[0:5], count))
