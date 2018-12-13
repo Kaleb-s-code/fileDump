@@ -27,10 +27,11 @@
    # per week, per month 
    # project total needed income to be able to 
    # save a user defined amount per month 
+import datetime
 def main():
     infile = open("C:/Users/Kaleb/Documents/fileDump/csvFiles/transactions.csv")
     initial = getInitialResponse()
-    handler = processUserInput(initial)
+    handler = mainMenuValidation(initial)
     if handler == 1:
     	transactionData(infile)
     	infile.close()
@@ -48,7 +49,7 @@ def getInitialResponse():
    print("\n")
    return response1
 # This needs user input 
-def processUserInput(res1):
+def mainMenuValidation(res1):
     res1 = int(res1)
     yesList = ["Yes", "y", "Y", "YES"]
     noList = ["n", "No", "no","NO","nO", "Nope"]
@@ -93,41 +94,60 @@ def transactionData(in1):
     in1.readline()
     idx = 0
     count = 0
+    response2 = 0
     dateContainer = []
-    # This containes max date and min date
+    nonExpenseList = ["Starting Balance:", "Additions:", "Digit", "Rebalancing:", "Expected Savings", "S balance +:", "S balance -:"]
+    yesList = ["Yes", "y", "Y", "YES"]
+    date1 = ""
+    date2 = ""
     maximumMinimumDates = []
     for line in in1:
         var = line.split(",")
         var[-1] = var[-1].strip("\n").strip("$").strip('""')
         if var[-1] < "0":
         	var[-1] = "0.00"
-        count += float(var[-1])
+        if var[3] not in nonExpenseList:
+            count += float(var[-1])
         dateContainer.append(var[0])
     maximumMinimumDates.append(max(dateContainer))
     maximumMinimumDates.append(min(dateContainer))
-    print("Most Recent Transaction Date: {}\nOldest Transaction Date: {}".format(maximumMinimumDates[0], maximumMinimumDates[1]))
-    response2 = int(input("\nSelect An Option From Below:\n1. Show total spent to date\n2. Show spending with given date range\n3. Show totals per category\n4. Show category spending in a range\n5. Show averages\nEnter a number: "))
-    if response2 == 1:
-    	print("\n")
-    	print("Total money moved: ${0:,.2f}".format(count))
-    elif response2 == 2:
-        print("\n")
-        date1 = input("Enter the start date (dd/mm/yyyy): ")
-        date1 = date1.strip()
-        while date1 not in dateContainer and len(date1) < 10:
-            date1 = input("Try that again: ")
-            date1 = date1.strip()
-        date2 = input("Enter the end date (dd/mm/yyyy): ")
-        date2 = date2.strip()
-        while date2 not in dateContainer and date2 < date1 and len(date2) < 10:
-            date2 = input("Try again: ")
-            date2 = date2.strip()
-        dateRanges(date1, date2)
+    while response2 == 0:    
+        print("Most Recent Transaction Date: {}\nOldest Transaction Date: {}".format(maximumMinimumDates[0], maximumMinimumDates[1]))
+        response2 = int(input("\nSelect An Option From Below:\n1. Show total spent to date\n2. Show spending with given date range\n3. Show totals per category\n4. Show category spending in a range\n5. Show averages\nEnter a number: "))
+        if response2 == 1:
+            print("\n")
+            print("Total spent up to {0}: ${1:,.2f}".format(maximumMinimumDates[0], count))
+            repeat = input("Back to menu?:" )
+            print("\n")
+            if repeat in yesList:
+                response2 = 0
+        elif response2 == 2:
+            print("\n")
+            print("Input the date you would like to begin the search")
+            print("=" * 25)
+            while date1 not in dateContainer:
+                date1 = input("Enter a date: ")
+                date1 = date1.strip()
+            print("\nInput the date you would like to end the search")
+            print("=" * 25)
+            while date2 not in dateContainer:
+                date2 = input("Enter a date: ")
+                if date2 < date1:
+                    date2 = ""
+            dateRanges(date1, date2)
+            repeat = input("Back to menu?:" )
+            print("\n")
+            if repeat in yesList:
+                response2 = 0
 def dateRanges(d1, d2):
     in1 = open("C:/Users/Kaleb/Documents/fileDump/csvFiles/transactions.csv")
     in1.readline()
     transactionRange = []
+    nonExpenseList = ["Starting Balance:", "Additions:", "Digit", "Rebalancing:", "Expected Savings", "S balance +:", "S balance -:"]
     count = 0
+    transCount = 0
+    idx = 0
+    idx2 = 0
     for line in in1:
         var = line.split(",")
         var[-1] = var[-1].strip("\n").strip("$").strip('""')
@@ -135,10 +155,27 @@ def dateRanges(d1, d2):
             if var[idx] < "0" or var[idx] == '':
                 var[idx] = "Null"
         if var[0] >= d1 and var[0] <= d2:
-            count += float(var[-1])
-            transactionRange.append(var[0])
-            transactionRange.append(var[3:])
-    print("\nBetween {0} and {1} you spent ${2:,.2f}".format(d1[0:5], d2[0:5], count))
+            if var[3] not in nonExpenseList:
+                count += float(var[-1])
+                transCount += 1
+                transactionRange.append(var[0])
+                transactionRange.append(var[3:])
+    print("\n")
+    print("=" * 25)
+    print("Transaction summary")
+    print("=" * 25)
+    if d1 != d2:
+        print("\nBetween {0} and {1} you spent ${2:,.2f}".format(d1[0:5], d2[0:5], count))
+        print("There were a total of {} transactions\n".format(transCount))
+        while idx2 < len(transactionRange):
+            print(transactionRange[idx2], ", ".join(transactionRange[idx2 + 1]))
+            idx2 += 2
+    else:
+        print("\nOn {0} you spent ${1:,.2f}".format(d1[0:5], count))
+        print("There were a total of {} transactions\n".format(transCount))
+        while idx2 < len(transactionRange):
+            print(transactionRange[idx2], ", ".join(transactionRange[idx2 + 1]))
+            idx2 += 2
     in1.close()
 def findBills(in1):
 	for line in in1:
