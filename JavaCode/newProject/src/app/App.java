@@ -53,6 +53,16 @@ public class App {
         } else {
             System.out.println("Dog doo doo");
         }
-        
+        if (gamrOver) {
+            int finalScore = score + (levelCompleted * bonus);
+            System.out.println("Your final score was: " + finalScore);
+            int Anotherscore = 10_000;
+            int anotherLevel = 8;
+            int anotherBonus = 200;
+            int lastFinal = Anotherscore + (levelCompleted * bonus);
+            System.out.println("Your score was: " + lastFinal);
+        }
+
+
     }
 }
