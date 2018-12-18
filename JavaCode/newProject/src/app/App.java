@@ -14,13 +14,13 @@ public class App {
         boolean bob = false;
         if (bob == false)
             System.out.println("Titty smack");
-        int topScore = 5000;
+        int topScore = 5000; 
         if (topScore == 5000)
-            System.out.println("Oh snap, you gonna git pussy");
+            System.out.println("Oh snap");
         if (bob == false && topScore > 4000)
-            System.out.println("And you gonna lick it too");
+            System.out.println("And");
         if ((bob == false) || topScore < 50)
-            System.out.println("And you might even get to put it in the stinky hole");
+            System.out.println("And you");
         boolean isCar = false;
         boolean wasCar = isCar ? true: false;
         System.out.println("This is a string: " + wasCar);
@@ -33,5 +33,26 @@ public class App {
         System.out.println("THis is the remainder: " + remainder);
         if (remainder <= 20)
             System.out.println("Total was over the limit!");
+//You should probably use brackets in if blocks 
+        if (remainder >= 20) {
+            System.out.println("Sexy time");
+        }
+        int myVariable = 50;
+        myVariable ++;
+        System.out.println(myVariable);
+//Code blocks 
+        boolean gamrOver = true;
+        int score = 5000;
+        int levelCompleted = 5;
+        int bonus = 100;
+
+        if (score == 5000 || score > 3000) {
+            System.out.println("Your score was: " + score);
+        } else if(score <= 2000) {
+            System.out.println("Your score was not 5000");
+        } else {
+            System.out.println("Dog doo doo");
+        }
+        
     }
 }
