@@ -1,0 +1,8 @@
+Udemy 
+-----------------
+    Methods
+
+    --> When creating methods, you need to pass into the method the parameters with the data types
+    --> You also need to pass the direct values into the function call by using the var name or value
+    --> Once you've done this, you don't need to define the vars in the method
+    --> Ref **** JavaCode\moretesting\src\main\java\com\thisisatest\App.java**** to see a good example
