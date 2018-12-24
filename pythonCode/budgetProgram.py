@@ -209,7 +209,7 @@ def dateRanges(d1, d2, tellNum):
                 transactionRange.append(var[0])
                 transactionRange.append(var[3:])
                 if tellNum == 4:
-                print("\nTotals for all categories")
+                    print("\nTotals for all categories")
                 #     print("=" * 25)
                 #     for idx in range(len(expenseList)):
                 #         print("{:<25} ${:.2f}".format(expenseList[idx], totals[idx]))
