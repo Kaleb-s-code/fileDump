@@ -1,0 +1,76 @@
+############################
+Day two code with the LAB
+Chapters 1 --> 4 Continued
+############################
+
+Misc
+############################
+--> Every other Fridays during the lunch hour for HUscii club
+--> TA had 11 - 1 office hours
+--> print instead of println stays on the same line
+
+
+Identifiers
+############################
+--> name given to piece of data, method etc..
+--> classes = ClassName
+--> methods = methodName
+--> constants = CONSTANT_NAME
+
+Primitive types
+############################
+--> int (byte, short, long, float), double(Most used and 64 bits), char, boolean
+
+Operators
+############################
+--> Same operators
+--> increment operator is ++;
+--> decrement operator is --;
+
+Strings
+############################
+--> implicit conversion of numbers if an operand is a higher order operand
+    --> "hello" + 42 is "hello42"
+    --> "abc" + 1 + 2 is "abc12"
+
+Variables
+############################
+--> Must declare type upon first use 
+--> do not have to assign something to var when you create it
+
+Loops
+############################
+int count = 10;
+--> for loop
+    --> for (init; test; update) {
+        statement;
+        statement;
+        statemnet;
+    }
+    --> for (int i = 1; i <= 6; i++) {
+        Sysout("I am so smart");
+    }
+    --> This loop is not necessary and while loops can do everything a for loop can do
+--> while loop 
+    --> while (count < 10) {
+        statement;
+        update;
+    }
+--> Nested loops
+    --> for (i = 1; i <= 4; i++) {
+            for (int j = 1; <= 5; j++) {
+                Sysout("some stuff)
+            }
+    }
+Scope
+############################
+--> vars without conflicting scope can have the same names
+
+Class constants
+############################
+--> Always declare first in a class at the very top
+--> public static final double INTEREST_RATE = 3.5;
+--> public static final int SSN = 123456789;
+
+Parameters
+############################
