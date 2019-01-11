@@ -8,7 +8,9 @@ Misc
 --> Every other Fridays during the lunch hour for HUscii club
 --> TA had 11 - 1 office hours
 --> print instead of println stays on the same line
-
+--> Do not have to import the math library in order to use the methods
+--> each char is converted to an ascii number when compared to a number
+    --> Can also be treated as the string when compared to strings 
 
 Identifiers
 ############################
@@ -73,4 +75,38 @@ Class constants
 --> public static final int SSN = 123456789;
 
 Parameters
+############################
+--> Remember to use "theParam"
+
+Value samantics
+############################
+--> Do not declare local vars with "the"
+
+String methods
+############################
+--> indexOf(str): index where the start of the given string appears in this string (-1 if not found)
+
+--> length(): number of characters in the string 
+
+--> substring(index1, index2) or substring(index1): the chars in this string from index1 (inclusive) o index2 (exclusive); if index2 is omitted, grabs till end of string
+
+--> euqals(str)
+    --> if name.equals("Barney")....
+
+Scanner methods
+############################
+--> nextInt(): reads an int from the user an returns it
+--> nextDouble(): reads a double from the user
+--> next(): reads a one word string from the user
+--> nextLine(): reads a one line string from the user 
+
+input tokens
+############################
+--> Uses whnitespace as a delimiter
+
+charAt
+############################
+--> pulls ascii characters out of a string
+
+
 ############################

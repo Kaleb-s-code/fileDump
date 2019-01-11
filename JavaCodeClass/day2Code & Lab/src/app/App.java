@@ -11,18 +11,27 @@ public class App {
         int starCnt;
 
         while (response == 'y') {
-            System.out.print("Enter the number of stars to display: ");
+            System.out.print("Enter # for pattern: ");
             starCnt = input.nextInt();
-            displayStars(starCnt);
+            printDesign(starCnt);
             System.out.println("Do another? [y/n] ");
             response = input.next().charAt(0);
         }
     }
-    public static void displayStars(int theAmount) {
-        for (int i = 0; i < theAmount; i++) {
-            System.out.print("*");
+    public static void printDesign(int theAmount) {
+        for (int lines = 1; lines <= theAmount; lines++) {
+            for (int i = 0; i < theAmount - lines; i++) {
+                System.out.print("-");
+            }
+            for (int digits = 1; digits <= (lines - 1) * 2; digits++) {
+                System.out.print(lines - 1);
+            }
+            for (int i = 0; i < theAmount - lines; i++) {
+                System.out.print("-");
+            }
+            System.out.println();
         }
-        System.out.println();
+        // System.out.println();
     }
 }
 
