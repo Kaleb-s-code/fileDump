@@ -1,0 +1,42 @@
+###########################
+Notes for Day3Code on 1/15
+###########################
+
+Misc Notes
+###########################
+--> The simplist expression: Single constant or variable 
+--> Do not need to name vars in methods with the prefix "my"
+--> Nested loops are a good idea for printing out tables
+--> Arrays are the same as "lists" in python
+
+--> {{{{Next programming project is posted}}}}
+    --> You need three nested loops to multiply matricies
+    --> 
+
+--> Need to have javadoc for every constant in class header
+--> substring(7,10) is a string method that includes 7 and excludes 10
+--> When dealing with input and output(files..etc): Do so in main
+--> Remember casting (byte), (char) etc..
+
+Various methods
+###########################
+--> charat(i): Might tell you the character referenced 
+--> when dealing with char, make sure you are using single quotes ''
+--> toUpperCase(): String method 
+--> .length(): Tells you the length
+
+formatting 
+###########################
+--> Sysout.printf("format string", parameters);
+    --> %d(integer), %f(real number), %s(string) are format specifiers 
+    --> Sysout.printf("x is %d and y is %d!\n", x, y); This is how you
+        get the same effect as in python to format output.
+    --> %3.2f, 3 would be fieldwidth, 2 would be decimal acuracy
+--> String.format() works exactly the same, and you can assign it to a variable
+    --> You could do Sysout(string.format()) to do the same thing as a (printf)
+--> 
+
+--> getPopulation should recieve an integer 
+
+--> draw populatin should be passed both the integer reresenting the town and its population value 
+

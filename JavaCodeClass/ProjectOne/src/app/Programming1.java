@@ -1,4 +1,4 @@
-// package app;
+package app;
 
 /* TCSS 143
  * Professor Schuessler
