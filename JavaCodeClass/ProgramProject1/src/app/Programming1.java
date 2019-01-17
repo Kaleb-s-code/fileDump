@@ -1,7 +1,8 @@
-package app;
+// package app;
+
 /* TCSS 143
  * Professor Schuessler
- * Programming assignment 1
+ * Programming1.java
  * 01/15/2019
  */
 import java.util.Scanner;
@@ -13,11 +14,12 @@ import java.util.Scanner;
   * @author Kaleb Moreno (kalebm2@uw.edu)
   * @version 01/13/2019
   */
-public class App {
+public class Programming1 {
      /**
      * This method is the main method which assigns the town
      * population variables and calls all the appropiate methods 
-     * @param theArgs
+     *
+     *  @param theArgs
      */
     public static void main(String[] theArgs) {
         Scanner userInput = new Scanner(System.in);
@@ -26,7 +28,8 @@ public class App {
         int town3Population = getPopulation(3, userInput);
         int town4Population = getPopulation(4, userInput);
         int town5Population = getPopulation(5, userInput);
-
+        
+        System.out.println();
         System.out.println("POPULATION GRAPH:");
         drawPopulationBar(1, town1Population);
         drawPopulationBar(2, town2Population);
@@ -35,7 +38,7 @@ public class App {
         drawPopulationBar(5, town5Population);
     }
     /**
-     * This method accepts the town number and the town population
+     * This method accepts the town number and then prompts user for population
      * then returns the population entered
      * 
      * @param theTownNumber This is the town number
@@ -58,12 +61,10 @@ public class App {
      * @param theTownNum This is the town number
      * @param theTownPop This is the town's population
      */
-    public static  void drawPopulationBar(int theTownNum, int theTownPop) {
-        int i = 0;
+    public static void drawPopulationBar(int theTownNum, int theTownPop) {
         String stars = "";
         while (theTownPop >= 1000) {
             theTownPop -= 1000;
-            i ++;
             stars += "*";
         }
         System.out.println("Town " + theTownNum + ": " + stars);
