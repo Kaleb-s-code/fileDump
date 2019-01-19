@@ -4,5 +4,6 @@
     "python.linting.enabled": true,
     "python.linting.pylamaEnabled": false,
     "java": "cd $dir && javac $fileName && java $fileName",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cSpell.language": "en,en-US"
 }
