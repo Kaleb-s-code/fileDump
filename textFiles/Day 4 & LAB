@@ -2,3 +2,88 @@
 Title here 
 #####################
 
+Misc
+#####################
+--> Remember to alphabatize the import statements 
+--> Do not put a path when referencing files..needs to be in directoy 
+
+--> Three types of classes: 
+    
+    executable: (Everything has to be static)
+    
+    module: (Static) (Contains methods and maybe some constants. NO data which means its NOT instantiable)
+
+    instantiable classes: (TO BE CONTINUED) 
+
+Opening files
+#####################
+--> This is how you open a file 
+--> do {
+    try {
+        // only put in here what might throw an exception and remember scope rules 
+        input = new Scanner(new File(filename ));
+        // This writes to a file you create  
+        output = new PrintStream(new File("out.txt"));
+        filesOf = true;
+    }
+    // cathcing an error 
+    catch (FileNotFoundException e) {
+        // "e" means something specific but think of it for now as a string 
+        Sysout("Cant find the file")
+    }
+}
+--> make sure this includes the bare minimum 
+--> PrintStream is for output files! 
+    --> import java.io.PrintStream to make this work
+    --> output.println(line) is how you actually write to the file 
+
+--> Another example 
+
+try {
+    in = new Scanner(new File("in1.txt"));
+    fileOk = true;
+} catch (FileNotFoundException e) {
+    System.exit(1);
+}
+if (FileOk) {
+    while (in.hasNext()) {
+        out.println(in.next());
+        counter++;
+    }
+    out.println("There are " + counter + "tokens in the input");
+    in.close();
+}
+
+......... Goes on for awhile, Refer to slides
+
+
+Two dimensional Arrays 
+#####################
+--> base + index * size of data (Formual for finding data in single dimensional arrays)
+
+--> base + row-index * number-of-columns-in-array * datasize + column-index * datasize (formula for two dimensional arrays)
+
+--> Refer to code for the day to find examples 
+
+--> When looping through arrays, you need to remember that it goes from left to right. (Refer to the loop structure for the day) 
+
+--> There was a class example reading arrays from a file like the project
+
+Matrix multiplication
+#####################
+--> Number of colums in a has to match number of rows in b 
+--> You go down the row of a, then down the column of b
+A
+1 0 
+1 1 
+3 4 
+
+B
+2 1
+3 0 
+
+(Across and down)
+C  
+|_2 |_1|
+|_5 |_1|
+|_18|_3|
