@@ -59,7 +59,7 @@ if (FileOk) {
 
 Two dimensional Arrays 
 #####################
---> base + index * size of data (Formual for finding data in single dimensional arrays)
+--> base + index * size of data (formula for finding data in single dimensional arrays)
 
 --> base + row-index * number-of-columns-in-array * datasize + column-index * datasize (formula for two dimensional arrays)
 
@@ -87,3 +87,19 @@ C
 |_2 |_1|
 |_5 |_1|
 |_18|_3|
+
+
+2    2
+4    2 
+2    1 
+
+5  2
+3  4
+2  5
+3  6
+0  2
+1  3 
+
+2  5
+1  0 7  1   2
+5  3 7  2   4
