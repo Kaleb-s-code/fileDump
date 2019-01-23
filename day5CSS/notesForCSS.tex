@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+language=Java,
+aboveskip=3mm,
+belowskip=3mm,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{gray},
+keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=3
+}
+\begin{document}
+
+
+\title{Notes for 1/22}
+\author{Kaleb Moreno}
+\maketitle
+
+\section{Covered writing the program }
+
+\subsection{Files Used:}
+
+\begin{enumerate}
+\item{Day4Code \& Lab} 
+\end{enumerate}
+
+\subsection{Notes}
+$\rightarrow$I never downloaded the files for this, so I can't compile yet. \\
+
+$\rightarrow$\%5d is the format specifier that should make things align
+\begin{lstlisting}
+    public class CheckArrays {
+        public static boolean sameDimensions(int[][] theA, int[][]theB) {
+            return theA.length == theB.length && theA[0].length == theB[0].length;
+        }
+        public static boolean areEqual(int[][]theA, int[][]theB) {
+            boolean result = sameDimensions(theA, theB);
+            for (int row = 0; row < theA.length && result; row ++) {
+                for (int col = 0; col < theA[row] && result; col ++) {
+                    result = theA[row][col] == theB[row][col];
+                }
+            }
+        return result;
+        }
+    }
+    public static int sum(int[][]theA, int[][]theB) {
+        int result = 0;
+        for (int row = 0; row < theA.length; row ++) {
+            for (int col = 0; col < theA[row]; col ++) {
+                result += theA[row][col];
+            }
+        }
+    return result;
+    }
+\end{lstlisting}
+
+\end{document}

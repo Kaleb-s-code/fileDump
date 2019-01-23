@@ -32,25 +32,25 @@ public class App {
         a4 = getArray(input);
         a5 = getArray(input);
 
-        output.println("Arrays 1 and 2 are the same size: " + CheckArrays.sameDimensions(a1, a2));
+        // output.println("Arrays 1 and 2 are the same size: " + CheckArrays.sameDimensions(a1, a2));
 
-        if (CheckArrays.sameDimensions(a1, a2)) {
-            output.println("Arrays 1 & 2 are equal in contantents: " + CheckArrays.areEqual(a1, a2));
-        }
-        boolean sameSize = CheckArrays.sameDimensions(a1, a3);
-        output.println("Arrays 1 & 3 the same size: " + sameSize);
+        // if (CheckArrays.sameDimensions(a1, a2)) {
+        //     output.println("Arrays 1 & 2 are equal in contantents: " + CheckArrays.areEqual(a1, a2));
+        // }
+        // boolean sameSize = CheckArrays.sameDimensions(a1, a3);
+        // output.println("Arrays 1 & 3 the same size: " + sameSize);
 
-        if (sameSize) {
-            output.println("Arrays 1 & 3 are equal in contents: " + CheckArrays.areEqual(a1, a3));
-        }
-        sameSize = CheckArrays.sameDimensions(a4, a5);
-        output.println("Arrays 4 & 5 the same size: " + sameSize);
+        // if (sameSize) {
+        //     output.println("Arrays 1 & 3 are equal in contents: " + CheckArrays.areEqual(a1, a3));
+        // }
+        // sameSize = CheckArrays.sameDimensions(a4, a5);
+        // output.println("Arrays 4 & 5 the same size: " + sameSize);
 
-        if (sameSize) {
-            output.println("Arrays 4 & 5 are equal in contents: " + CheckArrays.areEqual(a4, a5));
-        }
+        // if (sameSize) {
+        //     output.println("Arrays 4 & 5 are equal in contents: " + CheckArrays.areEqual(a4, a5));
+        // }
         writeArray(a4, 4, output);
-        displayArraySum(4, CheckArrays.sum(a4), output);
+        // displayArraySum(4, CheckArrays.sum(a4), output);
         
         input.close();
         output.close();
@@ -78,6 +78,32 @@ public class App {
                 }
                 return a;
             }
+        
+        }
+        // There was another class that was used..
+
+        public class CheckArrays {
+            public static boolean sameDimensions(int[][] theA, int[][]theB) {
+                return theA.length == theB.length && theA[0].length == theB[0].length;
+            }
+            public static boolean areEqual(int[][]theA, int[][]theB) {
+                boolean result = sameDimensions(theA, theB);
+                for (int row = 0; row < theA.length && result; row ++) {
+                    for (int col = 0; col < theA[row] && result; col ++) {
+                        result = theA[row][col] == theB[row][col];
+                    }
+                }
+            return result;
+            }
+        }
+        public static int sum(int[][]theA, int[][]theB) {
+            int result = 0;
+            for (int row = 0; row < theA.length; row ++) {
+                for (int col = 0; col < theA[row]; col ++) {
+                    result += theA[row][col];
+                }
+            }
+        return result;
         }
 
         // This is different code demonstrating arrays generally

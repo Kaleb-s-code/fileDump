@@ -11,6 +11,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 
+
  /**
   * This program reads from an input file and prints
   * to an output file the various arrays in the proper orders.  
@@ -37,7 +38,7 @@ public class App {
         String inFileName = "in2a.txt";
         String outFileName = "out.txt";
         boolean filesOk = false;
-
+    
         try {
             input = new Scanner(new File(inFileName));
             output = new PrintStream(new File(outFileName));
@@ -228,6 +229,7 @@ public class App {
             x += 2;
         }
         displayToOutput(6, multipArray, theOut);
+       
     }
     /**
      * This method is where I do all the actual sending of the 
