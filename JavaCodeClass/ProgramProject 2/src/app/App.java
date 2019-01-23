@@ -8,7 +8,10 @@ package app;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.PrintStream;
+// import java.util.Arrays;
 import java.util.Scanner;
+
+
 
 
 
@@ -31,7 +34,8 @@ public class App {
      *  @param theArgs
      */
     public static void main(String[] theArgs) {
-        
+        app.TestClass mathObject = new TestClass();
+
         Scanner input = null;
 
         PrintStream output = null;
@@ -48,8 +52,14 @@ public class App {
             System.out.println("can't open the file - " + e);
         }
         if (filesOk) {
-            int[][] listOfArrays = getDimensions(input, output);
-            doTheMath(listOfArrays, output);
+            
+            int [][] arrayA = findAllTheArrays(input);
+            int [][] arrayB = findAllTheArrays(input);
+            int [][] arrayC = findAllTheArrays(input);
+            int [][] arrayD = findAllTheArrays(input);
+            
+            mathObject.test();
+            // doTheMath(listOfArrays, output);
             }
         }
     /**
@@ -70,111 +80,19 @@ public class App {
      *         from the matricies appropriately split into their
      *         cooresponding arrays. 
      */
-        public static int[][] getDimensions(Scanner theInput, PrintStream theOutput) {
-        int dimensionArray[][];
-        int allTheArrays[][];
-        int coluOne = 0;
-        int coluTwo = 1;
-        int idx = 0;
-        allTheArrays = new int[4][10];
-        dimensionArray = new int[4][2];
-        while(theInput.hasNext()) {
-            int a = theInput.nextInt();
-            int b = theInput.nextInt();
-            int num = 0;
-            while (num < (a * b) && theInput.hasNext()) {   
-                allTheArrays[idx][num] = theInput.nextInt();
-                num ++;
-            }
-            dimensionArray[idx][coluOne] = a;
-            dimensionArray[idx][coluTwo] = b;
-            idx ++;
-        }
-        // Array one
-        int arrayOne [][];
-        int a = 0;
-        int b = 0;
-        int c = 0;
-        arrayOne = new int[dimensionArray[0][0]][dimensionArray[0][1]];
-        while (c < dimensionArray[0][0] * dimensionArray[0][1]) {
-            arrayOne[a][b] = allTheArrays[0][c];
-            if (c == 1) {
-                a ++;
-            }
-            if (b == 1) {
-                b = 0;
-            } else {
-                b ++;
-            }
-            c ++; 
-        }
-        displayToOutput(0, arrayOne, theOutput);
-        
-        //  Array two
-        int arrayTwo [][];
-        a = 0;
-        b = 0;
-        c = 0;
-        arrayTwo = new int[dimensionArray[1][0]][dimensionArray[1][1]];
-        
-        while (c < dimensionArray[1][0] * dimensionArray[1][1]) {
-            arrayTwo[a][b] = allTheArrays[1][c];
-            if (c == 1) {
-                a ++;
-            }
-            if (b == 1) {
-                b = 0;
-            } else {
-                b ++;
-            }
-            c ++;
-        }
-        displayToOutput(1, arrayTwo, theOutput);
-        a = 0;
-        b = 0;
-        c = 0;
+    public static int[][] findAllTheArrays(Scanner theInput) {
+        int rowsize = theInput.nextInt();
+        int colSize = theInput.nextInt();
 
-        //  Array three
-        int arrayThree [][];
-        arrayThree = new int[dimensionArray[2][0]][dimensionArray[2][1]];
-        while (c < dimensionArray[2][0] * dimensionArray[2][1]) {
-            arrayThree[a][b] = allTheArrays[2][c];
-            if (c % 2 == 0) {
-                if (c < 1) {
-                    a = 0;
-                }
-            } else {
-                a ++;
-            }
-            if (b == 1) {
-                b = 0;
-            } else {
-                b ++;
-            }
-            c ++;
-        }
-        displayToOutput(2, arrayThree, theOutput);
-        a = 0;
-        b = 0;
-        c = 0;
+        int[][] a = new int[rowsize][colSize];
 
-        // Array four
-        int arrayFour [][];
-        arrayFour = new int[dimensionArray[3][0]][dimensionArray[3][1]];
-        while (c < dimensionArray[3][0] * dimensionArray[3][1]) {
-            arrayFour[a][b] = allTheArrays[3][c];
-            if (c == 4) {
-                a ++;
+        for (int i = 0; i < a.length; i ++) {
+            for (int j = 0; j < a[i].length && theInput.hasNextInt(); j ++) {
+                a[i][j] = theInput.nextInt();
             }
-            if (b == 4) {
-                b = 0;
-            } else {
-                b ++;
-            }
-            c ++;
         }
-        displayToOutput(3, arrayFour, theOutput);
-        return allTheArrays;
+        return a;
+   
     }
     /**
      * The function of this method is three fold:
@@ -229,7 +147,6 @@ public class App {
             x += 2;
         }
         displayToOutput(6, multipArray, theOut);
-       
     }
     /**
      * This method is where I do all the actual sending of the 
