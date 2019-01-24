@@ -1,7 +1,9 @@
 package app;
-
 public class App {
+
     public static void main(String[] args) {
+        Test classObject = new Test();
+        classObject.stuff();
         double radius = 5.0;
         double side_x = 5.0;
         double side_y = 4.0;
