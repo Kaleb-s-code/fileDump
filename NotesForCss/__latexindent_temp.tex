@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+language=Java,
+aboveskip=3mm,
+belowskip=3mm,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{gray},
+keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=3
+}
+\begin{document}
+
+
+\title{Object Oriented}
+\maketitle
+
+\section{Covered writing the program }
+
+    \subsection{Files Used:}
+
+    \begin{enumerate}
+        \item{Day4Code \& Lab} 
+    \end{enumerate}
+
+    \subsection{Notes}
+    I never downloaded the files for this, so I can't compile yet. \\
+    \%5d is the format specifier that should make things align
+    
+    \begin{lstlisting}
+    public class CheckArrays {
+        public static boolean sameDimensions(int[][] theA, int[][]theB) {
+            return theA.length == theB.length && theA[0].length == theB[0].length;
+        }
+        public static boolean areEqual(int[][]theA, int[][]theB) {
+            boolean result = sameDimensions(theA, theB);
+            for (int row = 0; row < theA.length && result; row ++) {
+                for (int col = 0; col < theA[row] && result; col ++) {
+                    result = theA[row][col] == theB[row][col];
+                }
+            }
+        return result;
+        }
+    }
+    public static int sum(int[][]theA, int[][]theB) {
+        int result = 0;
+        for (int row = 0; row < theA.length; row ++) {
+            for (int col = 0; col < theA[row]; col ++) {
+                result += theA[row][col];
+            }
+        }
+    return result;
+    }
+    \end{lstlisting}
+
+\section{Day 5 Code and notes}
+    \subsubsection{ Misc Notes}
+    This is the code for the day explaining a bomb program that uses point classes and final parameters. These points make use of implied parameters, and there are \textbf{this} code references?? \\
+    
+
+    if throwing exceptions, do that fist in a method.
+
+
+
+    \begin{lstlisting}
+        package app;
+
+        public final class Point {
+            public static void main(String[] args) throws Exception {
+                public static final int DEFAULT_X = 0;
+                public static final int DEFAULT_Y = 0;
+                private int myX;
+                private int myY;
+                public Point(final int theX, final int theY) {
+                    if (theX < 0 || theY < 0) {
+                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+                    }
+                    myX = theX;
+                    myY = theY;
+                }
+                public Point() {
+                    this(DEFAULT_X, DEFAULT_Y);
+                }
+                public Point(Point theP) {
+                    this(theP.myX, theP.myY);
+                }
+                public int getX() {
+                    return myX;
+                }
+                public int getY() {
+                    return myY;
+                }
+            
+                public double calculateDistance(final Point theOtherPoint) {
+                    if (theOtherPoint == null) {
+                        throw new NullPointerException ("Cannot use a point of null" + "to calculate a distance");
+                    }
+                    final double dx = myX - theOtherPoint.myX;
+                    final double dy = myY - theOtherPoint.myY;
+                    return Math.sqrt(dx * dx + dy * dy);
+            
+                }
+        
+                public void setX(final int theX) {
+                    if (theX < 0) {
+                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+                    }
+                    // This is called a mutator method 
+                    myX = theX;
+                }
+                public void setY(final int theY) {
+                    if (theY < 0) {
+                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+                    }
+                    // This is called a mutator method 
+                    myY = theY;
+                }
+            }
+        }
+        public final class Point {
+            public static void main(String[] args) throws Exception {
+                public static final int DEFAULT_X = 0;
+                public static final int DEFAULT_Y = 0;
+                private int myX;
+                private int myY;
+                public Point(final int theX, final int theY) {
+                    if (theX < 0 || theY < 0) {
+                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+                    }
+                    myX = theX;
+                    myY = theY;
+                }
+                public Point() {
+                    this(DEFAULT_X, DEFAULT_Y);
+                }
+                public Point(Point theP) {
+                    this(theP.myX, theP.myY);
+                }
+                public int getX() {
+                    return myX;
+                }
+                public int getY() {
+                    return myY;
+                }
+                public double calculateDistance(final Point theOtherPoint) {
+                    if (theOtherPoint == null) {
+                        throw new NullPointerException ("Cannot use a point of null" + "to calculate a distance");
+                    }
+                    final double dx = myX - theOtherPoint.myX;
+                    final double dy = myY - theOtherPoint.myY;
+                    return Math.sqrt(dx * dx + dy * dy);
+            
+                }
+        
+                public void setX(final int theX) {
+                    if (theX < 0) {
+                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+                    }
+                    // This is called a mutator method which change state of object 
+                    myX = theX;
+                }
+                public void setLocation(int theX, int theY) {
+                    if (theX < 0 || theY < 0) {
+                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+                    }
+                    // This is called a mutator method which change state of object
+                    myX = theX;
+                    myY = theY;
+                }
+                public void translate(int theX, int theY) {
+                    if (theX < 0 || theY < 0) {
+                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+                    }
+                    // This is called a mutator method which change state of object
+                    setLocation(myX + theX, myY + theY);
+                }
+        
+                public String toString(){
+                    String result = "";
+                    result += "Point";
+                    result += "(";
+                    result += myX;
+                    result += ", " + myY + ")";
+                    return result; 
+            
+                }
+            }    
+            
+        }
+                
+        
+    \end{lstlisting}
+
+    \subsubsection{Overloading methods}
+        
+
+\end{document}
