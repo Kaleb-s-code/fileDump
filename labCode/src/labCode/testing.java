@@ -5,6 +5,7 @@ public class testing {
 	System.out.println("This is a test");
 	
 	MyClass someObject = new MyClass();
+	System.out.println("THis is something");
 	
 	someObject.someClass();
     }
