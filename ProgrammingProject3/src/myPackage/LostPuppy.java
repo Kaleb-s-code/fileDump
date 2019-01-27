@@ -1,10 +1,18 @@
 package myPackage;
-
+import java.util.Arrays;
 
 public class LostPuppy {
-	
+
+	public LostPuppy(int totalFloors, int totalRooms) {
+		
+		int[][] buildingDimensions;
+		buildingDimensions = new int[totalFloors][totalRooms];
+		System.out.println(Arrays.deepToString(buildingDimensions));
+		
+	}
+
 	public boolean roomSearchedAlready(int floor, int room) {
-		return true;
+		return false;
 	}
 	
 	public boolean puppyLocation(int floor, int room) {
@@ -13,6 +21,7 @@ public class LostPuppy {
 	}
 	
 	public boolean indicesOK(int floor, int room) {
+		System.out.println("THis is indiciesOK");
 		return true;
 	}
 	
