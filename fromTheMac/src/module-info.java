@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author adminuser
- *
- */
-module fromTheMac {
-}
