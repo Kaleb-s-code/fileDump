@@ -5,6 +5,7 @@ public class LostPuppy {
 
 	public LostPuppy(int totalFloors, int totalRooms) {
 		
+		System.out.println("This is some code that I added from the mac");
 		int[][] buildingDimensions;
 		buildingDimensions = new int[totalFloors][totalRooms];
 		System.out.println(Arrays.deepToString(buildingDimensions));
