@@ -31,208 +31,251 @@ tabsize=3
 
 \section{Covered writing the program }
 
-    \subsection{Files Used:}
+\subsection{Files Used:}
 
-    \begin{enumerate}
-        \item{Day4Code \& Lab} 
-    \end{enumerate}
+\begin{enumerate}
+\item{Day4Code \& Lab} 
+\end{enumerate}
 
-    \subsection{Notes}
-    I never downloaded the files for this, so I can't compile yet. \\
-    \%5d is the format specifier that should make things align
-    
-    \begin{lstlisting}
-    public class CheckArrays {
-        public static boolean sameDimensions(int[][] theA, int[][]theB) {
-            return theA.length == theB.length && theA[0].length == theB[0].length;
-        }
-        public static boolean areEqual(int[][]theA, int[][]theB) {
-            boolean result = sameDimensions(theA, theB);
-            for (int row = 0; row < theA.length && result; row ++) {
-                for (int col = 0; col < theA[row] && result; col ++) {
-                    result = theA[row][col] == theB[row][col];
-                }
-            }
-        return result;
+\subsection{Notes}
+I never downloaded the files for this, so I can't compile yet. \\
+\%5d is the format specifier that should make things align
+
+\begin{lstlisting}
+public class CheckArrays {
+public static boolean sameDimensions(int[][] theA, int[][]theB) {
+    return theA.length == theB.length && theA[0].length == theB[0].length;
+}
+public static boolean areEqual(int[][]theA, int[][]theB) {
+    boolean result = sameDimensions(theA, theB);
+    for (int row = 0; row < theA.length && result; row ++) {
+        for (int col = 0; col < theA[row] && result; col ++) {
+            result = theA[row][col] == theB[row][col];
         }
     }
-    public static int sum(int[][]theA, int[][]theB) {
-        int result = 0;
-        for (int row = 0; row < theA.length; row ++) {
-            for (int col = 0; col < theA[row]; col ++) {
-                result += theA[row][col];
-            }
-        }
-    return result;
+return result;
+}
+}
+public static int sum(int[][]theA, int[][]theB) {
+int result = 0;
+for (int row = 0; row < theA.length; row ++) {
+    for (int col = 0; col < theA[row]; col ++) {
+        result += theA[row][col];
     }
-    \end{lstlisting}
+}
+return result;
+}
+\end{lstlisting}
 
 \section{Day 5 Code and notes}
-    \subsubsection{ Misc Notes}
+\subsubsection{ Misc Notes}
 This is the code for the day explaining a bomb program that uses point classes and final parameters. These points make use of implied parameters,and there are \textbf{this} code references?? \\
 
 
 if throwing exceptions, do that fist in a method.\\
 
-    \begin{enumerate}
-        \item Protecting methods is one of the key points in this program
-        \item reuseability is also key as demonstrated in this program
-    \end{enumerate}
+\begin{enumerate}
+\item Protecting methods is one of the key points in this program
+\item reuseability is also key as demonstrated in this program
+\end{enumerate}
+
+
+
+
+\begin{lstlisting}
+package app;
+
+public final class Point {
+    public static void main(String[] args) throws Exception {
+        public static final int DEFAULT_X = 0;
+        public static final int DEFAULT_Y = 0;
+        private int myX;
+        private int myY;
+        public Point(final int theX, final int theY) {
+            if (theX < 0 || theY < 0) {
+                throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+            }
+            myX = theX;
+            myY = theY;
+        }
+        public Point() {
+            this(DEFAULT_X, DEFAULT_Y);
+        }
+        public Point(Point theP) {
+            this(theP.myX, theP.myY);
+        }
+        public int getX() {
+            return myX;
+        }
+        public int getY() {
+            return myY;
+        }
     
-
-
-
-    \begin{lstlisting}
-        package app;
-
-        public final class Point {
-            public static void main(String[] args) throws Exception {
-                public static final int DEFAULT_X = 0;
-                public static final int DEFAULT_Y = 0;
-                private int myX;
-                private int myY;
-                public Point(final int theX, final int theY) {
-                    if (theX < 0 || theY < 0) {
-                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
-                    }
-                    myX = theX;
-                    myY = theY;
-                }
-                public Point() {
-                    this(DEFAULT_X, DEFAULT_Y);
-                }
-                public Point(Point theP) {
-                    this(theP.myX, theP.myY);
-                }
-                public int getX() {
-                    return myX;
-                }
-                public int getY() {
-                    return myY;
-                }
-            
-                public double calculateDistance(final Point theOtherPoint) {
-                    if (theOtherPoint == null) {
-                        throw new NullPointerException ("Cannot use a point of null" + "to calculate a distance");
-                    }
-                    final double dx = myX - theOtherPoint.myX;
-                    final double dy = myY - theOtherPoint.myY;
-                    return Math.sqrt(dx * dx + dy * dy);
-            
-                }
-        
-                public void setX(final int theX) {
-                    if (theX < 0) {
-                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
-                    }
-                    // This is called a mutator method 
-                    myX = theX;
-                }
-                public void setY(final int theY) {
-                    if (theY < 0) {
-                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
-                    }
-                    // This is called a mutator method 
-                    myY = theY;
-                }
+        public double calculateDistance(final Point theOtherPoint) {
+            if (theOtherPoint == null) {
+                throw new NullPointerException ("Cannot use a point of null" + "to calculate a distance");
             }
+            final double dx = myX - theOtherPoint.myX;
+            final double dy = myY - theOtherPoint.myY;
+            return Math.sqrt(dx * dx + dy * dy);
+    
         }
-        public final class Point {
-            public static void main(String[] args) throws Exception {
-                public static final int DEFAULT_X = 0;
-                public static final int DEFAULT_Y = 0;
-                private int myX;
-                private int myY;
-                public Point(final int theX, final int theY) {
-                    if (theX < 0 || theY < 0) {
-                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
-                    }
-                    myX = theX;
-                    myY = theY;
-                }
-                public Point() {
-                    this(DEFAULT_X, DEFAULT_Y);
-                }
-                public Point(Point theP) {
-                    this(theP.myX, theP.myY);
-                }
-                public int getX() {
-                    return myX;
-                }
-                public int getY() {
-                    return myY;
-                }
-                public double calculateDistance(final Point theOtherPoint) {
-                    if (theOtherPoint == null) {
-                        throw new NullPointerException ("Cannot use a point of null" + "to calculate a distance");
-                    }
-                    final double dx = myX - theOtherPoint.myX;
-                    final double dy = myY - theOtherPoint.myY;
-                    return Math.sqrt(dx * dx + dy * dy);
-            
-                }
-        
-                public void setX(final int theX) {
-                    if (theX < 0) {
-                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
-                    }
-                    // This is called a mutator method which change state of object 
-                    myX = theX;
-                }
-                public void setLocation(int theX, int theY) {
-                    if (theX < 0 || theY < 0) {
-                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
-                    }
-                    // This is called a mutator method which change state of object
-                    myX = theX;
-                    myY = theY;
-                }
-                public void translate(int theX, int theY) {
-                    if (theX < 0 || theY < 0) {
-                        throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
-                    }
-                    // This is called a mutator method which change state of object
-                    setLocation(myX + theX, myY + theY);
-                }
-        
-                public String toString(){
-                    String result = "";
-                    result += "Point";
-                    result += "(";
-                    result += myX;
-                    result += ", " + myY + ")";
-                    return result; 
-            
-                }
-            }    
-            
-        }
-    \end{lstlisting}
 
-    This is another class held in a different file that deals with the 
-    checkpoints.
-    \begin{lstlisting}
-        // This is a a different class that we made in a differnet file that we used to execute the point class and make the points
-        public class Checkpoint {
-            public static void main(String[] theArgs) {
-                Point p1 = new Point(s, 9);
-                Point p2 = new Point();
-                Point p3 = new Point(p1);
-                // Note that here you don't have to do p1.toString()
-                // Becasue it is implicitly understood as that 
-                System.out.println(p1 + "\n" + p2 +"\n" + p3);
-                p1.setLocation()
-
+        public void setX(final int theX) {
+            if (theX < 0) {
+                throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
             }
+            // This is called a mutator method 
+            myX = theX;
+        }
+        public void setY(final int theY) {
+            if (theY < 0) {
+                throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+            }
+            // This is called a mutator method 
+            myY = theY;
+        }
+    }
+}
+public final class Point {
+    public static void main(String[] args) throws Exception {
+        public static final int DEFAULT_X = 0;
+        public static final int DEFAULT_Y = 0;
+        private int myX;
+        private int myY;
+        public Point(final int theX, final int theY) {
+            if (theX < 0 || theY < 0) {
+                throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+            }
+            myX = theX;
+            myY = theY;
+        }
+        public Point() {
+            this(DEFAULT_X, DEFAULT_Y);
+        }
+        public Point(Point theP) {
+            this(theP.myX, theP.myY);
+        }
+        public int getX() {
+            return myX;
+        }
+        public int getY() {
+            return myY;
+        }
+        public double calculateDistance(final Point theOtherPoint) {
+            if (theOtherPoint == null) {
+                throw new NullPointerException ("Cannot use a point of null" + "to calculate a distance");
+            }
+            final double dx = myX - theOtherPoint.myX;
+            final double dy = myY - theOtherPoint.myY;
+            return Math.sqrt(dx * dx + dy * dy);
+    
         }
 
+        public void setX(final int theX) {
+            if (theX < 0) {
+                throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+            }
+            // This is called a mutator method which change state of object 
+            myX = theX;
+        }
+        public void setLocation(int theX, int theY) {
+            if (theX < 0 || theY < 0) {
+                throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+            }
+            // This is called a mutator method which change state of object
+            myX = theX;
+            myY = theY;
+        }
+        public void translate(int theX, int theY) {
+            if (theX < 0 || theY < 0) {
+                throw new IllegalArgumentException("Coordinates cannot " + "be negative.");
+            }
+            // This is called a mutator method which change state of object
+            setLocation(myX + theX, myY + theY);
+        }
+
+        public String toString(){
+            String result = "";
+            result += "Point";
+            result += "(";
+            result += myX;
+            result += ", " + myY + ")";
+            return result; 
+    
+        }
+    }    
+    
+}
+\end{lstlisting}
+
+This is another class held in a different file that deals with the 
+checkpoints.
+\begin{lstlisting}
+// This is a a different class that we made in a differnet file that we used to execute the point class and make the points
+public class Checkpoint {
+    public static void main(String[] theArgs) {
+        Point p1 = new Point(s, 9);
+        Point p2 = new Point();
+        Point p3 = new Point(p1);
+        // Note that here you don't have to do p1.toString()
+        // Becasue it is implicitly understood as that 
+        System.out.println(p1 + "\n" + p2 +"\n" + p3);
+        p1.setLocation()
+
+    }
+}
+
+\end{lstlisting}
+
+\section{1/29/2019}
+\subsubsection{Misc}
+Files used:
+
+\begin{enumerate}
+\item codeFromClass/MyClass.java
+\end{enumerate}
+
+\subsection{Inheritance}
+We started an employee program that demonstrated common characteristics among them.\\
+when you Inherite, you do:
+
+\begin{lstlisting}
+public class secretary extends Employee {
+// This is where the method goes
+}
+\end{lstlisting}
+
+You can override to a new method in the subclass\\
+When you need to access base pay for example, you should call the super class:
+
+\pagebreak
+
+\begin{lstlisting}
+public class Legalsecretary extends Secretary {
+  public double Salary() {
+  // The keyword super grabs from the super class the base pay for example  
+  super.getSalary();
+  }  
+}
+\end{lstlisting}
+
+You can call the superclasses constructors by doing this:
+
+\begin{lstlisting}
+  super(years) // Calls the Employee constructor 
+\end{lstlisting}
+
+\subsubsection{Next programming project}
+Nevermind the crazy driver it just tests the methods\\
+Do not write it based on the output, or you'll be jacked up. Its meant to be confusing\\
+Makes use of interfacing which describe the methods that you have to include in your class\\
+Needs javadoc for every class and even the constructor 
+
+\subsection{Polymorphism}
+Every class is an objectm
 
 
 
-
-    \end{lstlisting}
-
-    \subsubsection{Overloading methods}
-        
 
 \end{document}

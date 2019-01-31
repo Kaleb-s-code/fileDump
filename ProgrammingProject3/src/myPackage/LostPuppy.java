@@ -1,4 +1,4 @@
-//package myPackage;
+package myPackage;
 
 import java.util.Random;
 
@@ -36,7 +36,6 @@ public class LostPuppy {
 		int a = 0;
 		int b = 0;
 		myHiddingPlaces = new char[theTotalFloors][theTotalRooms];
-		
 		while (a < theTotalFloors) {
 			while (b < theTotalRooms ) {
 				myHiddingPlaces[a][b] = '_';
