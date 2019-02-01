@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1548812432 "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.tex" "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.pdf" "notesForCSS" 1548873516
-  "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.aux" 1548812432 813 205815c5ad71e8631405021de3298db3 ""
-  "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.tex" 1548873374 8128 0c9aaf17e54a7c4d2418cfaf753c88a2 ""
+["pdflatex"] 1548984738 "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.tex" "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.pdf" "notesForCSS" 1548984739
+  "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.aux" 1548984738 969 4ec7eb4935abf78cb7ebf622fd882575 ""
+  "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.tex" 1548984738 10833 44362acb03141fd5e683fb8261e0a51d ""
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1480098701 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1480098701 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -22,6 +22,7 @@
   "/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1480098733 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1480098733 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1480098733 32362 179c33bbf43f19adbb3825bb4e36e57a ""
+  "/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1480098733 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb" 1480098733 29078 718ea4567ceff944262b0f5b0800e1d9 ""
   "/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1480098815 7612 729a8cc22a1ee0029997c7f74717ae05 ""
@@ -33,6 +34,7 @@
   "/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty" 1480098815 18425 5b3c0c59d76fac78978b5558e83c1f36 ""
   "/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty" 1522444781 20418 ca44694be1c8df491925faa194fe6edf ""
   "/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls" 1523050425 19823 fcbc01552b07b608574cbf8e1977e0c0 ""
+  "/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd" 1523050425 2472 aa08940f0a4dc6c24ae9f943b04ae0b9 ""
   "/usr/local/texlive/2018/texmf-dist/tex/latex/base/size10.clo" 1523050425 8294 b0f177401f895563eb19304d2389582d ""
   "/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1480098830 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
   "/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1480098830 1224 978390e9c2234eab29404bc21b268d1e ""
@@ -54,11 +56,11 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1523934516 4220280 10cab8fbd7c5a7c52aba9917e190d018 ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "notesForCSS.aux" 1548812432 813 205815c5ad71e8631405021de3298db3 ""
-  "notesForCSS.tex" 1548873374 8128 0c9aaf17e54a7c4d2418cfaf753c88a2 ""
+  "notesForCSS.aux" 1548984738 969 4ec7eb4935abf78cb7ebf622fd882575 ""
+  "notesForCSS.tex" 1548984738 10833 44362acb03141fd5e683fb8261e0a51d ""
   (generated)
-  "notesForCSS.aux"
-  "notesForCSS.log"
   "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.log"
+  "notesForCSS.aux"
   "notesForCSS.pdf"
   "/Users/adminuser/Code/codeDumpingGround/fileDump/NotesForCss/notesForCSS.pdf"
+  "notesForCSS.log"
