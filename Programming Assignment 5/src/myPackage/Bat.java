@@ -7,7 +7,7 @@ import java.util.Random;
  * This class represents the bat in the program
  * Which behaves randomly
  * 
- * @author Kaleb
+ * @author Kaleb Moreno (kalebm2@uw.edu)
  * @version 2/4/2019
  */
 public class Bat extends AbstractCritter {

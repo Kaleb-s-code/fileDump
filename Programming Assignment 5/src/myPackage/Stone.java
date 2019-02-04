@@ -7,7 +7,7 @@ package myPackage;
  * This class represents the stone in the 
  * Program. 
  * 
- * @author Kaleb
+ * @author Kaleb Moreno (kalebm2@uw.edu)
  * @version 2/4/2019
  */
 public class Stone extends AbstractCritter {
