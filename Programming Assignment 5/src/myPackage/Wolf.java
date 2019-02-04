@@ -35,12 +35,12 @@ public class Wolf extends AbstractCritter {
 		int direction = myDirection;
 		myCount += 1;
 		
-		if(myCount == myTarget) {
-			if(myFirst == false) {
+		if (myCount == myTarget) {
+			if (myFirst == false) {
 				myTarget += 1;
 				myFirst = true;
 				myCount = 0;
-				if(myDirection == EAST) {
+				if (myDirection == EAST) {
 					myDirection = NORTH;
 				} else if (myDirection == NORTH) {
 					myDirection = WEST;
