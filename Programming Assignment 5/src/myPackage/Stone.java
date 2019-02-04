@@ -23,6 +23,8 @@ public class Stone extends AbstractCritter {
 	/**
 	 * This is the overridden abstract method 
 	 * From the interface.
+	 * 
+	 * @return
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {

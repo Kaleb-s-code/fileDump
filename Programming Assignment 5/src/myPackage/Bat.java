@@ -25,6 +25,8 @@ public class Bat extends AbstractCritter {
 	 * This is the overridden method from the 
 	 * Interface which should return a random
 	 * Direction up to, but not including CENTER.
+	 * 
+	 * @return
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {
