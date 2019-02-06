@@ -1,3 +1,4 @@
+package myPackage;
 /*
  * Class CritterMain "CritterMain.java."
  * TCSS 143.

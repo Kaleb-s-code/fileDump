@@ -1,7 +1,8 @@
-/*
+/* 
  * Class CritterPanel "CritterPanel.java."
  * TCSS 143.
  */
+package myPackage;
 
 // imports.  Note the sorted order:
 import java.awt.Color;

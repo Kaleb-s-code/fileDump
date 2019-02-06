@@ -26,7 +26,7 @@ public class Frog extends AbstractCritter{
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {
-		return 0;
+		return CENTER;
 	}
 
 }

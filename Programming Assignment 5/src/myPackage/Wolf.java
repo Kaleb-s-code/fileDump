@@ -32,14 +32,13 @@ public class Wolf extends AbstractCritter {
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {
-		int direction = myDirection;
 		myCount += 1;
 		
 		if (myCount == myTarget) {
+			myCount = 0;
 			if (myFirst == false) {
 				myTarget += 1;
 				myFirst = true;
-				myCount = 0;
 				if (myDirection == EAST) {
 					myDirection = NORTH;
 				} else if (myDirection == NORTH) {
@@ -50,7 +49,11 @@ public class Wolf extends AbstractCritter {
 					myDirection = EAST;
 				}
 			}
+			if (myFirst == true) {
+				myFirst = false;
+			}
 		}
+		int direction = myDirection;
 		return direction;
 	}
 

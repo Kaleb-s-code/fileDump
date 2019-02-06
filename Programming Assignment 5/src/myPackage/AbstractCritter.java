@@ -19,7 +19,8 @@ public abstract class AbstractCritter implements Critter {
 	
 	/**
 	 * Overridden method from interface
-	 * @return
+	 * @return : returns the char representing the type of 
+	 * Critter
 	 */
 	@Override
 	public char getChar() {

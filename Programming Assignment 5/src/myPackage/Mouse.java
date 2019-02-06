@@ -34,7 +34,6 @@ public class Mouse extends AbstractCritter {
 		if (myGetMoveCounter > 1) {
 			returnValue = getNewDirection();
 //		Reset counter
-			myGetMoveCounter = 0;
 		}
 		
 		myTotalCounter += 1;
@@ -46,9 +45,11 @@ public class Mouse extends AbstractCritter {
 	 * @return
 	 */
 	public int getNewDirection() {
-		int returnValue = myDirection - 1; // WEST
+		int returnValue = myDirection;
 		
 		if (myTotalCounter % 4 == 0) {
+			myTotalCounter = 0;
+			myGetMoveCounter = 0;
 			myDirection = new Random().nextInt(CENTER);
 			returnValue = myDirection;
 		}

@@ -1,3 +1,5 @@
+package myPackage;
+
 /*
  * Class CritterModel "CritterModel.java."
  * TCSS 143.
