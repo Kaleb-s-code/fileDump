@@ -14,7 +14,9 @@ package myPackage;
  */
 public abstract class AbstractCritter implements Critter {
 
-	//	Field
+	/**
+	 * This field represents the critter as a char
+	 */
 	private char myCritter;
 	
 	/**

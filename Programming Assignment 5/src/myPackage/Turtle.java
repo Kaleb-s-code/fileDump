@@ -10,9 +10,16 @@ import java.util.Random;
  *
  */
 public class Turtle extends AbstractCritter {
-//	Fields
+	/**
+	 * This field is a simple counter
+	 */
 	private int myCounter;
+	/**
+	 * This field holds a random integer that is created 
+	 * When the class is instantiated.
+	 */
 	private int myRandom;
+	
 	/**
 	 * The constructor!
 	 */
@@ -28,7 +35,7 @@ public class Turtle extends AbstractCritter {
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {
-		int returnValue = CENTER;
+		int result = CENTER;
 		boolean randomBoolean = new Random().nextBoolean();
 
 //		This is (group 1) that returns a movement based on
@@ -37,34 +44,34 @@ public class Turtle extends AbstractCritter {
 			if (randomBoolean == false) {
 				int moveWhere = new Random().nextInt(11);
 				if (moveWhere <= 1) {
-					returnValue = NORTH;
+					result = NORTH;
 				} else if (moveWhere <= 3 && moveWhere >= 2) {
-					returnValue = EAST;
+					result = EAST;
 				} else if (moveWhere == 4) {
-					returnValue = SOUTH;
+					result = SOUTH;
 				} else if (moveWhere >= 5 && moveWhere <= 7) {
-					returnValue = WEST;
+					result = WEST;
 				} else {
-					returnValue = CENTER;
+					result = CENTER;
 				}
 			}
 //			This is (group 2) that returns a movement based on a 
-//			Number in range 13
+//			Number in range 13 omitting CENTER
 			else if (randomBoolean == true && myRandom <= 7) {
 				int moveWhere = new Random().nextInt(13);
 				if (moveWhere <= 3) {
-					returnValue = SOUTH;
+					result = SOUTH;
 				} else if (moveWhere <= 5 && moveWhere <= 4) {
-					returnValue = WEST;
+					result = WEST;
 				} else if (moveWhere <= 7 && moveWhere >= 6) {
-					returnValue = NORTH;
+					result = NORTH;
 				} else if (moveWhere >= 8) {
-					returnValue = EAST;
+					result = EAST;
 				}
 			}
 		}
 		myCounter += 1;	
-		return returnValue;
+		return result;
 	}
 	
 }
