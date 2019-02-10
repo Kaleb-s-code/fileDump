@@ -1,10 +1,14 @@
 /**
- * multiline comment
+ * Multiline comment at the top of the file
  */
-package myPackage;
+//package myPackage;
 import java.util.Random;
 
 /**
+ * This class represents the turtle in the program
+ * That moves at 1/3 the speed of every other animal
+ * In the simulation.
+ * 
  * @author Kaleb Moreno (kalebm2@uw.edu)
  * @version 2/4/2019
  *
@@ -31,7 +35,9 @@ public class Turtle extends AbstractCritter {
 
 	/**
 	 * This is the overridden method
-	 * @return : 
+	 * @param theInfo : 
+	 * @return : This method returns the next move of the 
+	 * Turtle.
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {

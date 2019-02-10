@@ -1,9 +1,13 @@
 /**
- * multiline comment
+ * Multiline comment at the top of the file
  */
-package myPackage;
+//package myPackage;
 
 /**
+ * This class represents the Wolf which behaves 
+ * As a pack, moving together throughout the
+ * Grid world.
+ * 
  * @author Kaleb Moreno (kalebm2@uw.edu)
  * @version 2/4/2019
  */
@@ -14,7 +18,7 @@ public class Wolf extends AbstractCritter {
 	private int myDirection;
 	/**
 	 * This field represents a counter that I use 
-	 * in the getMove() method.
+	 * In the getMove() method.
 	 */
 	private int myCount;
 	/**
@@ -41,7 +45,11 @@ public class Wolf extends AbstractCritter {
 
 	/**
 	 * This is the overridden method from the interface
-	 * @return
+	 * That handles the moves of the wolves.
+	 * 
+	 * @param theInfo : 
+	 * @return : This method returns a direction based 
+	 * On conditions.
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {
@@ -69,5 +77,4 @@ public class Wolf extends AbstractCritter {
 		int direction = myDirection;
 		return direction;
 	}
-
 }

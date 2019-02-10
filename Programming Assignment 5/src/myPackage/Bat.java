@@ -1,7 +1,7 @@
 /**
- * Multiline comment
+ * Multiline comment at the top of the file
  */
-package myPackage;
+//package myPackage;
 import java.util.Random;
 /**
  * This class represents the bat in the program
@@ -26,7 +26,9 @@ public class Bat extends AbstractCritter {
 	 * Interface which should return a random
 	 * Direction up to, but not including CENTER.
 	 * 
-	 * @return
+	 * @param theInfo : 
+	 * @return : This method returns a random
+	 * Position not including center.
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {

@@ -1,7 +1,7 @@
 /**
- * This is a multiline comment
+ * Multiline comment at the top of the file
  */
-package myPackage;
+//package myPackage;
 
 /**
  * This class represents the stone in the 
@@ -24,7 +24,9 @@ public class Stone extends AbstractCritter {
 	 * This is the overridden abstract method 
 	 * From the interface.
 	 * 
-	 * @return
+	 * @param theInfo : 
+	 * @return : This method returns a direction
+	 * Of Center.
 	 */
 	@Override
 	public int getMove(CritterInfo theInfo) {
