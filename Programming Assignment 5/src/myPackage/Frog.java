@@ -1,7 +1,7 @@
-/**
+/*
  * Multiline comment at the top of the file
  */
-//package myPackage;
+package myPackage;
 /**
  * This class represents the frog in the 
  * Program that never gets stuck on a stone.
@@ -21,7 +21,9 @@ public class Frog extends AbstractCritter {
 	private double myCount;
 	
 	/**
-	 * Constructor 
+	 * This is the constructor for the Frog class. This 
+	 * constructor consists of a char, and two ints serving 
+	 * individual purposes.  
 	 */
 	public Frog() {
 		super('F');

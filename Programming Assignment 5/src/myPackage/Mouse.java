@@ -1,7 +1,7 @@
-/**
+/*
  * Multiline comment at the top of the file
  */
-//package myPackage;
+package myPackage;
 
 import java.util.Random;
 
@@ -27,7 +27,9 @@ public class Mouse extends AbstractCritter {
 	private int myGetMoveCounter = 0;
 	
 	/**
-	 * Constructor
+	 * Constructor for the mouse class that uses
+	 * A random non center direction, and a counter
+	 * to accomplish the unique mouse behavior.
 	 */
 	public Mouse() {
 		super('M');
@@ -50,16 +52,15 @@ public class Mouse extends AbstractCritter {
 	@Override
 	public int getMove(CritterInfo theInfo) {
 		int result = 0;
-		myGetMoveCounter += 1;	
-		if (myGetMoveCounter % 2 > 0) {
+		myGetMoveCounter += 1;
+		if (myGetMoveCounter % 3 > 0) {
 			result = myDirection;
-//			System.out.println("TOP DIRECTION: " + result);
-		}	else if (myGetMoveCounter % 2 == 0) {
-			result = getNewDirection(myDirection);
+		}	else if (myGetMoveCounter % 3 == 0) {
+					result = getNewDirection(myDirection);
 		}
 		return result;
 	}
-	
+
 	/**
 	 * This method uses a series of if conditions and
 	 * a random boolean to determine where on the grid 

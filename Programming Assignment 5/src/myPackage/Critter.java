@@ -1,7 +1,7 @@
 /*
  * Multiline comment at the top of the file
  */
-//package myPackage;
+package myPackage;
 
 /**
  * This is the Critter interface that holds
@@ -32,6 +32,7 @@ public interface Critter {
 	 * Where the critter will stay still.
 	 */
 	public static final int CENTER = 4;
+	
 	/**
 	 * This is an abstract method to be included in 
 	 * Whatever implements this interface.
@@ -40,6 +41,7 @@ public interface Critter {
 	 * returns nothing
 	 */
 	public char getChar();
+	
 	/**
 	 * This is an abstract method to be included in 
 	 * Whatever implements this interface.

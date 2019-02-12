@@ -1,7 +1,7 @@
-/**
+/*
  * Multiline comment at the top of the file
  */
-//package myPackage;
+package myPackage;
 
 /**
  * This class represents the Wolf which behaves 
@@ -32,7 +32,9 @@ public class Wolf extends AbstractCritter {
 	private int myTarget;
 	
 	/**
-	 * This is the constructor 
+	 * This is the constructor for the wolf class that 
+	 * Uses basic fields for the direction of the wolf, and 
+	 * a couple counters, as well as a boolean.
 	 */
 	public Wolf() {
 		super('W');
