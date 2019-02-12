@@ -34,6 +34,4 @@ public class Bat extends AbstractCritter {
 	public int getMove(CritterInfo theInfo) {
 		return new Random().nextInt(CENTER);
 	}
-
-	
 }

@@ -10,11 +10,13 @@ package myPackage;
  * @version 2/4/2019
  */
 public class Frog extends AbstractCritter {
+	
 	/**
 	 * This field holds the direction that is initially 
 	 * Set to CENTER during instantiation
 	 */
 	private int myDirection;
+	
 	/**
 	 * This field is a simple counter
 	 */
@@ -66,5 +68,4 @@ public class Frog extends AbstractCritter {
 		}
 		return result;
 	}
-
 }

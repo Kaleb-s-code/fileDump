@@ -12,20 +12,24 @@ package myPackage;
  * @version 2/4/2019
  */
 public class Wolf extends AbstractCritter {
+	
 	/**
 	 * This fields represents the direction the wolf will go.
 	 */
 	private int myDirection;
+	
 	/**
 	 * This field represents a counter that I use 
 	 * In the getMove() method.
 	 */
 	private int myCount;
+	
 	/**
 	 * This field is used to determine if a move is the 
 	 * Initial move or not.
 	 */
 	private boolean myFirst;
+	
 	/**
 	 * This field represents the target value 
 	 */

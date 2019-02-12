@@ -14,10 +14,12 @@ import java.util.Random;
  *
  */
 public class Turtle extends AbstractCritter {
+	
 	/**
 	 * This field is a simple counter
 	 */
 	private int myCounter;
+	
 	/**
 	 * This field holds a random integer that is created 
 	 * When the class is instantiated.

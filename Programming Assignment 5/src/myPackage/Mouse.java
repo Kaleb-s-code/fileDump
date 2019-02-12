@@ -1,5 +1,7 @@
 /*
- * Multiline comment at the top of the file
+ * Per your comments, I tried to get the mouse to hold 
+ * A direction for longer periods of time. Though, It seems they
+ * Hold a consistent trajectory more than a specific direction.
  */
 package myPackage;
 
@@ -15,11 +17,13 @@ import java.util.Random;
  * @version 2/4/2019
  */
 public class Mouse extends AbstractCritter {
+	
 	/**
 	 * This field represents the direction that the mouse
 	 * Starts off heading.
 	 */
 	private int myDirection;
+	
 	/**
 	 * This field is a counter that is used to keep track
 	 * Track of the times getMove() is called 

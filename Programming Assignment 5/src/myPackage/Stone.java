@@ -31,7 +31,5 @@ public class Stone extends AbstractCritter {
 	@Override
 	public int getMove(CritterInfo theInfo) {
 		return CENTER;
-		
 	}
-
 }
