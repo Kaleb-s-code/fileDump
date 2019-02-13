@@ -2,7 +2,7 @@
  * I wasn't sure how to get the turtle to hold a direction for longer
  * periods of time in a way that did not break that section of code..
  */
-package myPackage;
+//package myPackage;
 import java.util.Random;
 
 /**

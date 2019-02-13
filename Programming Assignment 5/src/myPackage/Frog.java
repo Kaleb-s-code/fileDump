@@ -1,7 +1,7 @@
 /*
  * Multiline comment at the top of the file
  */
-package myPackage;
+//package myPackage;
 /**
  * This class represents the frog in the 
  * Program that never gets stuck on a stone.

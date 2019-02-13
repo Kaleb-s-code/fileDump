@@ -1,7 +1,7 @@
 /*
  * Multiline comment at the top of the file
  */
-package myPackage;
+//package myPackage;
 
 /**
  * This abstract class implements the Critter interface

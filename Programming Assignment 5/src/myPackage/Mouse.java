@@ -3,7 +3,7 @@
  * A direction for longer periods of time. Though, It seems they
  * Hold a consistent trajectory more than a specific direction.
  */
-package myPackage;
+//package myPackage;
 
 import java.util.Random;
 
