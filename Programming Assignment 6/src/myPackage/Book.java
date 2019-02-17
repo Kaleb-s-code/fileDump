@@ -4,10 +4,13 @@
 package myPackage;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 
 /**
- * This class does things and stuff that a class should do And there are
- * more things that it can do too.
+ * This class is supposed to represent a book object in a library.
+ * Upon instantiation, a title  for each book is captured 
+ * as well as the author(s).
  * 
  * @author Kaleb Moreno (kalebm2@uw.edu)
  * @version 2/14/2019
@@ -15,33 +18,37 @@ import java.util.ArrayList;
 public class Book implements Comparable<Book> {
 
 	/**
-	 * Private field
+	 * Private field that holds the title of the book
 	 */
 	private String myBookTitle;
 
 	/**
-	 * Private field
+	 * Private field that holds the ArrayList of author names
 	 */
 	private ArrayList<String> myAuthorsNames;
 
 	/**
-	 * This is the constructor that does some things
+	 * This is the constructor that uses a try catch block to check for 
+	 * invalid parameters and prints to the console a simple message 
+	 * indicating such. If successful, the fields are instantiated and 
+	 * assigned the legal values.
 	 * 
 	 * @param theTitle   : The title of the books
 	 * @param theAuthors : The name of the author(s)
 	 */
 	public Book(final String theTitle, final ArrayList<String> theAuthors) {
-		if (theTitle == null || theAuthors == null) {
-			throw new IllegalArgumentException();
-		} else {
-			ArrayList<String> myAuthorsNames = new ArrayList<String>();
+		try {
+			myAuthorsNames = new ArrayList<String>();
+			myAuthorsNames.addAll(theAuthors);
 			myBookTitle = theTitle;
-			myAuthorsNames = theAuthors;
+		} catch (IllegalArgumentException e) {
+			System.out.println("Invalid Parameters: " + e);
 		}
+	
 	}
 
 	/**
-	 * Getter for the field
+	 * Getter for the titles
 	 * 
 	 * @return : myBookTitle
 	 */
@@ -50,7 +57,7 @@ public class Book implements Comparable<Book> {
 	}
 
 	/**
-	 * Getter for the field
+	 * Getter for the authors
 	 * 
 	 * @return : myAuthorsNames
 	 */
@@ -59,7 +66,36 @@ public class Book implements Comparable<Book> {
 	}
 
 	/**
-	 * This is a method that does things
+	 * This is the compareTo method that compares two different objects
+	 * and returns an integer value indicating the result.
+	 * 
+	 * @param theOther :
+	 * @return : integer
+	 */
+	@Override
+	public int compareTo(final Book theOther) {
+		int result = 0;
+		int titles = getTitle().compareTo(theOther.getTitle());
+		boolean authors = getAuthors().equals(theOther.getAuthors());
+		
+		if (titles < 0) {
+			result = -1;
+		} else if (titles > 0) {
+			result = 1;
+		} else if (titles == 0) {
+			if (authors) {
+				result = 0;
+			} else if (!authors) {
+				result = -1;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * This is the overridden equals method from the interface that does 
+	 * a number of sequential checks. Then finally returns a boolean
+	 * indicating equality. 
 	 * 
 	 * @param theOther :
 	 * @return : boolean
@@ -67,31 +103,40 @@ public class Book implements Comparable<Book> {
 	@Override
 	public boolean equals(final Object theOther) {
 		boolean result = false;
-		if (myBookTitle == theOther) {
+
+		// Checking for equality of self
+		if (this == theOther) {
 			result = true;
 		}
-		return true;
+
+		// Checking for null
+		if (theOther == null) {
+			result = false;
+		}
+
+		// The type cast to Book
+		Book book = (Book) theOther;
+
+		// Checking for equality amongst instances
+		if ((book instanceof Book) == false) {
+			result = false;
+		}
+
+		// Checking for book title first, then the author's names
+		if (Objects.equals(myBookTitle, book.myBookTitle) && 
+				Objects.equals(myAuthorsNames, book.myAuthorsNames)) {
+			result = true;
+		}
+		return result;
 	}
 	
-	/**
-	 * This is another method that does things
-	 * 
-	 * @param theOther :
-	 * @return : integer
-	 */
-	@Override
-	public int compareTo(final Book theOther) {
-		// TODO
-		return 0;
-	}
-
 	/*
 	 * The toString() override
 	 */
 	@Override
 	public String toString() {
 		// TODO
-		return "Book [myBookTitle=" + myBookTitle + ", myAuthorsNames=" + 
-				myAuthorsNames + "]";
+		return "Book [myBookTitle=" + myBookTitle +
+				", myAuthorsNames=" + myAuthorsNames + "]";
 	}
 }
