@@ -48,29 +48,26 @@ public class Library {
 	 * @return : This method returns whether or not the book was
 	 *         successfully added to the ArrayList.
 	 */
+	public boolean add(final Book theBook) {
+		boolean result = true;
+		try {
+			myBookObjects.add(theBook);
+		} catch (NullPointerException e) {
+			System.out.println("Something is not right: " + e);
+			result = false;
+		}
+		return result;
+	}
 
-	// public boolean add(final Book theBook) {
-	// boolean result = true;
-	// try {
-	// myBookObjects.add(theBook);
-	// } catch (NullPointerException e) {
-	// System.out.println("Something is not right: " + e);
-	// result = false;
-	// }
-	// return result;
-	// }
-	//
-	// /**
-	// * This method is supposed to return an ArrayList where every title
-	// in
-	// * the library that matches the parameter exactly, is added to the
-	// * Array.
-	// *
-	// * @param theTitle : This is the title that will be compared to the
-	// * titles in the library.
-	// * @return : This method returns an ArrayList of the matching
-	// titles.
-	// */
+	/**
+	 * This method is supposed to return an ArrayList where every title in
+	 * the library that matches the parameter exactly, is added to the
+	 * Array.
+	 *
+	 * @param theTitle : This is the title that will be compared to the
+	 *                 titles in the library.
+	 * @return : This method returns an ArrayList of the matching titles.
+	 */
 	public ArrayList<Book> findTitles(final String theTitle) {
 		return myBookObjects;
 		/*
@@ -80,31 +77,27 @@ public class Library {
 		 */
 	}
 
-	//
-	// /**
-	// * This method sorts the library's book in ascending order according
-	// * to the title field
-	// */
+	/**
+	 * This method sorts the library's book in ascending order according
+	 * to the title field
+	 */
 	public void sort() {
-		 Collections.sort(myBookObjects);
+		Collections.sort(myBookObjects);
 	}
 
-	//
-	// /**
-	// * This method is supposed to return a properly formatted string
-	// * representation of all the books in the library. Title followed by
-	// * authors.
-	// *
-	// * @return : This method returns a string of sorts
-	// */
+	/**
+	 * This method is supposed to return a properly formatted string
+	 * representation of all the books in the library. Title followed by
+	 * authors.
+	 *
+	 * @return : This method returns a string of sorts
+	 */
 	@Override
 	public String toString() {
 		String formattedString = "";
 		for (int i = 0; i < myBookObjects.size(); i++) {
 			formattedString += myBookObjects.get(i) + "\n";
 		}
-		
-		
 		return formattedString;
 	}
 }
