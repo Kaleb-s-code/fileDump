@@ -43,22 +43,31 @@ public class Book implements Comparable<Book> {
 		} catch (IllegalArgumentException e) {
 			System.out.println("Invalid Parameters: " + e);
 		}
-
 	}
 
 	/**
-	 * Getter for the titles
+	 * This is the overloaded Book constructor who's purpose is to allow
+	 * instantiation of a book object, without having to set all of the
+	 * fields. I only used this constructor once in the driver so that I
+	 * could return book objects created in a loop.
+	 */
+	public Book() {
+		myBookTitle = "";
+	}
+
+	/**
+	 * This method is a getter for the book titles.
 	 * 
-	 * @return : myBookTitle
+	 * @return : This method returns the book title.
 	 */
 	public String getTitle() {
 		return myBookTitle;
 	}
 
 	/**
-	 * Getter for the authors
+	 * This method is a getter for the author's names.
 	 * 
-	 * @return : myAuthorsNames
+	 * @return : This method returns the authors names.
 	 */
 	public ArrayList<String> getAuthors() {
 		return myAuthorsNames;
@@ -68,15 +77,16 @@ public class Book implements Comparable<Book> {
 	 * This is the compareTo method that compares two different objects
 	 * and returns an integer value indicating the result.
 	 * 
-	 * @param theOther :
-	 * @return : integer
+	 * @param theOther : This is the book to be checked.
+	 * @return : This method returns the result indicating the nature of
+	 *         equality.
 	 */
 	@Override
 	public int compareTo(final Book theOther) {
 		int result = 0;
 		int titles = getTitle().compareTo(theOther.getTitle());
 		boolean authors = getAuthors().equals(theOther.getAuthors());
-
+		equals(theOther);
 		if (titles < 0) {
 			result = -1;
 		} else if (titles > 0) {
@@ -96,13 +106,16 @@ public class Book implements Comparable<Book> {
 	 * number of sequential checks. Then finally returns a boolean
 	 * indicating equality.
 	 * 
-	 * @param theOther :
-	 * @return : boolean
+	 * @param theOther : This is the object to be checked for equality.
+	 * @return : This method returns a boolean indicating the nature of
+	 *         equality.
 	 */
 	@Override
 	public boolean equals(final Object theOther) {
 		boolean result = false;
-
+		System.out.println("myBookTitle: " + myBookTitle + myAuthorsNames);
+		System.out.println("theOther: " + theOther);
+		System.out.println("=================================");
 		// Checking for equality of self
 		if (this == theOther) {
 			result = true;
@@ -119,24 +132,28 @@ public class Book implements Comparable<Book> {
 		// Checking for equality amongst instances
 		if ((book instanceof Book) == false) {
 			result = false;
+			System.out.println("third if");
 		}
 
-		// Checking for book title first, then the author's names
+		// Checking for book title & the author's names
 		if (Objects.equals(myBookTitle, book.myBookTitle) && Objects.equals(myAuthorsNames, book.myAuthorsNames)) {
 			result = true;
+			System.out.println("fourth if");
 		}
+		System.out.println(result);
 		return result;
 	}
 
 	/*
-	 * The toString() override
+	 * This is the toString() method that builds a string and returns the
+	 * Finished result.
 	 */
 	@Override
 	public String toString() {
 		String stringRep = "";
 		for (int i = 0; i < myAuthorsNames.size(); i++) {
-				stringRep += String.format("%s; ", myAuthorsNames.get(i));
+			stringRep += String.format("%s; ", myAuthorsNames.get(i));
 		}
-		return "\"" + myBookTitle + ",\"" + " by " + stringRep.substring(0, stringRep.length() -2);
+		return "\"" + myBookTitle + ",\"" + " by " + stringRep.substring(0, stringRep.length() - 2);
 	}
 }

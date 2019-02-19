@@ -1,6 +1,4 @@
-
-
-PRINTS INITIAL BOOK LIST:
+PRINTS UNSORTED BOOK LIST:
 "The Hobbit," by Tolkien, J.R.R.
 "Acer Dumpling," by Doofus, Robert
 "A Christmas Carol," by Dickens, Charles
@@ -26,7 +24,17 @@ PRINTS SORTED BOOK LIST:
 "The Time Machine," by Wells, H.G.
 
 
-PRINTS INITIAL BOOK LIST:
+PRINTS UNSORTED BOOK LIST:
+"The Hobbit," by Tolkien, J.R.R.
+"Acer Dumpling," by Doofus, Robert
+"A Christmas Carol," by Dickens, Charles
+"Marley and Me," by Remember, SomeoneIdont
+"The Bluff," by Dougan, Thomas; Peters, Paul; Elliot, Sam
+"Acer Dumpling," by Sagan, Carl; Smith, Tom
+"Building Java Programs," by Reges, Stuart; Stepp, Marty
+"Java, How to Program," by Deitel, Paul; Deitel, Harvey
+"The Time Machine," by Wells, H.G.
+"The Time Machine," by Howell, Carl; Smith, Peter; Saunders, Alan; Botje, Wil
 "Acer Dumpling," by Dude, Cool; Daddy, Big
 "The Bluff," by Zwayer, Ted; Starr, Ringo; Stork, Tony
 "The Time Machine," by Sagan, Carl; Peters, Tom
@@ -34,7 +42,31 @@ PRINTS INITIAL BOOK LIST:
 
 
 PRINTS SORTED BOOK LIST:
+"A Christmas Carol," by Dickens, Charles
 "Acer Dumpling," by Mott, John; Peters, Carl; Regan, Sarah; Dennis, George
 "Acer Dumpling," by Dude, Cool; Daddy, Big
+"Acer Dumpling," by Sagan, Carl; Smith, Tom
+"Acer Dumpling," by Doofus, Robert
+"Building Java Programs," by Reges, Stuart; Stepp, Marty
+"Java, How to Program," by Deitel, Paul; Deitel, Harvey
+"Marley and Me," by Remember, SomeoneIdont
 "The Bluff," by Zwayer, Ted; Starr, Ringo; Stork, Tony
+"The Bluff," by Dougan, Thomas; Peters, Paul; Elliot, Sam
+"The Hobbit," by Tolkien, J.R.R.
 "The Time Machine," by Sagan, Carl; Peters, Tom
+"The Time Machine," by Howell, Carl; Smith, Peter; Saunders, Alan; Botje, Wil
+"The Time Machine," by Wells, H.G.
+
+
+PRINTS ALL "ACER DUMPLING"s:
+"Acer Dumpling," by Mott, John; Peters, Carl; Regan, Sarah; Dennis, George
+"Acer Dumpling," by Dude, Cool; Daddy, Big
+"Acer Dumpling," by Sagan, Carl; Smith, Tom
+"Acer Dumpling," by Doofus, Robert
+
+
+PRINTS ALL "THE BLUFF"s:
+"The Bluff," by Zwayer, Ted; Starr, Ringo; Stork, Tony
+"The Bluff," by Dougan, Thomas; Peters, Paul; Elliot, Sam
+
+
