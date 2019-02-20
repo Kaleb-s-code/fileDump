@@ -1,7 +1,7 @@
 /*
  * Multiline comment at the top of the document
  */
-package myPackage;
+//package myPackage;
 
 import java.util.ArrayList;
 import java.util.Collections;

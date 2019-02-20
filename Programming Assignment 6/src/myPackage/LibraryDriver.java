@@ -1,7 +1,7 @@
 /*
  * Multiline Comment
  */
-package myPackage;
+//package myPackage;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -165,7 +165,7 @@ public class LibraryDriver {
 	 *                       far.
 	 * @param theOutputFile  : This is the output file.
 	 * @param theInputFile   : This is the input file.
-	 * @return : This method returns a Library object.
+	 * @return : This method returns a Library object
 	 */
 	public static Library writeUnsorted(ArrayList<Book> theDriverBooks, PrintStream theOutputFile, Scanner theInputFile) {
 		Library library = new Library(theDriverBooks);
