@@ -30,12 +30,11 @@ public class Library {
 	 * @param theOther : This is a book object passed.
 	 */
 	public Library(final ArrayList<Book> theOther) {
-		myBookObjects = new ArrayList<Book>();
-		try {
-			myBookObjects.addAll(theOther);
-		} catch (NullPointerException e) {
-			System.out.println("Something is null: " + e);
+		if (theOther == null) {
+			throw new NullPointerException();
 		}
+		myBookObjects = new ArrayList<Book>();
+		myBookObjects.addAll(theOther);
 	}
 
 	/**
@@ -57,12 +56,15 @@ public class Library {
 	 */
 	public boolean add(final Book theBook) {
 		boolean result = true;
-		try {
-			myBookObjects.add(theBook);
-		} catch (NullPointerException e) {
-			System.out.println("Something is not right: " + e);
+		if (theBook == null) {
 			result = false;
+			throw new NullPointerException();
 		}
+		if (theBook.getAuthors().isEmpty() || theBook.getTitle().isEmpty()) {
+			result = false;
+			throw new IllegalArgumentException();
+		}
+		myBookObjects.add(theBook);
 		return result;
 	}
 

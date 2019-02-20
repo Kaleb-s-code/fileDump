@@ -3,9 +3,10 @@
  */
 package myPackage;
 
-import java.util.*;
-
-import java.io.*;
+import java.io.File;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class is the driver for two other classes "Library.java" and
@@ -68,6 +69,15 @@ public class LibraryDriver {
 		populateTheBooks(inputFile2, allTheAuthors, authorHolding, driverBooks);
 		library = writeUnsorted(driverBooks, outputFile, inputFile2);
 		writeSorted(library, outputFile);
+
+		/*
+		 * This method call adds a new book to the end of the library
+		 * ArrayList. Each author must be separated by a semicolon ";" To
+		 * display the new book in the list, uncomment out the writeSorted
+		 * method below.
+		 */
+		addABookToLibrary(library, "NEW BOOK TITLE", "Bob, Jones;Terry, Cruse");
+		// writeSorted(library, outputFile);
 
 		/*
 		 * These methods find the books in the library that match the String
@@ -155,6 +165,7 @@ public class LibraryDriver {
 	 *                       far.
 	 * @param theOutputFile  : This is the output file.
 	 * @param theInputFile   : This is the input file.
+	 * @return : This method returns a Library object.
 	 */
 	public static Library writeUnsorted(ArrayList<Book> theDriverBooks, PrintStream theOutputFile, Scanner theInputFile) {
 		Library library = new Library(theDriverBooks);
@@ -177,6 +188,27 @@ public class LibraryDriver {
 		theOutputFile.print("PRINTS SORTED BOOK LIST:\n");
 		theOutputFile.print(theLibrary.toString());
 		theOutputFile.print("\n\n");
+	}
+
+	/**
+	 * The sole purpose of this method is to add single books to the end
+	 * of the library ArrayList.
+	 * 
+	 * @param theLibrary : This is the passed library object
+	 * @param theTitle   : This is the passed desired title
+	 * @param theAuthors : This is the passed desired author(s)
+	 */
+	public static void addABookToLibrary(Library theLibrary, String theTitle, String theAuthors) {
+		ArrayList<String> passedAuthor = new ArrayList<String>();
+		String[] tempAuthors = new String[0];
+		for (int i = 0; i < theAuthors.length(); i++) {
+			tempAuthors = theAuthors.split(";");
+		}
+		for (int i = 0; i < tempAuthors.length; i++) {
+			passedAuthor.add(tempAuthors[i]);
+		}
+		Book newBook = new Book(theTitle, passedAuthor);
+		theLibrary.add(newBook);
 	}
 
 	/**

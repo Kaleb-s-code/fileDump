@@ -36,13 +36,12 @@ public class Book implements Comparable<Book> {
 	 * @param theAuthors : The name of the author(s)
 	 */
 	public Book(final String theTitle, final ArrayList<String> theAuthors) {
-		try {
-			myAuthorsNames = new ArrayList<String>();
-			myAuthorsNames.addAll(theAuthors);
-			myBookTitle = theTitle;
-		} catch (IllegalArgumentException e) {
-			System.out.println("Invalid Parameters: " + e);
+		if (theTitle.isBlank() || theAuthors.isEmpty() || theAuthors == null) {
+			throw new IllegalArgumentException();
 		}
+		myAuthorsNames = new ArrayList<String>();
+		myAuthorsNames.addAll(theAuthors);
+		myBookTitle = theTitle;
 	}
 
 	/**
@@ -113,9 +112,6 @@ public class Book implements Comparable<Book> {
 	@Override
 	public boolean equals(final Object theOther) {
 		boolean result = false;
-		System.out.println("myBookTitle: " + myBookTitle + myAuthorsNames);
-		System.out.println("theOther: " + theOther);
-		System.out.println("=================================");
 		// Checking for equality of self
 		if (this == theOther) {
 			result = true;
@@ -126,21 +122,12 @@ public class Book implements Comparable<Book> {
 			result = false;
 		}
 
-		// The type cast to Book
-		Book book = (Book) theOther;
-
 		// Checking for equality amongst instances
-		if ((book instanceof Book) == false) {
-			result = false;
-			System.out.println("third if");
+		if ((theOther instanceof Book) == false) {
+			// The type cast to Book
+			Book book = (Book) theOther;
+			result = (book.myBookTitle == myBookTitle && book.myAuthorsNames == myAuthorsNames);
 		}
-
-		// Checking for book title & the author's names
-		if (Objects.equals(myBookTitle, book.myBookTitle) && Objects.equals(myAuthorsNames, book.myAuthorsNames)) {
-			result = true;
-			System.out.println("fourth if");
-		}
-		System.out.println(result);
 		return result;
 	}
 
