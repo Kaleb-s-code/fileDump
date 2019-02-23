@@ -1,4 +1,4 @@
-/**
+/*
  * Multiline comment at the top of the file
  */
 //package myPackage;
@@ -32,5 +32,4 @@ public class Stone extends AbstractCritter {
 	public int getMove(CritterInfo theInfo) {
 		return CENTER;
 	}
-
 }

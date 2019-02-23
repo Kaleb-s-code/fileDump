@@ -1,4 +1,4 @@
-/**
+/*
  * Multiline comment at the top of the file
  */
 //package myPackage;
@@ -34,6 +34,4 @@ public class Bat extends AbstractCritter {
 	public int getMove(CritterInfo theInfo) {
 		return new Random().nextInt(CENTER);
 	}
-
-	
 }

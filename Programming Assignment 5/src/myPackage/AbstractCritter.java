@@ -18,6 +18,15 @@ public abstract class AbstractCritter implements Critter {
 	 * This field represents the critter as a char
 	 */
 	private char myCritter;
+
+	/**
+	 * Constructor that sets the field to the parameter passed
+	 * 
+	 * @param theChar : This is the critter identifier
+	 */
+	public AbstractCritter(final char theChar) {
+		myCritter = theChar;
+	}
 	
 	/**
 	 * Overridden method from interface
@@ -27,15 +36,5 @@ public abstract class AbstractCritter implements Critter {
 	@Override
 	public char getChar() {
 		return myCritter;
-	}
-	//	Constructor
-	
-	/**
-	 * Constructor that sets the field to the parameter passed
-	 * 
-	 * @param theChar : This is the critter identifier
-	 */
-	public AbstractCritter(final char theChar) {
-		myCritter = theChar;
 	}
 }

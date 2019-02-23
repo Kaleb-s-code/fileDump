@@ -1,5 +1,6 @@
-/**
- * Multiline comment at the top of the file
+/*
+ * I wasn't sure how to get the turtle to hold a direction for longer
+ * periods of time in a way that did not break that section of code..
  */
 //package myPackage;
 import java.util.Random;
@@ -14,10 +15,12 @@ import java.util.Random;
  *
  */
 public class Turtle extends AbstractCritter {
+	
 	/**
 	 * This field is a simple counter
 	 */
 	private int myCounter;
+	
 	/**
 	 * This field holds a random integer that is created 
 	 * When the class is instantiated.
@@ -25,7 +28,9 @@ public class Turtle extends AbstractCritter {
 	private int myRandom;
 	
 	/**
-	 * The constructor!
+	 * This is the constructor for the turtle class that uses
+	 * A set of random integers to accomplish the slow and 
+	 * unpredictable behavior of the turtle.
 	 */
 	public Turtle() {
 		super('T');
@@ -63,21 +68,20 @@ public class Turtle extends AbstractCritter {
 			}
 //			This is (group 2) that returns a movement based on a 
 //			Number in range 13 omitting CENTER
-			else if (randomBoolean == true && myRandom <= 7) {
-				int moveWhere = new Random().nextInt(13);
-				if (moveWhere <= 3) {
-					result = SOUTH;
-				} else if (moveWhere <= 5 && moveWhere <= 4) {
-					result = WEST;
-				} else if (moveWhere <= 7 && moveWhere >= 6) {
-					result = NORTH;
-				} else if (moveWhere >= 8) {
-					result = EAST;
+		else if (randomBoolean == true && myRandom <= 7) {
+			int moveWhere = new Random().nextInt(13);
+			if (moveWhere <= 3) {
+				result = SOUTH;
+			} else if (moveWhere <= 5 && moveWhere <= 4) {
+				result = WEST;
+			} else if (moveWhere <= 7 && moveWhere >= 6) {
+				result = NORTH;
+			} else if (moveWhere >= 8) {
+				result = EAST;
 				}
 			}
 		}
 		myCounter += 1;	
 		return result;
 	}
-	
 }
