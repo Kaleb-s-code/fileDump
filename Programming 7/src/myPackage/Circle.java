@@ -38,7 +38,7 @@ public class Circle extends AbstractShape {
 		super("Circle", myID++);
 		if (theRadius <= 0.0) {
 			myID--;
-			throw new IllegalArgumentException("ERROR! Negative or 0\nValue can't" + "be applied to a circle radius.");
+			throw new IllegalArgumentException("ERROR! Negative or 0 Value can't" + "be applied to a circle radius.");
 		}
 		myRadius = theRadius;
 	}

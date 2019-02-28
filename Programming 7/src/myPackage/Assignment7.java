@@ -6,6 +6,7 @@ package myPackage;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,9 +95,8 @@ public class Assignment7 {
 					Circle circle = new Circle(someNum);
 					theShapes.add(circle);
 					copyList.add(circle);
-					System.out.println(circle.toString());
-				} catch (Exception e) {
-					// System.out.println(e + ": Exception in CIRCLE");
+				} catch (IllegalArgumentException e) {
+					 System.out.println(e);
 				}
 			}
 
@@ -111,10 +111,9 @@ public class Assignment7 {
 							Rectangle rectangle = new Rectangle(length, width);
 							theShapes.add(rectangle);
 							copyList.add(rectangle);
-							System.out.println(rectangle.toString());
 						}
-					} catch (Exception e) {
-						// System.out.println(e + ": Exception in RECTANGLE");
+					} catch (IllegalArgumentException e) {
+						 System.out.println(e);
 
 					}
 
@@ -130,10 +129,9 @@ public class Assignment7 {
 							Triangle triangle = new Triangle(a, b, c);
 							theShapes.add(triangle);
 							copyList.add(triangle);
-							System.out.println(triangle.toString());
 						}
-					} catch (Exception e) {
-						// System.out.println(e + ": Exception in TRIANGLE");
+					} catch (IllegalArgumentException e) {
+						 System.out.println(e);
 					}
 				}
 			}
@@ -184,6 +182,7 @@ public class Assignment7 {
 	 */
 	public static void writeSorted(List<Shape> theList, PrintStream theOutputFile) {
 		
+		Collections.sort(theList);
 		Iterator<Shape> itr = theList.iterator();
 		theOutputFile.print("Copied List [sorted]:\n");
 		while (itr.hasNext()) {
