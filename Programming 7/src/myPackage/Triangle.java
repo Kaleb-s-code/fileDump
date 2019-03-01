@@ -4,12 +4,12 @@
 package myPackage;
 
 /**
- * This class is a representation of a Triangle object that inherits
- * from the parent abstract class AbstractShape.
+ * This class is a representation of a Triangle object that inherits from the
+ * parent abstract class AbstractShape.
  * 
  *
  * @author : Kaleb Moreno (kalebm2@uw.edu)
- * @version : Feb 23, 2019
+ * @version : Feb 28, 2019
  */
 public class Triangle extends AbstractShape {
 
@@ -41,20 +41,22 @@ public class Triangle extends AbstractShape {
 	}
 
 	/**
-	 * This is the parameterized constructor that decides what is a side,
-	 * and which of the parameters is the hypotenuse. It then determines
-	 * if the values are valid and throws an exception if that is the
-	 * case.
+	 * This is the parameterized constructor that decides what is a side, and which
+	 * of the parameters is the hypotenuse. It then determines if the values are
+	 * valid and throws an exception if that is the case.
 	 * 
-	 * @param theName
-	 * @param theNumber
+	 * @param theName   : This is the name passed to the super constructor.
+	 * @param theNumber : This is the ID passed to the super constructor.
+	 * @param theSideA  : This is side A.
+	 * @param theSideB  : This is side B.
+	 * @param theSideC  : This is side C.
 	 */
 	public Triangle(final double theSideA, final double theSideB, final double theSideC) {
-		super("Triangle", myID++);
+		super("Triangle", ++myID);
 		double hypot = 1.0;
 		double sideOne = 1.0;
 		double sideTwo = 1.0;
-//System.out.println("\n****Sides coming in: " + theSideA + ", " + theSideB + ", " + theSideC);
+
 		if (theSideA > theSideB && theSideA > theSideC) {
 			hypot = theSideA;
 			sideOne = theSideB;
@@ -80,15 +82,16 @@ public class Triangle extends AbstractShape {
 		mySideB = sideTwo;
 		mySideC = hypot;
 
-		if (theSideA <= 0.0 || theSideB <= 0.0 || theSideC <= 0.0 || sideOne + sideTwo == hypot) {
+		if (theSideA <= 0.0 || theSideB <= 0.0 || theSideC <= 0.0
+				|| hypot >= sideOne + sideTwo) {
 			myID--;
 			throw new IllegalArgumentException("ERROR! Negative or 0 Value can't "
-					+ "be applied to a Triangle side. The sum of the sides must also not" + " equal the length of the hypotenuse.");
+					+ "be applied to a Triangle side. The sum of the sides must also not" +
+					" equal the length of the hypotenuse.");
 		} else if (calculateArea() <= 0) {
 			myID--;
 			throw new IllegalArgumentException("ERROR! Not a triangle");
 		}
-
 	}
 
 	/**
@@ -118,19 +121,22 @@ public class Triangle extends AbstractShape {
 		mySideC = theSideC;
 	}
 
-	/* 
+	/**
+	 * This allows for copying of the shape.
 	 * 
+	 * @return : This returns the new triangle object.
 	 */
 	@Override
 	public Shape copyShape() {
-		
-		return null;
+		Triangle triangle = new Triangle(mySideA, mySideB, mySideC);
+		return triangle;
 	}
 
-	/*
-	 * This method calculates the area of the triangle based on Heron's
-	 * formula which uses the three sides, neglecting the need for a base
-	 * and height.
+	/**
+	 * This method calculates the area of the shape and attempts to correct the
+	 * excessive trailing digits.
+	 * 
+	 * @return : This returns a double representing the area.
 	 */
 	@Override
 	public double calculateArea() {
@@ -143,13 +149,14 @@ public class Triangle extends AbstractShape {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * This is the toString()
+	 * 
+	 * @return : This method returns a string representation of the object.
 	 */
 	@Override
 	public String toString() {
-		return "Triangle" + myID + " [SideA: " + mySideA + ", SideB: " + mySideB + ", SideC: " + mySideC + "] Area: " + calculateArea();
+		return getName() + " [SideA: " + mySideA + ", SideB: " 
+	+ mySideB + ", SideC: " + mySideC + "] Area: " + calculateArea();
 	}
-
-
 }

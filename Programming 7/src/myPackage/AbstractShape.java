@@ -4,10 +4,11 @@
 package myPackage;
 
 /**
- * This class
+ * This is the abstract class that houses several abstract methods, and two
+ * concrete methods as well as a toString().
  *
  * @author : Kaleb Moreno (kalebm2@uw.edu)
- * @version : Feb 23, 2019
+ * @version : Feb 28, 2019
  */
 public abstract class AbstractShape implements Shape {
 
@@ -17,8 +18,8 @@ public abstract class AbstractShape implements Shape {
 	private String myName;
 
 	/**
-	 * This is the parameterized constructor that sets the name field to
-	 * the name passed concatenated with the number passed.
+	 * This is the parameterized constructor that sets the name field to the name
+	 * passed concatenated with the number passed.
 	 */
 	public AbstractShape(String theName, int theNumber) {
 		myName = theName + theNumber;
@@ -32,15 +33,6 @@ public abstract class AbstractShape implements Shape {
 	public abstract double calculateArea();
 
 	/**
-	 * This method shall make a copy of the shape for further processing.
-	 * 
-	 * @return
-	 */
-	// public Shape copyShape() {
-	// //TODO
-	// }
-
-	/**
 	 * This method shall get the name of the shape.
 	 * 
 	 * @return
@@ -51,30 +43,27 @@ public abstract class AbstractShape implements Shape {
 
 	/**
 	 * This is the compareTo method.
+	 * 
+	 * @return : This method returns an integer representing the nature of the
+	 *         comparison.
 	 */
 	@Override
 	public int compareTo(Shape theOther) {
 		int result = 0;
-		int titles = getName().compareTo(theOther.getName());
-		// boolean authors = getAuthors().equals(theOther.getAuthors());
-		equals(theOther);
-		if (titles < 0) {
+		double currentArea = calculateArea();
+		double otherArea = theOther.calculateArea();
+		if (currentArea < otherArea) {
 			result = -1;
-		} else if (titles > 0) {
+		} else if (otherArea > currentArea) {
 			result = 1;
 		}
-		// } else if (titles == 0) {
-		// if (authors) {
-		// result = 0;
-		// } else if (!authors) {
-		// result = -1;
-		// }
-		// }
 		return result;
 	}
 
-	/*
-	 * This is the equals method that goes along with the compareTo.
+	/**
+	 * This is the equals method that comes with the Comparable interface.
+	 * 
+	 * @return : This method returns the nature of the equality.
 	 */
 	@Override
 	public boolean equals(Object theOther) {
@@ -83,24 +72,22 @@ public abstract class AbstractShape implements Shape {
 		if (this == theOther) {
 			result = true;
 		}
-
 		// Checking for null
 		if (theOther == null) {
 			result = false;
 		}
-
 		// Checking for equality amongst instances
 		if ((theOther instanceof Shape) == false) {
 			// The type cast to Book
 			Shape shape = (Shape) theOther;
-			// result = (shape.myName == myBookTitle && book.myAuthorsNames ==
-			// myAuthorsNames);
 		}
 		return result;
 	}
-	
-	/* 
+
+	/**
+	 * This is the toString method.
 	 * 
+	 * @return : This returns a string representation of the object.
 	 */
 	@Override
 	public String toString() {

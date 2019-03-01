@@ -7,7 +7,7 @@ package myPackage;
  * This class represents a circle.
  *
  * @author : Kaleb Moreno (kalebm2@uw.edu)
- * @version : Feb 23, 2019
+ * @version : Feb 28, 2019
  */
 public class Circle extends AbstractShape {
 
@@ -19,7 +19,7 @@ public class Circle extends AbstractShape {
 	/**
 	 * This is the ID field.
 	 */
-	private static int myID = 0;
+	private static int myID;
 
 	/**
 	 * This is the non - parameterized constructor.
@@ -35,16 +35,19 @@ public class Circle extends AbstractShape {
 	 * @param theRadius
 	 */
 	public Circle(final double theRadius) {
-		super("Circle", myID++);
+		super("Circle", ++myID);
 		if (theRadius <= 0.0) {
 			myID--;
-			throw new IllegalArgumentException("ERROR! Negative or 0 Value can't" + "be applied to a circle radius.");
+			throw new IllegalArgumentException(
+					"ERROR! Negative or 0 Value can't" + "be applied to a circle radius.");
 		}
 		myRadius = theRadius;
 	}
 
-	/*
-	 *  
+	/**
+	 * This method allows a circle to be copied.
+	 * 
+	 * @return : This is the new circle object based on the current circle's radius.
 	 */
 	@Override
 	public Shape copyShape() {
@@ -52,22 +55,33 @@ public class Circle extends AbstractShape {
 		return circle;
 	}
 
-	/*
-	 *
+	/**
+	 * This is a setter for the radius.
+	 * 
+	 * @param theRadius : This is the radius passed.
+	 */
+	public void setMyRadius(double theRadius) {
+		myRadius = theRadius;
+	}
+
+	/**
+	 * This method calculates the area of the shape and attempts to correct the
+	 * excessive trailing digits.
+	 * 
+	 * @return : This returns a double representing the area.
 	 */
 	@Override
 	public double calculateArea() {
 		return Math.round(((Math.PI) * (myRadius * myRadius)) * 100.0) / 100.0;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * This is the toString()
 	 * 
-	 * @see java.lang.Object#toString()
+	 * @return : This method returns a string representation of the object.
 	 */
 	@Override
 	public String toString() {
-		return "Circle" + myID + " [myRadius: " + myRadius + "] Area: " + calculateArea();
+		return getName() + " [myRadius: " + myRadius + "] Area: " + calculateArea();
 	}
-
 }

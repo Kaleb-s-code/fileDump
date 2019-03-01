@@ -4,11 +4,10 @@
 package myPackage;
 
 /**
- * This class does things and stuff that a class should do And there
- * are more things that it can do too.
+ * This class represents a rectangle.
  *
  * @author : Kaleb Moreno (kalebm2@uw.edu)
- * @version : Feb 23, 2019
+ * @version : Feb 28, 2019
  */
 public class Rectangle extends AbstractShape {
 
@@ -35,16 +34,15 @@ public class Rectangle extends AbstractShape {
 	}
 
 	/**
-	 * This is the parameterized constructor that validates the dimensions
-	 * passed. then either throws an exception if invalid, or sets the
-	 * fields to the passed values.
+	 * This is the parameterized constructor that validates the dimensions passed.
+	 * then either throws an exception if invalid, or sets the fields to the passed
+	 * values.
 	 * 
-	 * @param theName
-	 * @param theNumber
+	 * @param theLength : This is the length passed.
+	 * @param theWidth  : This is the width passed.
 	 */
 	public Rectangle(double theLength, double theWidth) {
-		super("Rectangle", myID++);
-//		System.out.println("This is the Length: " + theLength + "\n" + "This is the Width: " + theWidth);
+		super("Rectangle", ++myID);
 		if (theLength <= 0.0 || theWidth <= 0.0) {
 			myID--;
 			throw new IllegalArgumentException(
@@ -57,7 +55,7 @@ public class Rectangle extends AbstractShape {
 	/**
 	 * This method is a setter for the length field.
 	 * 
-	 * @param theLength
+	 * @param theLength : This is the length passed.
 	 */
 	public void setLength(final double theLength) {
 		myLength = theLength;
@@ -66,34 +64,41 @@ public class Rectangle extends AbstractShape {
 	/**
 	 * This method is a setter for the width field.
 	 * 
-	 * @param theWidth
+	 * @param theWidth : This is the width.
 	 */
 	public void setWidth(final double theWidth) {
 		myWidth = theWidth;
 	}
 
-	/*
-	 * This method makes a copy of the shape object.
+	/**
+	 * This method allows for copying of rectangle object.
+	 * 
+	 * @return : This returns the new rectangle.
 	 */
 	@Override
 	public final Shape copyShape() {
-		// TODO Auto-generated method stub
-		return null;
+		Rectangle rectangle = new Rectangle(myLength, myWidth);
+		return rectangle;
 	}
 
-	/*
-	 * This method simply calculates the area of the rectangle.
+	/**
+	 * This method calculates the area of the shape and attempts to correct the
+	 * excessive trailing digits.
+	 * 
+	 * @return : This returns a double representing the area.
 	 */
 	@Override
 	public double calculateArea() {
 		return myLength * myWidth;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * This is the toString()
+	 * 
+	 * @return : This method returns a string representation of the object.
 	 */
 	@Override
 	public String toString() {
-		return "Rectangle" + myID + " [Length: " + myLength + ", Width: " + myWidth + "] Area: " + calculateArea();
+		return getName() + " [Length: " + myLength + ", Width: " + myWidth + "] Area: " + calculateArea();
 	}
 }

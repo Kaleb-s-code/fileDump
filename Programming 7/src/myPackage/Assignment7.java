@@ -13,30 +13,33 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * This class does things and stuff that a class should do And there are more
- * things that it can do too.
+ * This class is the driver for several other classes. This driver seeks to make
+ * three different shapes from an input file. A circle, a rectangle and a
+ * Triangle. The driver then writes them to an output file in an unsorted and
+ * sorted fashion.
  *
  * @author : Kaleb Moreno (kalebm2@uw.edu)
- * @version : Feb 23, 2019
+ * @version : Feb 28, 2019
  */
 public class Assignment7 {
 
 	/**
+	 * This is the main method in which all other methods are called, and the input
+	 * and output files are closed.
+	 * 
 	 * @param theArgs
 	 */
 	public static void main(String[] theArgs) {
 		Scanner inputFile = openTheInputFiles("in7.txt");
 		PrintStream outputFile = openTheOutputFile("out7.txt");
 
-		List<Shape> myList = new LinkedList<Shape>();
-		List<Shape> copyList = populateTheShapes(inputFile, myList);
+		List<Shape> aList = new LinkedList<Shape>();
+		List<Shape> populatedList = populateTheShapes(inputFile, aList);
+		List<Shape> copiedList = copyTheList(populatedList);
 
-		writeUnsorted(myList, outputFile);
-		writeSorted(copyList, outputFile);
-		writeUnsorted(myList, outputFile);
-		
-		
-		copyTheList(myList);
+		writeUnsorted(aList, outputFile);
+		writeSorted(copiedList, outputFile);
+		writeUnsorted(aList, outputFile);
 
 		inputFile.close();
 		outputFile.close();
@@ -74,76 +77,66 @@ public class Assignment7 {
 			System.exit(1);
 		}
 		return outputFile;
-
 	}
 
 	/**
+	 * This method does the heavy lifting by looking at the file, determining what
+	 * lines of input can be used to make shapes, then actually makes the shapes.
 	 * 
-	 * @param theInputFile
+	 * @param theInputFile : This is the input file passed.
+	 * @param theShapes    : This is the LinkedList passed which will hold all of
+	 *                     the shape objects.
+	 * @return : This method returns the List that was passed via the parameter.
 	 */
-	public static ArrayList<Shape> populateTheShapes(Scanner theInputFile, List<Shape> theShapes) {
-
-		ArrayList<Shape> copyList = new ArrayList<Shape>();
+	public static List<Shape> populateTheShapes(Scanner theInputFile, List<Shape> theShapes) {
 
 		String[] splitString;
 		while (theInputFile.hasNext()) {
-			String string = theInputFile.nextLine().strip();
-			if (string.length() < 4 && !string.isEmpty() && string.length() != 3
-					|| string.length() == 3 && string.contains(".")) {
+			splitString = theInputFile.nextLine().trim().split(" ");
+			if (splitString.length < 2) {
 				try {
-					Double someNum = Double.valueOf(string);
+					Double someNum = Double.valueOf(splitString[0]);
 					Circle circle = new Circle(someNum);
 					theShapes.add(circle);
-					copyList.add(circle);
-				} catch (IllegalArgumentException e) {
-					 System.out.println(e);
+				} catch (Exception e) {
+					System.out.println(e);
 				}
-			}
-
-			else if (!string.isEmpty()) {
-				splitString = string.split(" ");
-				if (splitString.length < 3) {
-					try {
-						for (int i = 0; i < splitString.length; i++) {
-							Double length = Double.valueOf(splitString[i]);
-							i++;
-							Double width = Double.valueOf(splitString[i]);
-							Rectangle rectangle = new Rectangle(length, width);
-							theShapes.add(rectangle);
-							copyList.add(rectangle);
-						}
-					} catch (IllegalArgumentException e) {
-						 System.out.println(e);
-
+			} else if (splitString.length > 1 && splitString.length < 3) {
+				try {
+					for (int i = 0; i < splitString.length; i++) {
+						Double length = Double.valueOf(splitString[i]);
+						i++;
+						Double width = Double.valueOf(splitString[i]);
+						Rectangle rectangle = new Rectangle(length, width);
+						theShapes.add(rectangle);
 					}
-
+				} catch (Exception e) {
+					System.out.println(e);
 				}
-				if (splitString.length >= 3) {
-					try {
-						for (int i = 0; i < splitString.length; i++) {
-							Double a = Double.valueOf(splitString[i]);
-							i++;
-							Double b = Double.valueOf(splitString[i]);
-							i++;
-							Double c = Double.valueOf(splitString[i]);
-							Triangle triangle = new Triangle(a, b, c);
-							theShapes.add(triangle);
-							copyList.add(triangle);
-						}
-					} catch (IllegalArgumentException e) {
-						 System.out.println(e);
+			} else {
+				try {
+					for (int i = 0; i < splitString.length; i++) {
+						Double a = Double.valueOf(splitString[i]);
+						i++;
+						Double b = Double.valueOf(splitString[i]);
+						i++;
+						Double c = Double.valueOf(splitString[i]);
+						Triangle triangle = new Triangle(a, b, c);
+						theShapes.add(triangle);
 					}
+				} catch (Exception e) {
+					System.out.println(e);
 				}
 			}
 		}
-		return copyList;
+		return theShapes;
 	}
 
 	/**
+	 * This method performs a deep copy of whatever list is passed to it.
 	 * 
-	 * @param theInputFile
-	 * @param theList
-	 * @return
+	 * @param theList : This is the list passed to be copied.
+	 * @return : This method returns the deep copied list
 	 */
 	public static List<Shape> copyTheList(List<Shape> theList) {
 		List<Shape> newList = new ArrayList<Shape>();
@@ -152,16 +145,13 @@ public class Assignment7 {
 			newList.add(s);
 		}
 		return newList;
-
 	}
 
 	/**
+	 * This method writes the objects to the output file in an unsorted fashion.
 	 * 
-	 * 
-	 * @param theDriverBooks
-	 * @param theOutputFile
-	 * @param theInputFile
-	 * @return
+	 * @param theShapes     : This is the list of shapes.
+	 * @param theOutputFile : This is the file to be written to.
 	 */
 	public static void writeUnsorted(List<Shape> theShapes, PrintStream theOutputFile) {
 		Iterator<Shape> itr = theShapes.iterator();
@@ -174,14 +164,14 @@ public class Assignment7 {
 	}
 
 	/**
-	 * The primary purpose of this method is to write the sorted Library to the
-	 * output file. This is also where the actual sorting method is called.
+	 * This method writes to the output file in a sorted fashion based on the area
+	 * of the shape.
 	 * 
-	 * @param theLibrary    : This is the Library object this far.
-	 * @param theOutputFile : This is the output file to be written to.
+	 * @param theList       : This is the list passed.
+	 * @param theOutputFile : this is the output file that will be written to.
 	 */
 	public static void writeSorted(List<Shape> theList, PrintStream theOutputFile) {
-		
+
 		Collections.sort(theList);
 		Iterator<Shape> itr = theList.iterator();
 		theOutputFile.print("Copied List [sorted]:\n");
@@ -190,5 +180,4 @@ public class Assignment7 {
 		}
 		theOutputFile.print("\n");
 	}
-
 }

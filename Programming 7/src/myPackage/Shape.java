@@ -4,12 +4,12 @@
 package myPackage;
 
 /**
- * This class is an interface that extends from Comparable and passes
- * the responsibility of implementation on to the sub classes which
- * implement this interface.
+ * This class is an interface that extends from Comparable and passes the
+ * responsibility of implementation on to the sub classes which implement this
+ * interface.
  *
  * @author : Kaleb Moreno (kalebm2@uw.edu)
- * @version : Feb 23, 2019
+ * @version : Feb 28, 2019
  */
 public interface Shape extends Comparable<Shape> {
 	/**

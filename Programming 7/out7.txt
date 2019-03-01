@@ -1,27 +1,27 @@
 Original List [unsorted]:
-Circle4 [myRadius: 4.4] Area: 60.82
-Rectangle2 [Length: 2.5, Width: 3.0] Area: 7.5
+Circle1 [myRadius: 4.4] Area: 60.82
+Rectangle1 [Length: 2.5, Width: 3.0] Area: 7.5
 Triangle1 [SideA: 3.0, SideB: 2.5, SideC: 4.0] Area: 3.75
-Circle4 [myRadius: 2.5] Area: 19.63
-Circle4 [myRadius: 1.0] Area: 3.14
+Circle2 [myRadius: 2.5] Area: 19.63
+Circle3 [myRadius: 1.0] Area: 3.14
 Rectangle2 [Length: 3.0, Width: 5.0] Area: 15.0
 Circle4 [myRadius: 1.0] Area: 3.14
 
 Copied List [sorted]:
-Circle4 [myRadius: 4.4] Area: 60.82
-Circle4 [myRadius: 2.5] Area: 19.63
-Circle4 [myRadius: 1.0] Area: 3.14
-Circle4 [myRadius: 1.0] Area: 3.14
-Rectangle2 [Length: 2.5, Width: 3.0] Area: 7.5
-Rectangle2 [Length: 3.0, Width: 5.0] Area: 15.0
-Triangle1 [SideA: 3.0, SideB: 2.5, SideC: 4.0] Area: 3.75
+Circle7 [myRadius: 1.0] Area: 3.14
+Circle8 [myRadius: 1.0] Area: 3.14
+Triangle2 [SideA: 2.5, SideB: 3.0, SideC: 4.0] Area: 3.75
+Rectangle3 [Length: 2.5, Width: 3.0] Area: 7.5
+Rectangle4 [Length: 3.0, Width: 5.0] Area: 15.0
+Circle6 [myRadius: 2.5] Area: 19.63
+Circle5 [myRadius: 4.4] Area: 60.82
 
 Original List [unsorted]:
-Circle4 [myRadius: 4.4] Area: 60.82
-Rectangle2 [Length: 2.5, Width: 3.0] Area: 7.5
+Circle1 [myRadius: 4.4] Area: 60.82
+Rectangle1 [Length: 2.5, Width: 3.0] Area: 7.5
 Triangle1 [SideA: 3.0, SideB: 2.5, SideC: 4.0] Area: 3.75
-Circle4 [myRadius: 2.5] Area: 19.63
-Circle4 [myRadius: 1.0] Area: 3.14
+Circle2 [myRadius: 2.5] Area: 19.63
+Circle3 [myRadius: 1.0] Area: 3.14
 Rectangle2 [Length: 3.0, Width: 5.0] Area: 15.0
 Circle4 [myRadius: 1.0] Area: 3.14
 
