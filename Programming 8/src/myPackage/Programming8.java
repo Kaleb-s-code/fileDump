@@ -60,7 +60,6 @@ public class Programming8 {
 	 * @param theArgs :
 	 */
 	public static void main(String[] theArgs) {
-		System.out.println("TEST");
 		Scanner inputFile = openTheInputFiles("in8.txt");
 		PrintStream outputFile = openTheOutputFile("out8.txt");
 
