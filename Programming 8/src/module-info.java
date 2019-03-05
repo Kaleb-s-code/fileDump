@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author Kaleb
+ *
+ */
+module myModule {
+}
