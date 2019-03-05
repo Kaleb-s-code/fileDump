@@ -60,6 +60,7 @@ public class Programming8 {
 	 * @param theArgs :
 	 */
 	public static void main(String[] theArgs) {
+		System.out.println("FROM THE MAC");
 		Scanner inputFile = openTheInputFiles("in8.txt");
 		PrintStream outputFile = openTheOutputFile("out8.txt");
 
