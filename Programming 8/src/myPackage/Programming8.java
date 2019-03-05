@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
@@ -44,10 +45,14 @@ import java.util.TreeSet;
 public class Programming8 {
 
 	/**
-	 * This is a constant
+	 * This is a field
 	 */
-	public static String SOMESTRING = "";
+	private static String myString;
 
+	/**
+	 * This is a field
+	 */
+	private static Set<String> mySet;
 	/**
 	 * This program is to read all the words contained in the input file,
 	 * one at a time recursively until no words remain. To do this main
@@ -60,15 +65,16 @@ public class Programming8 {
 	 * @param theArgs :
 	 */
 	public static void main(String[] theArgs) {
+		mySet = new TreeSet<String>();
 		Scanner inputFile = openTheInputFiles("in8.txt");
 		PrintStream outputFile = openTheOutputFile("out8.txt");
 
 		getWordsString(inputFile, 'a');
-
-		Set<String> theWordSet = getWordSet(SOMESTRING);
-
-		System.out.println();
-		System.out.println(theWordSet.toString());
+		getWordSet(myString);
+		 
+		getWordLengthMap(mySet);
+		
+		System.out.println(mySet.toString());
 
 		inputFile.close();
 		outputFile.close();
@@ -125,7 +131,7 @@ public class Programming8 {
 		if (theInputFile.hasNext()) {
 			tempString = theInputFile.next();
 			if (hasCharacter(tempString.toLowerCase(), theChar)) {
-				SOMESTRING += tempString + " ";
+				myString += tempString + " ";
 			}
 			getWordsString(theInputFile, theChar);
 		}
@@ -166,14 +172,13 @@ public class Programming8 {
 //		System.out.println(theWordSet.toString());
 
 		if (theWords.length() < 1) {
-			System.out.println("Base case reached");
+			return null;
 		} else {
 			int theSpace = theWords.indexOf(" ");
 			
 			getWordSet(theWords.substring(theSpace + 1));
-			theWordSet.add((theWords.substring(0, theWords.indexOf(" ") + 1)));
-			
-			System.out.println(theWordSet.toString());
+			mySet.add((theWords.substring(0, theWords.indexOf(" ") + 1)));
+
 		}
 		return theWordSet;
 	}
@@ -190,7 +195,29 @@ public class Programming8 {
 	 * call the recursive version of getWordLengthMap passing it the Map
 	 * it creates and an Iterator on the Set which it receives. :
 	 */
-	public static void getWordLengthMap() {
+	
+	/**
+	 * The helper method to the getLengthMap
+	 * 
+	 * @param theSet
+	 * @return
+	 */
+	public static Map<Integer, Set<String>> getWordLengthMap(Set<String> theSet) {
+		Map<Integer, Set<String>> theMap = new TreeMap<Integer, Set<String>>();
+		return theMap;
+	}
+	
+	/**
+	 * The meat and potatoes of the getWordLengthMap
+	 * 
+	 * @param theWordLengths
+	 * @param theWordSetItr
+	 * @return
+	 */
+	public static Map<Integer, Set<String>> getWordLengthMap(Map<Integer, 
+			Set<String>> theWordLengths, 
+			Iterator<String> theWordSetItr) {
+		return theWordLengths;
 	}
 
 	/**
