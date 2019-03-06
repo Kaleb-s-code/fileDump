@@ -1,7 +1,7 @@
 /**
  * Multiline comment at the top of the file.
  */
-//package myPackage;
+package myPackage;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -22,63 +22,33 @@ import java.util.TreeSet;
  * return a String containing all words from the input file that
  * contain a single given character, perhaps the character ‘a’.
  * 
- * getWordString will use the recursive method hasCharacter to
- * determine if the current word needs to be added to the String. Keep
- * in mind, this string must have a single space inserted between each
- * word. In order to remove redundant words, the String returned from
- * getWordsString will be sent to another recursive method
- * “getWordSet” which will ‘pick’ out each word in the String and add
- * them to a TreeSet (this will remove all duplicates and, as a
- * TreeSet, will align the words in sorted order). The TreeSet will be
- * returned to main for final output. Details on getWordSet are listed
- * below.
- * 
- * Before outputting the results, main will pass the TreeSet of words
- * to the non-recursive helper method getWordLengthMap which in turn,
- * returns a call to the recursive version of this method of the same
- * name to produce a Map (instantiated as a TreeMap) of word lengths
- * to a set of words of that same length.
- *
  * @author  Kaleb Moreno (kalebm2@uw.edu)
  * @version Mar 2, 2019 (Date of class creation)
  */
 public class Programming8 {
 
 	/**
-	 * This is a field
-	 */
-	private static String myString;
-
-	/**
-	 * This is a field
-	 */
-	private static Set<String> mySet;
-	/**
-	 * This program is to read all the words contained in the input file,
-	 * one at a time recursively until no words remain. To do this main
-	 * will call a recursive method named getWordsString which is passed a
-	 * Scanner to a File object and a single character. getWordsString
-	 * will read all the words in the file and return a String containing
-	 * all words from the input file that contain a single given
-	 * character.
+	 * This main method is
 	 *
 	 * @param theArgs :
 	 */
 	public static void main(String[] theArgs) {
-		mySet = new TreeSet<String>();
 		Scanner inputFile = openTheInputFiles("in8.txt");
 		PrintStream outputFile = openTheOutputFile("out8.txt");
 
-		getWordsString(inputFile, 'a');
-		getWordSet(myString);
-		 
-		getWordLengthMap(mySet);
-		
-		System.out.println(mySet.toString());
+		// This is where you put the letter you're looking for
+		char theChar = 'A';
+
+		String stringOfWordString = getWordsString(inputFile, theChar);
+
+		Set<String> wordSet = getWordSet(stringOfWordString);
+
+		Map<Integer, Set<String>> wordMap = getWordLengthMap(wordSet);
+		//
+		writeToTheFile(outputFile, wordSet, wordMap, theChar);
 
 		inputFile.close();
 		outputFile.close();
-
 	}
 
 	/**
@@ -116,38 +86,43 @@ public class Programming8 {
 	}
 
 	/**
-	 * Recursively read all the words contained in the input file and
-	 * return a String containing only the words found in the file that
-	 * contain a given char (The words within this String will be
-	 * separated by a space). Multiple return statements will be allowed
-	 * here.
+	 * This method gets the String of words from the input file and checks
+	 * if any of the words contain the passed char via another method.
 	 *
-	 * @param  theInputFile
-	 * @return              :
+	 * @param  theInputFile : This is the input file passed.
+	 * @param  theChar      : This is the character to be searched for.
+	 * @return              : This method returns a string containing all
+	 *                      of the words that have the character.
 	 */
-	public static String getWordsString(final Scanner theInputFile, final char theChar) {
+	public static String getWordsString(final Scanner theInputFile, 
+			final char theChar) {
 		String resultString = "";
 		String tempString = "";
 		if (theInputFile.hasNext()) {
 			tempString = theInputFile.next();
 			if (hasCharacter(tempString.toLowerCase(), theChar)) {
-				myString += tempString + " ";
-			}
+				resultString = tempString + " " + 
 			getWordsString(theInputFile, theChar);
+			} else {
+				resultString = getWordsString(theInputFile, theChar);
+			}
 		}
-		// getWordSet(resultString);
-		System.out.print(resultString);
 		return resultString;
 	}
 
 	/**
-	 * Recursively scan the characters within a received word to see if it
-	 * contains a given char and return true if it does, false otherwise
+	 * This method checks to see if the word passed contains the character
+	 * any where in the string of letters. It does this by removing a
+	 * piece of the word until all characters have been checked.
 	 *
-	 * @param  theWord
-	 * @return         :
+	 * 
+	 * @param  theWord : This is the word to be broken down.
+	 * @param  theChar : This is the char to be checked against.
+	 * @return         : This method returns whether or not the char is in
+	 *                 the string.
 	 */
-	public static boolean hasCharacter(final String theWord, final char theChar) {
+	public static boolean hasCharacter(final String theWord, 
+			final char theChar) {
 		int i = 0;
 		if (theWord.charAt(i) == theChar) {
 			return true;
@@ -158,84 +133,118 @@ public class Programming8 {
 	}
 
 	/**
-	 * Recursively scan the words in a received String where each word is
-	 * separated by a space and placing each word into a Set (TreeSet)
-	 * which is returned to the calling program once all the words have
-	 * been scanned. Multiple return statements will be allowed here
+	 * This is a what this method is a helper method to the overloaded
+	 * method below.
 	 *
-	 * @param  theWords
-	 * @return          :
+	 * @param  theWords : This is a string of words from the input file.
+	 * @return          : returns a Set of type string.
 	 */
 	public static Set<String> getWordSet(final String theWords) {
 		Set<String> theWordSet = new TreeSet<String>();
-//		theWordSet.add(theWords.substring(0, theWords.indexOf(" ") + 1));
-//		System.out.println(theWordSet.toString());
+
+		return getWordSet(theWords, theWordSet);
+	}
+
+	/**
+	 * This method converts all of the words into a set of type string.
+	 *
+	 * @param  theWords   : These are the words passed to be converted.
+	 * @param  theWordSet : This is the TreeSet passed from the helper
+	 *                    method.
+	 * @return            : This method returns a Set of type string.
+	 */
+	public static Set<String> getWordSet(final String theWords, 
+			Set<String> theWordSet) {
+		Set<String> tempSet = new TreeSet<String>();
+		String aWord = theWords.substring(0, theWords.indexOf(" ") + 1);
+		int theSpace = theWords.indexOf(" ");
+
+		tempSet.add(aWord);
 
 		if (theWords.length() < 1) {
-			return null;
+			return theWordSet;
 		} else {
-			int theSpace = theWords.indexOf(" ");
-			
-			getWordSet(theWords.substring(theSpace + 1));
-			mySet.add((theWords.substring(0, theWords.indexOf(" ") + 1)));
-
+			tempSet.addAll(getWordSet(theWords.substring(theSpace + 1)));
+			theWordSet.addAll(tempSet);
 		}
 		return theWordSet;
 	}
 
 	/**
-	 * Recursively scan the set created by getWordSet and generate a
-	 * Map<Integer, Set<String>> that Maps the length of a word to a Set
-	 * of words of that length, i.e. a length of a given word will use
-	 * this length as a key and add the given word to a Set to which the
-	 * key maps. This solution implies the use of a non-recursive
-	 * overloaded helper method of the same name called by main, that
-	 * simply receives the Set created by getWordSet and in it,
-	 * instantiates a Map of Integer to a Set of String which should then
-	 * call the recursive version of getWordLengthMap passing it the Map
-	 * it creates and an Iterator on the Set which it receives. :
+	 * This is the helper method to the method directly below. This method
+	 * passes an instantiated TreeMap and iterator to the overloaded
+	 * method so that the set can be placed into a map of like terms.
+	 *
+	 * @param  theSet : This is the set passed.
+	 * @return        : This method returns a Map of Sets.
 	 */
-	
+	public static Map<Integer, Set<String>> getWordLengthMap(
+			Set<String> theSet) {
+		if (!theSet.isEmpty()) {
+			Map<Integer, Set<String>> theMap = new TreeMap<Integer, 
+					Set<String>>();
+			Iterator<String> itr = theSet.iterator();
+			return getWordLengthMap(theMap, itr);
+		} else {
+			return null;
+		}
+	}
+
 	/**
-	 * The helper method to the getLengthMap
-	 * 
-	 * @param theSet
-	 * @return
+	 * This method does the actual converting. It takes the iterator and
+	 * the map object then adds to it the words which match the length of
+	 * the key.
+	 *
+	 * @param  theMap : This is the map passed.
+	 * @param  itr    : This is the iterator.
+	 * @return        : This method returns a map of Sets.
 	 */
-	public static Map<Integer, Set<String>> getWordLengthMap(Set<String> theSet) {
-		Map<Integer, Set<String>> theMap = new TreeMap<Integer, Set<String>>();
+	public static Map<Integer, Set<String>> getWordLengthMap(
+			Map<Integer, Set<String>> theMap, Iterator<String> itr) {
+		Set<String> tempSet = new TreeSet<String>();
+		String theNextWordString = itr.next();
+		int key = theNextWordString.length();
+		tempSet.add(theNextWordString);
+		if (!itr.hasNext()) {
+			return theMap;
+		} else {
+			getWordLengthMap(theMap, itr);
+			if (theMap.get(key) != null) {
+				tempSet.addAll(theMap.get(key));
+				theMap.put(key, tempSet);
+			} else {
+				theMap.put(key, tempSet);
+			}
+		}
 		return theMap;
 	}
-	
-	/**
-	 * The meat and potatoes of the getWordLengthMap
-	 * 
-	 * @param theWordLengths
-	 * @param theWordSetItr
-	 * @return
-	 */
-	public static Map<Integer, Set<String>> getWordLengthMap(Map<Integer, 
-			Set<String>> theWordLengths, 
-			Iterator<String> theWordSetItr) {
-		return theWordLengths;
-	}
 
 	/**
-	 * This method writes the objects to the output file in an unsorted
-	 * fashion.
-	 * 
-	 * @param theShapes     : This is the list of shapes.
+	 * This method is responsible for getting the set and Map information
+	 * to the output file.
+	 *
 	 * @param theOutputFile : This is the file to be written to.
+	 * @param theSet        : This is the set to be written.
+	 * @param theMap        : This is the map to be written.
+	 * @param theChar       : This is the char to be written, so that the
+	 *                      header reflects the proper search char.
 	 */
-	public static void writeToTheFile(PrintStream theOutputFile) {
-		// Iterator<Shape> itr = theShapes.iterator();
-		//
-		// theOutputFile.print("Original List [unsorted]:\n");
-		// while (itr.hasNext()) {
-		// theOutputFile.print(itr.next() + "\n");
-		// }
-		// theOutputFile.print("\n");
-		// }
-
+	public static void writeToTheFile(
+			PrintStream theOutputFile, Set<String> theSet, 
+			Map<Integer, Set<String>> theMap,
+			char theChar) {
+		if (!theSet.isEmpty()) {
+			theOutputFile.print("Set Size=" + theSet.size());
+			theOutputFile.print("\nSet of words containing the letter " 
+			+ theChar + ": ");
+			theOutputFile.print("\n" + theSet);
+			theOutputFile.print("\n\nMap Size=" + theMap.size());
+			theOutputFile.print("\nMap of words containing the letter " 
+			+ theChar + ": ");
+			theOutputFile.print("\n" + theMap);
+		} else {
+			System.out.println("**Character not found in the file.**\n"
+					+ "     Try a lower case letter.");
+		}
 	}
 }
