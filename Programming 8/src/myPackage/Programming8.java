@@ -35,14 +35,14 @@ public class Programming8 {
 		PrintStream outputFile = openTheOutputFile("out8.txt");
 
 		// This is where you put the letter you're looking for
-		char theChar = 'a';
-
+		char theChar = 'y';
+		// Step 1
 		String stringOfWordString = getWordsString(inputFile, theChar);
-
+		// Step 2
 		Set<String> wordSet = getWordSet(stringOfWordString);
-
+		// Step 3
 		Map<Integer, Set<String>> wordMap = getWordLengthMap(wordSet);
-
+		// Step 4
 		writeToTheFile(outputFile, wordSet, wordMap, theChar);
 
 		inputFile.close();
@@ -121,13 +121,14 @@ public class Programming8 {
 	 */
 	public static boolean hasCharacter(final String theWord, 
 			final char theChar) {
+		boolean result = false;
 		int i = 0;
 		if (theWord.charAt(i) == theChar) {
-			return true;
+			result = true;
 		} else if (theWord.length() > 1) {
-			return hasCharacter(theWord.substring(1), theChar);
+			result =  hasCharacter(theWord.substring(1), theChar);
 		}
-		return false;
+		return result;
 	}
 
 	/**
@@ -152,12 +153,13 @@ public class Programming8 {
 	 */
 	public static Set<String> getWordSet(final String theWords, 
 			Set<String> theWordSet) {
+		Set<String> result = theWordSet;
 		Set<String> tempSet = new TreeSet<String>();
 		String aWord = theWords.substring(0, theWords.indexOf(" ") + 1);
 		int theSpace = theWords.indexOf(" ");
 		tempSet.add(aWord);
 		if (theWords.length() < 1) {
-			return theWordSet;
+			result = theWordSet;
 		} else {
 			tempSet.addAll(getWordSet(theWords.substring(theSpace + 1)));
 			theWordSet.addAll(tempSet);
@@ -175,14 +177,14 @@ public class Programming8 {
 	 */
 	public static Map<Integer, Set<String>> getWordLengthMap(
 			Set<String> theSet) {
+		 Map<Integer, Set<String>> result = null;
 		if (!theSet.isEmpty()) {
 			Map<Integer, Set<String>> theMap = new TreeMap<Integer, 
 					Set<String>>();
 			Iterator<String> itr = theSet.iterator();
-			return getWordLengthMap(theMap, itr);
-		} else {
-			return null;
+			result =  getWordLengthMap(theMap, itr);
 		}
+		return result;
 	}
 
 	/**
@@ -196,12 +198,14 @@ public class Programming8 {
 	 */
 	public static Map<Integer, Set<String>> getWordLengthMap(
 			Map<Integer, Set<String>> theMap, Iterator<String> itr) {
+		Map<Integer, Set<String>> resultMap = theMap;
 		Set<String> tempSet = new TreeSet<String>();
 		String theNextWordString = itr.next();
 		int key = theNextWordString.length();
 		tempSet.add(theNextWordString);
+		theMap.put(key, tempSet);
 		if (!itr.hasNext()) {
-			return theMap;
+			resultMap = theMap;
 		} else {
 			getWordLengthMap(theMap, itr);
 			if (theMap.get(key) != null) {
@@ -211,7 +215,7 @@ public class Programming8 {
 				theMap.put(key, tempSet);
 			}
 		}
-		return theMap;
+		return resultMap;
 	}
 
 	/**
