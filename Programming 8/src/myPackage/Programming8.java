@@ -6,7 +6,6 @@ package myPackage;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -15,12 +14,8 @@ import java.util.TreeSet;
 
 /**
  * This program is to read all the words contained in the input file,
- * one at a time recursively until no words remain. To do this main
- * will call a recursive method named getWordsString (discussed
- * shortly) which is passed a Scanner to a File object and a single
- * character. getWordsString will read all the words in the file and
- * return a String containing all words from the input file that
- * contain a single given character, perhaps the character ‘a’.
+ * one at a time recursively until no words remain. Then print the 
+ * results of a set and map to an output file.
  * 
  * @author  Kaleb Moreno (kalebm2@uw.edu)
  * @version Mar 2, 2019 (Date of class creation)
@@ -28,7 +23,10 @@ import java.util.TreeSet;
 public class Programming8 {
 
 	/**
-	 * This main method is
+	 * This main method calls a number of other methods that first 
+	 * get the string of words from the input file. Then it creates a 
+	 * set out of those words. Then a map. finally, it outputs the results
+	 * to an outfile. 
 	 *
 	 * @param theArgs :
 	 */
@@ -37,14 +35,14 @@ public class Programming8 {
 		PrintStream outputFile = openTheOutputFile("out8.txt");
 
 		// This is where you put the letter you're looking for
-		char theChar = 'A';
+		char theChar = 'a';
 
 		String stringOfWordString = getWordsString(inputFile, theChar);
 
 		Set<String> wordSet = getWordSet(stringOfWordString);
 
 		Map<Integer, Set<String>> wordMap = getWordLengthMap(wordSet);
-		//
+
 		writeToTheFile(outputFile, wordSet, wordMap, theChar);
 
 		inputFile.close();
@@ -141,7 +139,6 @@ public class Programming8 {
 	 */
 	public static Set<String> getWordSet(final String theWords) {
 		Set<String> theWordSet = new TreeSet<String>();
-
 		return getWordSet(theWords, theWordSet);
 	}
 
@@ -158,9 +155,7 @@ public class Programming8 {
 		Set<String> tempSet = new TreeSet<String>();
 		String aWord = theWords.substring(0, theWords.indexOf(" ") + 1);
 		int theSpace = theWords.indexOf(" ");
-
 		tempSet.add(aWord);
-
 		if (theWords.length() < 1) {
 			return theWordSet;
 		} else {
