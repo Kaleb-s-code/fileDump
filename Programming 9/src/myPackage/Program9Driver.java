@@ -67,7 +67,7 @@ public class Program9Driver {
 
 		for (Iterator iterator = theAnagramLinkedList.iterator(); iterator.hasNext();) {
 			AnagramFamily word = (AnagramFamily) iterator.next();
-			System.out.println(word.toString());
+			outputFile.println(word.toString());
 		}
 		// This sorts the anagram families based on family size.
 //		sortTheAnagramFamilies(theAnagramLinkedList);
