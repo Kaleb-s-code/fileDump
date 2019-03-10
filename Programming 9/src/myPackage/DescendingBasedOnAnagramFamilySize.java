@@ -6,22 +6,32 @@ package myPackage;
 import java.util.Comparator;
 
 /**
-	* This is a description of what this class will do...
-	*
- * @author Kaleb Moreno (kalebm2@uw.edu)
- * @version Mar 8, 2019 (Date of class creation) : 
+ * This is class is a comparator that attempts to organize a family of
+ * anagrams in descending order based on the size of the family.
+ *
+ * @author  Kaleb Moreno (kalebm2@uw.edu)
+ * @version Mar 8, 2019 (Date of class creation)
  */
-public class DescendingBasedOnAnagramFamilySize implements Comparator<Word>{
+public class DescendingBasedOnAnagramFamilySize implements Comparator<AnagramFamily> {
 
 	/**
-		* This is an overidden method..
-		*
-	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 * This method is supposed to check for the size of the family and
+	 * determine the difference between one families size against
+	 * another's.
+	 *
+	 * @param  o1 : This is the object doing the comparing.
+	 * @param  o2 : This is the object being compared.
+	 * @return    : This method returns the nature of the comparison.
 	 */
 	@Override
-	public int compare(Word o1, Word o2) {
-		// TODO
-		return 0;
-	}
+	public int compare(AnagramFamily o1, AnagramFamily o2) {
+		int result = 0;
 
+		if (o1.getMyCurrentListSize() < o2.getMyCurrentListSize()) {
+			result = 1;
+		} else if (o1.getMyCurrentListSize() > o2.getMyCurrentListSize()) {
+			result = -1;
+		}
+		return result;
+	}
 }
