@@ -72,7 +72,7 @@ public class Word implements Comparable<Word> {
 			characterHolding.add(theChars[i]);
 		}
 		Collections.sort(characterHolding);
-		return characterHolding.toString();
+		return characterHolding.toString().replace(",", "").replace(" ", "").substring(1, characterHolding.size() + 1);
 	}
 
 	/**
@@ -86,6 +86,7 @@ public class Word implements Comparable<Word> {
 	@Override
 	public int compareTo(Word o) {
 		int result = 0;
+//		System.out.println("WORDS BEING COMPARED: " + myOriginalWord + ", " + o.myOriginalWord);
 		if (myCanonicalWord.length() < o.myCanonicalWord.length()) {
 			result = -1;
 		} else if (myCanonicalWord.length() > o.myCanonicalWord.length()) {
@@ -118,6 +119,6 @@ public class Word implements Comparable<Word> {
 	 */
 	@Override
 	public String toString() {
-		return " Word: " + myOriginalWord;
+		return myOriginalWord;
 	}
 }

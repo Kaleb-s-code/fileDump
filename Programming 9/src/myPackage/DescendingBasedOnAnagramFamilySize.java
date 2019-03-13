@@ -4,6 +4,7 @@
 package myPackage;
 
 import java.util.Comparator;
+import java.util.Set;
 
 /**
  * This is class is a comparator that attempts to organize a family of

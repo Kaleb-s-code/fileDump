@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -24,31 +25,6 @@ import java.util.TreeMap;
 public class Program9Driver {
 
 	/**
-	 * Step 1
-	 * 
-	 * This Driver should create a LinkedList of Word objects using all
-	 * the words found in the input file "words.txt".
-	 * 
-	 * Step 2
-	 * 
-	 * Using an Iterator on the LinkedList of Word, create a 2nd list (new
-	 * LinkedList) consisting of objects of a new class named
-	 * AnagramFamily.
-	 * 
-	 * Step 3
-	 * 
-	 * Sort the AnagramFamily LinkedList in descending order based on
-	 * family size by use of a Comparator to be passed to the Collections
-	 * sort method.
-	 * 
-	 * Step 4
-	 * 
-	 * Next, output the top five largest families then, all families of
-	 * length 8, and lastly, the very last family stored in the list to a
-	 * file named “out9.txt.” Be sure to format the output to be very
-	 * clear and meaningful.
-	 * 
-	 * 
 	 * @param theArgs :
 	 */
 	public static void main(String[] theArgs) {
@@ -64,20 +40,19 @@ public class Program9Driver {
 		// Sort the linked list by canonical
 		Collections.sort(theWordList);
 
-		// for (Iterator iterator = theWordList.iterator();
-		// iterator.hasNext();) {
-		// Word word = (Word) iterator.next();
-		// System.out.println(word.getMyCanonicalWord());
-		// }
-
 		// Get the anagrams into a list
 		List<AnagramFamily> theAnagramLinkedList = createTheAnagramsLinkedList(theWordList);
 
 		// // This sorts the list in descending order based on the size of the
 		// family
 		theAnagramLinkedList.sort(new DescendingBasedOnAnagramFamilySize());
-		//
-		//
+
+		// for (Iterator iterator = theAnagramLinkedList.iterator();
+		// iterator.hasNext();) {
+		// AnagramFamily word = (AnagramFamily) iterator.next();
+		// outputFile.println(word);
+		// }
+
 		// // This writes to the file
 		outputToTheFile(outputFile, theAnagramLinkedList);
 
@@ -148,40 +123,52 @@ public class Program9Driver {
 	 *                     Anagrams.
 	 */
 	public static List<AnagramFamily> createTheAnagramsLinkedList(List<Word> theWordList) {
-		Word nextWord = null;
 		int counter = 0;
+		Word nextWord = null;
 		List<Word> copiedList = new LinkedList<Word>();
 		List<Word> anagramHolding = new ArrayList<Word>();
 		List<AnagramFamily> anagramfamilyList = new LinkedList<AnagramFamily>();
-
+		Word fish = null;
 		// Deep copy of the list coming in..
 		for (Iterator<Word> iterator = theWordList.iterator(); iterator.hasNext();) {
+
 			Word wordInList = iterator.next();
-			counter++;
+			// System.out.println(wordInList);
 			copiedList.add(wordInList.copyWord());
 		}
-		System.out.println("TOTAL WORD COUNT: " + counter);
+
 		/*
 		 * This initial loop begins the process of creating anagrams from the
 		 * deep copied list.
 		 */
-		for (Iterator<Word> iterator = copiedList.iterator(); iterator.hasNext();) {
-			Word word = iterator.next();
+		for (ListIterator<Word> iterator = copiedList.listIterator(); iterator.hasNext();) {
+			counter++;
+			Word firstWord = iterator.next();
+			if (counter >= 2) {
+				firstWord = nextWord;
+				nextWord = iterator.previous();
+			}
 			if (iterator.hasNext()) {
 				nextWord = iterator.next();
 			}
+
 			/*
 			 * This initial check is for equality amongst a word and its
 			 * neighbors.
 			 */
-			if (word.compareTo(nextWord) == 0) {
-				anagramHolding.add(word);
+			// System.out.println("Coming in: " + firstWord + ", " + nextWord);
+			if (firstWord.compareTo(nextWord) == 0) {
+				anagramHolding.add(firstWord);
 				anagramHolding.add(nextWord);
-				Word furtherTests = iterator.next();
-				while (nextWord.compareTo(furtherTests) == 0) {
-					anagramHolding.add(furtherTests);
-					furtherTests = iterator.next();
+				// System.out.println("EXACT MATCH: " + anagramHolding);
+				Word tempWord = iterator.next();
+				while (nextWord.compareTo(tempWord) == 0) {
+					// System.out.println("****WHILE LOOP ENTERED****");
+					anagramHolding.add(tempWord);
+					// System.out.println(anagramHolding);
+					tempWord = iterator.next();
 				}
+				iterator.previous();
 
 				/*
 				 * This sorts each item from the list from Z-A before being added to
@@ -197,9 +184,10 @@ public class Program9Driver {
 				 * This next check adds any words that do not have a neighbor who
 				 * matches their canonical form.
 				 */
+				// System.out.println("Counter: " + counter);
 			} else {
-				anagramHolding.add(word);
-
+				anagramHolding.add(firstWord);
+				// System.out.println("ELSE: " + anagramHolding);
 				// Actual creation of an anagram family.
 				AnagramFamily anagramFamily = new AnagramFamily(anagramHolding);
 				anagramfamilyList.add(anagramFamily);
@@ -219,61 +207,22 @@ public class Program9Driver {
 	 */
 	public static void outputToTheFile(PrintStream theOutFile, List<AnagramFamily> theSortedList) {
 		int counter = 0;
-		int counter2 = 0;
-		int counter3 = 0;
-		int counter4 = 0;
-		int counter5 = 0;
-		int counter6 = 0;
-		int counter7 = 0;
-		int counter8 = 0;
-		int counter9 = 0;
-		int counter10 = 0;
-		int counter11 = 0;
+		int i = 12;
+		for (ListIterator<AnagramFamily> iterator = theSortedList.listIterator(); iterator.hasNext() && i != 8;) {
+			counter++;
+			AnagramFamily tempWord = iterator.next();
+			if (tempWord.getMyCurrentListSize() == i) {
+				theOutFile.println(tempWord);
 
-		for (Iterator<AnagramFamily> iterator = theSortedList.iterator(); iterator.hasNext();) {
-			AnagramFamily anagramFamily = (AnagramFamily) iterator.next();
+				while (tempWord.getMyCurrentListSize() == i) {
+					theOutFile.println(iterator.next());
 
-			if (anagramFamily.getMyCurrentListSize() == 1) {
-				counter++;
-			} else if (anagramFamily.getMyCurrentListSize() == 2) {
-				counter2++;
-			} else if (anagramFamily.getMyCurrentListSize() == 3) {
-				counter3++;
-			} else if (anagramFamily.getMyCurrentListSize() == 4) {
-				counter4++;
-			} else if (anagramFamily.getMyCurrentListSize() == 5) {
-				counter5++;
-			} else if (anagramFamily.getMyCurrentListSize() == 6) {
-				counter6++;
-			} else if (anagramFamily.getMyCurrentListSize() == 7) {
-				counter7++;
-			} else if (anagramFamily.getMyCurrentListSize() == 8) {
-				counter8++;
-			} else if (anagramFamily.getMyCurrentListSize() == 9) {
-				counter9++;
-			} else if (anagramFamily.getMyCurrentListSize() == 10) {
-				counter10++;
-			} else if (anagramFamily.getMyCurrentListSize() == 11) {
-				counter11++;
+				}
+
 			}
+			i--;
 		}
-
-		System.out.println("Size 1: " + counter);
-		System.out.println("Size 2: " + counter2);
-		System.out.println("Size 3: " + counter3);
-		System.out.println("Size 4: " + counter4);
-		System.out.println("Size 5: " + counter5);
-		System.out.println("Size 6: " + counter6);
-		System.out.println("Size 7: " + counter7);
-		System.out.println("Size 8: " + counter8);
-		System.out.println("Size 9: " + counter9);
-		System.out.println("Size 10: " + counter10);
-		System.out.println("Size 11: " + counter11);
-		
-		System.out.println();
-		System.out.println(counter + (counter2 * 2) + (counter3 * 3) + 
-				(counter4 * 4) + (counter5 * 5) + (counter6 * 6) + (counter7 * 7) + (counter8 * 8) + 
-				(counter9 * 9) + (counter10 * 10) + (counter11 * 11));
-
+		System.out.println(counter);
+		System.out.println(i);
 	}
 }

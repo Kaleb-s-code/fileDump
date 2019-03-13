@@ -48,6 +48,7 @@ public class AnagramFamily {
 		return myAnagrams;
 	}
 
+	
 	/**
 		* This is a getter for..
 		*
@@ -64,7 +65,7 @@ public class AnagramFamily {
  */
 @Override
 public String toString() {
-	return "The Anagram Family: " + myAnagrams + " Size: " + myCurrentListSize;
+	return "The Anagram Family: " + "'" + myAnagrams.get(getMyCurrentListSize() - 1).getMyCanonicalWord() + "', " + myAnagrams + " Size: " + myCurrentListSize;
 }
 
 	
