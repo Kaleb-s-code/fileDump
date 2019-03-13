@@ -4,7 +4,6 @@
 package myPackage;
 
 import java.util.Comparator;
-import java.util.Set;
 
 /**
  * This is class is a comparator that attempts to organize a family of
@@ -13,7 +12,8 @@ import java.util.Set;
  * @author  Kaleb Moreno (kalebm2@uw.edu)
  * @version Mar 8, 2019 (Date of class creation)
  */
-public class DescendingBasedOnAnagramFamilySize implements Comparator<AnagramFamily> {
+public class DescendingBasedOnAnagramFamilySize 
+implements Comparator<AnagramFamily> {
 
 	/**
 	 * This method is supposed to check for the size of the family and
@@ -32,6 +32,14 @@ public class DescendingBasedOnAnagramFamilySize implements Comparator<AnagramFam
 			result = 1;
 		} else if (o1.getMyCurrentListSize() > o2.getMyCurrentListSize()) {
 			result = -1;
+		} else if (o1.getMyCurrentListSize() == o2.getMyCurrentListSize()) {
+			if (o1.getTheComparisonWord()
+					.compareTo(o2.getTheComparisonWord()) < 0) {
+				result = -1;
+			} else if (o1.getTheComparisonWord()
+					.compareTo(o2.getTheComparisonWord()) > 0) {
+				result = 1;
+			}
 		}
 		return result;
 	}

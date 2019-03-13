@@ -1,16 +1,14 @@
+/*
+ * Multiline comment at the top of the file.
+ */
 package myPackage;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
- * Multiline comment at the top of the file.
- */
-
-/**
- * This is a description of what this class will do...
+ * This class is responsible for creating the word objects. 
  *
  * @author  Kaleb Moreno (kalebm2@uw.edu)
  * @version Mar 8, 2019 (Date of class creation)
@@ -72,7 +70,8 @@ public class Word implements Comparable<Word> {
 			characterHolding.add(theChars[i]);
 		}
 		Collections.sort(characterHolding);
-		return characterHolding.toString().replace(",", "").replace(" ", "").substring(1, characterHolding.size() + 1);
+		return characterHolding.toString().replace(",", "").replace(" ", "")
+				.substring(1, characterHolding.size() + 1);
 	}
 
 	/**
@@ -86,7 +85,6 @@ public class Word implements Comparable<Word> {
 	@Override
 	public int compareTo(Word o) {
 		int result = 0;
-//		System.out.println("WORDS BEING COMPARED: " + myOriginalWord + ", " + o.myOriginalWord);
 		if (myCanonicalWord.length() < o.myCanonicalWord.length()) {
 			result = -1;
 		} else if (myCanonicalWord.length() > o.myCanonicalWord.length()) {
@@ -103,19 +101,9 @@ public class Word implements Comparable<Word> {
 	}
 
 	/**
-	 * This method copies the word from the field.
+	 * This method returns a copy of the field in the form of a string. 
 	 *
-	 * @return :
-	 */
-	public Word copyWord() {
-		Word word = new Word(myOriginalWord);
-		return word;
-	}
-
-	/**
-	 * This is an overidden method..
-	 *
-	 *
+	 *@return : This method returns the copied field. 
 	 */
 	@Override
 	public String toString() {

@@ -29,7 +29,8 @@ public class DescendingBasedOnNormalForm implements Comparator<Word> {
 		int result = 0;
 		if (o1.getMyOriginalWord().compareTo(o2.getMyOriginalWord()) < 0) {
 			result = 1;
-		} else if (o1.getMyOriginalWord().compareTo(o2.getMyOriginalWord()) > 0) {
+		} else if (o1.getMyOriginalWord()
+				.compareTo(o2.getMyOriginalWord()) > 0) {
 			result = -1;
 		}
 		return result;
