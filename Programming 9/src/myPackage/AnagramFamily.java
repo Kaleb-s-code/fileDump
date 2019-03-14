@@ -1,7 +1,7 @@
 /**
  * Multiline comment at the top of the file.
  */
-package myPackage;
+//package myPackage;
 
 import java.util.LinkedList;
 import java.util.List;
