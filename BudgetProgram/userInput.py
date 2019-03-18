@@ -44,9 +44,35 @@ def getVendor():
     return ven.lower()
 
 '''This method gets the justification for the transaction'''
-def getJust():
+def getDesc():
     just = input("Enter a description: ")
     return just.lower()
+
+'''This method gets the name of the line item to be added to the 
+budget.'''
+def getItem():
+    itemName = input("Enter a name for this budget line item: ")
+    return itemName.lower()
+
+
+''' This method gets the date last paid'''
+def getDateLastPaid():
+    date = input("Enter the date you last paid this item:\
+    (If this item does not associate with a date enter '0000-00-00'): ")
+    return date
+
+''' This method gets the due date for a budget line item'''
+def getDueDate():
+    date = input("Enter the due date:\
+    (If this item does not associate with a date enter '0000-00-00'): ")
+    return date
+
+''' This method gets the due date for a budget line item'''
+def getNotes():
+    note = input("Enter a note associated with this line item: \n\
+    (If this item does not need a note, enter '')")
+    return note
+
 
 '''This method gets the category under
  which the transaction should fall'''
@@ -73,10 +99,22 @@ def getAmount():
     retry = True
     while retry:
         try:
-            price = float(input('Enter transaction amount: '))
+            price = float(input('Enter an amount: '))
             retry = False
         except Exception:
             print('Try Again')
             retry = True
-    return price    
+    return price  
+ 
+'''This method gets the amount that the transaction came to'''
+def getExpectedMonthly():
+    retry = True
+    while retry:
+        try:
+            price = float(input('Enter the anticipated monthly cost of this item: '))
+            retry = False
+        except Exception:
+            print('Try Again')
+            retry = True
+    return price 
 
