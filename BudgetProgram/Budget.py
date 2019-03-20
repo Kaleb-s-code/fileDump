@@ -77,5 +77,22 @@ class Transactions(myBase):
         self.vendor = theVendor
         self.description = theDesc
         self.category = theCategory
-        self.amount = theAmount
+        self.amount = float(theAmount)
+
+'''
+The purpose of this class is to take on the characteristics of a bank 
+account
+'''
+class Accounts(myBase):
+    __tablename__ = 'accounts'
+    
+    itemId = Column(Integer, primary_key=True)
+    balance = Column(Float, nullable=False)
+    type = Column(String(100), nullable=False)
+    
+    def __init__(self, theBalance, theType):
+        self.balance = theBalance
+        self.type = theType
+    
+    
 
