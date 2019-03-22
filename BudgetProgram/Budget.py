@@ -16,7 +16,7 @@ from sqlalchemy.orm import sessionmaker
 from unicodedata import category
 
 # Establishing a connection to the database.
-myEngine = create_engine('mysql+pymysql://root:Admin-PASSwo-Rd@localhost/testdb')
+myEngine = create_engine('mysql+pymysql://kalebsc1_theBoss:Cassandra1$@162.241.219.194/kalebsc1_MyBlueDataBase')
 myBase = declarative_base()
 
 '''
