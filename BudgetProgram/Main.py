@@ -130,6 +130,7 @@ def Main():
                     SpendingReport.createWordDocumentOfBudget()
                     ans = input("Generate another report(y/n)? ")
                 elif ans2 == 8:
+                    ans = 'n'
                     pass
         elif choice == 6:
             ans = 'y'
@@ -232,7 +233,6 @@ def Main():
                     ans = input("Delete another account(y/n)? ")
             elif ans2 == 6:
                 pass
-
     print("**Program terminated**")
 
 

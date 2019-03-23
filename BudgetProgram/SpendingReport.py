@@ -16,12 +16,14 @@ with a summary of the transactions for a given range'''
 def generateGeneralReport():
     document = Document()
     
-    headingString = 'General Transaction Report | Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
+    headingString = 'General Transaction Report'
+    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsGeneral())
     totalSpent = "Total spent: ${:,.2f}".format(dbMethods.getTheTotalSpentGeneral())
 
     document.add_heading(headingString, 0)
-    
+    document.add_heading(dateString)
+
     document.add_heading("Overview", level=1)
     
     document.add_paragraph(
@@ -51,7 +53,7 @@ def generateGeneralReport():
         row_cells[3].text = vendor
         row_cells[4].text = desc
         row_cells[5].text = cat
-        row_cells[6].text = '$', amount
+        row_cells[6].text = amount
 
     document.save('GeneralReport{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
     print('**Report Generated**')
@@ -60,11 +62,13 @@ def generateGeneralReport():
 def generateReportByDate(theBeginDate, theEndDate):
     document = Document()
     
-    headingString = 'Transactions by Date | Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
+    headingString = 'Transactions by Date Report'
+    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsDate(theBeginDate, theEndDate))
     totalSpent = "Total spent in date range: ${:,.2f}".format(dbMethods.getTheTotalSpentDate(theBeginDate, theEndDate))
 
     document.add_heading(headingString, 0)
+    document.add_heading(dateString)
     
     document.add_heading("Overview", level=1)
     
@@ -95,7 +99,7 @@ def generateReportByDate(theBeginDate, theEndDate):
         row_cells[3].text = vendor
         row_cells[4].text = desc
         row_cells[5].text = cat
-        row_cells[6].text = '$', amount
+        row_cells[6].text = amount
 
     document.save('SpendingByDate{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
     print('**Report Generated**')
@@ -103,11 +107,14 @@ def generateReportByDate(theBeginDate, theEndDate):
 def generateReportByPurchaser(thePurchaser):
     document = Document()
     
-    headingString = 'Transactions by Purchaser | Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
+    headingString = 'Transactions by Purchaser Report'
+    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsPurchaser(thePurchaser))
     totalSpent = "Total spent by purchaser: ${:,.2f}".format(dbMethods.getTheTotalSpentPurchaser(thePurchaser))
 
     document.add_heading(headingString, 0)
+    document.add_heading(dateString)
+    
     
     document.add_heading("Overview", level=1)
     
@@ -138,7 +145,7 @@ def generateReportByPurchaser(thePurchaser):
         row_cells[3].text = vendor
         row_cells[4].text = desc
         row_cells[5].text = cat
-        row_cells[6].text = '$', amount
+        row_cells[6].text = amount
 
     document.save('SpendingByPurchaser{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
     print('**Report Generated**')
@@ -155,11 +162,13 @@ def generateReportByAmount(theFile, theAmount):
 def generateReportByVendor(theVendor):
     document = Document()
     
-    headingString = 'Transactions by Vendor | Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
+    headingString = 'Transactions by Vendor Report'
+    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsVendor(theVendor))
     totalSpent = "Total spent by vendor: ${:,.2f}".format(dbMethods.getTheTotalSpentVendor(theVendor))
 
     document.add_heading(headingString, 0)
+    document.add_heading(dateString)
     
     document.add_heading("Overview", level=1)
     
@@ -190,7 +199,7 @@ def generateReportByVendor(theVendor):
         row_cells[3].text = vendor
         row_cells[4].text = desc
         row_cells[5].text = cat
-        row_cells[6].text = '$', amount
+        row_cells[6].text = amount
 
     document.save('SpendingByVendor{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
     print('**Report Generated**')
@@ -199,11 +208,13 @@ def generateReportByVendor(theVendor):
 def generateReportByCategory(theCat):
     document = Document()
     
-    headingString = 'Transactions by Category | Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
+    headingString = 'Transactions by Category Report'
+    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactions(theCat))
     totalSpent = "Total spent in category: ${:,.2f}".format(dbMethods.getTheTotalSpent(theCat))
 
     document.add_heading(headingString, 0)
+    document.add_heading(dateString)
     
     document.add_heading("Overview", level=1)
     
@@ -234,7 +245,7 @@ def generateReportByCategory(theCat):
         row_cells[3].text = vendor
         row_cells[4].text = desc
         row_cells[5].text = cat
-        row_cells[6].text = '$', amount
+        row_cells[6].text = amount
 
     document.save('SpendingByCategory{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
     print('**Report Generated**')
@@ -247,8 +258,10 @@ def createWordDocumentOfBudget():
     totalSaved = "Total Savings: {}".format(dbMethods.getTotalSaved())
 
 
-    headingString = 'The Budget | Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
+    headingString = 'The Budget'
+    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     document.add_heading(headingString, 0)
+    document.add_heading(dateString)
     
     document.add_heading("Financial Overview", level=1)
     
@@ -281,8 +294,8 @@ def createWordDocumentOfBudget():
         row_cells[0].text = str(itemId)
         row_cells[1].text = lastPaid
         row_cells[2].text = name
-        row_cells[3].text = "$", value
-        row_cells[4].text = "$", exp
+        row_cells[3].text = value
+        row_cells[4].text = exp
         row_cells[5].text = due
 
     document.save('TheBudget{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))

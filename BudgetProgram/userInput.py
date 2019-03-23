@@ -16,7 +16,7 @@ def greeting():
     greet = 0
     print(
           "Pick from one of the following menu options\n\n", 
-          "1.) Set up a budget\n",
+          "1.) Add an account\n",
           "2.) Enter a transaction\n",
           "3.) Edit a transaction\n",
           "4.) View transactions\n", 
@@ -139,7 +139,7 @@ def getCategory():
                "ipad", "car insurance", "medical dental", "sprint", "xfinity",
                "groceries", "donations", "allowance", "netflix", "ymca", "hp instant ink",
                "fuel", "pse", "home needs", "state farm", "healthy paws", "date night",
-               "wishlist", "buffer","other"]
+               "wishlist", "buffer","other", "addition", "deduction"]
     while retry or cat not in options:
         try:
             cat = input("Enter a category: ")

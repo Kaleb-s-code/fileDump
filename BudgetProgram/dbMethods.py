@@ -16,7 +16,7 @@ from sqlalchemy import desc
 This method adds items to the database budget
 '''
 def addItemToDb(theDate, theName, theValue, theExpected, theDueDate, theNotes):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     newItem = TheBudget(theDate, theName, theValue, theExpected, theDueDate, theNotes)
     session.add(newItem)
@@ -28,7 +28,7 @@ def addItemToDb(theDate, theName, theValue, theExpected, theDueDate, theNotes):
 This method adds items to the database budget
 '''
 def addAccountToDb(theBalance, theType):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     newAccount = Accounts(theBalance, theType)
     session.add(newAccount)
@@ -40,7 +40,7 @@ def addAccountToDb(theBalance, theType):
 This method updates the account balance
 '''
 def updateAccountBalance(theID, theNewValue):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.balance: theNewValue})
@@ -52,7 +52,7 @@ def updateAccountBalance(theID, theNewValue):
 This method updates the account type
 '''
 def updateAccountType(theID, theType):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.type: theType})
@@ -65,7 +65,7 @@ This method deletes from the database an item matching the name
 passed
 '''
 def deleteFromDbByName(theName):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(TheBudget.itemName == theName).delete(synchronize_session=False)
     session.query(TheBudget).filter(TheBudget.itemName == theName).delete(synchronize_session='evaluate')
@@ -77,7 +77,7 @@ def deleteFromDbByName(theName):
 This method deletes from the database items matching the ID
 '''
 def deleteFromDbByID(theId):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(TheBudget.itemId == theId).delete(synchronize_session=False)
     session.query(TheBudget).filter(TheBudget.itemId == theId).delete(synchronize_session='evaluate')
@@ -89,7 +89,7 @@ def deleteFromDbByID(theId):
 This method deletes from the database items matching the ID
 '''
 def deleteAccountFromDbByID(theId):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Accounts).filter(Accounts.itemId == theId).delete(synchronize_session=False)
     session.query(Accounts).filter(Accounts.itemId == theId).delete(synchronize_session='evaluate')
@@ -103,7 +103,7 @@ This method adds items to the database budget and removes the value from
 the budget table and the account balance in the account table.
 '''
 def addTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     newItem = Transactions(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount)
     session.add(newItem)
@@ -111,10 +111,15 @@ def addTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, theAm
     session.close()
     print("\n\n")
     print(viewAccounts())
-    anId = int(input("Which account would you like to deduct from?: "))
-    subtractFromAccountBalance(anId, theAmount)
-    subtractFromBudgetItemValue(theCategory, theAmount)
-    print("**item added to budget**")
+    if theCategory == 'addition':
+        anID = int(input('Enter an account ID to add to: '))
+        AddToAccountBalance(anID, theAmount)
+    elif theCategory == 'deduction': 
+        anId = int(input("Which account would you like to deduct from?(Enter 0 for neither): "))
+        if anId != 0:
+            subtractFromAccountBalance(anId, theAmount)
+            subtractFromBudgetItemValue(theCategory, theAmount)
+    print("**Transaction recorded**")
 
 
 '''
@@ -123,7 +128,7 @@ This method is called from the method above and executed every time a new
 transaction is made.
 '''
 def subtractFromBudgetItemValue(theCategory, theValue):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(TheBudget.itemName == theCategory).update(
         {TheBudget.itemValue: TheBudget.itemValue - theValue})
@@ -136,7 +141,7 @@ This method is called from the method above and executed every time a new
 transaction is made.
 '''
 def subtractFromAccountBalance(theID, theValue):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.balance: Accounts.balance - theValue})
@@ -149,7 +154,7 @@ This method is called from the method above and executed every time a new
 transaction is made.
 '''
 def AddToAccountBalance(theID, theValue):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.balance: Accounts.balance + theValue})
@@ -160,7 +165,7 @@ def AddToAccountBalance(theID, theValue):
 This method updates the item name in the budget table
 '''
 def updateBudgetItemName(theOldName, theName):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(TheBudget.itemName == theOldName).update(
         {TheBudget.itemName: theName})
@@ -172,7 +177,7 @@ def updateBudgetItemName(theOldName, theName):
 This method updates the item value in the budget table
 '''
 def updateBudgetItemValue(theName, theNewValue):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(TheBudget.itemName == theName).update(
         {TheBudget.itemValue: theNewValue})
@@ -184,7 +189,7 @@ def updateBudgetItemValue(theName, theNewValue):
 This method updates the date last paid for an item in the budget table
 '''
 def updateBudgetDateLastPaid(theName, theNewDate):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(
         TheBudget.itemName == theName).update(
@@ -197,7 +202,7 @@ def updateBudgetDateLastPaid(theName, theNewDate):
 This method updates the expected monthly value in the budget table
 '''
 def updateBudgetExpectedValue(theName, theNewExpectedValue):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(TheBudget.itemName == theName).update(
         {TheBudget.expectedMonthlyValue: theNewExpectedValue})
@@ -209,7 +214,7 @@ def updateBudgetExpectedValue(theName, theNewExpectedValue):
 This method updates the due date of the item in the budget table
 '''
 def updateBudgetItemDueDate(theName, theNewDate):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(
         TheBudget.itemName == theName).update(
@@ -222,7 +227,7 @@ def updateBudgetItemDueDate(theName, theNewDate):
 This method updates the item item notes in the budget table
 '''
 def updateBudgetItemNotes(theName, theNewNotes):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(TheBudget).filter(TheBudget.itemName == theName).update(
         {TheBudget.itemNotes: theNewNotes})
@@ -234,7 +239,7 @@ def updateBudgetItemNotes(theName, theNewNotes):
 This method deletes from the database items matching the ID
 '''
 def deleteTransactionByID(theId):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Transactions).filter(Transactions.itemId == theId).delete(
         synchronize_session=False)
@@ -248,7 +253,7 @@ def deleteTransactionByID(theId):
 This method updates the item name in the budget table
 '''
 def updateTransactionDate(theID, theDate):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.dateOfTransaction: theDate})
@@ -260,7 +265,7 @@ def updateTransactionDate(theID, theDate):
 This method updates the item value in the budget table
 '''
 def updateTransactionPurchaser(theID, thePurchaser):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.purchaser: thePurchaser})
@@ -272,7 +277,7 @@ def updateTransactionPurchaser(theID, thePurchaser):
 This method updates the date last paid for an item in the budget table
 '''
 def updateTransactionAmount(theID, theAmount):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.amount: theAmount})
@@ -284,7 +289,7 @@ def updateTransactionAmount(theID, theAmount):
 This method updates the expected monthly value in the budget table
 '''
 def updateTransactionVendor(theID, theVen):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.vendor: theVen})
@@ -296,7 +301,7 @@ def updateTransactionVendor(theID, theVen):
 This method updates the due date of the item in the budget table
 '''
 def updateTransactionDesc(theID, theDesc):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.description: theDesc})
@@ -308,7 +313,7 @@ def updateTransactionDesc(theID, theDesc):
 This method updates the item item notes in the budget table
 '''
 def updateTransactionCategory(theID, theCat):
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.category: theCat})
@@ -322,7 +327,7 @@ This method shows all of the info about the accounts
 '''
 def viewAccounts():
     result = ""
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     account = session.query(Accounts).all()
     for acc in account:
@@ -335,7 +340,7 @@ This method deletes from the database items matching the ID
 '''
 def viewTransactions():
     result = ""
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     trans = session.query(Transactions).all()
     for tran in trans:
@@ -356,7 +361,7 @@ This method deletes from the database items matching the ID
 '''
 def viewTransactionsByDate(theBeginDate, theEndDate):
     result = ""
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     trans = session.query(Transactions).filter(Transactions.dateOfTransaction >= theBeginDate,
                                                Transactions.dateOfTransaction <= theEndDate )
@@ -378,7 +383,7 @@ This method deletes from the database items matching the ID
 '''
 def viewTransactionsByPurchaser(thePurchaser):
     result = ""
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     trans = session.query(Transactions).filter(
         Transactions.purchaser == thePurchaser)
@@ -400,7 +405,7 @@ This method deletes from the database items matching the ID
 def viewTransactionsByAmount(theAmount):
     result = ""
 
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     trans = session.query(Transactions).filter(Transactions.amount == theAmount)
     for tran in trans:
@@ -420,7 +425,7 @@ This method deletes from the database items matching the ID
 '''
 def viewTransactionsByVendor(theVendor):
     result = ""
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     trans = session.query(Transactions).filter(Transactions.vendor == theVendor)
     for tran in trans:
@@ -440,7 +445,7 @@ This method deletes from the database items matching the ID
 '''
 def viewTransactionsByCategory(theCat):
     result = ""
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     trans = session.query(Transactions).filter(Transactions.category == theCat)
     for tran in trans:
@@ -465,16 +470,16 @@ def viewBudget():
     monthly = 0
     test = 0
     
-    Budget.myBase.metadata.create_all(Budget.myEngine)
+#     Budget.myBase.metadata.create_all(Budget.myEngine)
     session = Budget.sessionmaker(bind=Budget.myEngine)()
     budg = session.query(TheBudget).all()
     noHealthInsurance = session.query(TheBudget).filter(TheBudget.itemName != 'medical & dental')
     accountBal = session.query(Accounts).all()
-    result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}\t |{3:<10}|\t |{4:<15}|\t |{5:<7}|\t\n".format(
-        'itemId', 'dateLastPaid', 'itemName', 'itemValue', 'expectedMonthly', 'dueDate'))
+    result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}\t |{3:<10}|\t |{4:<15}|\t |{5:<7}|\t |{6:<7}|\t\n".format(
+        'itemId', 'dateLastPaid', 'itemName', 'itemValue', 'expectedMonthly', 'dueDate', 'notes'))
     for item in budg:
-        result += ('{0:<8}\t {1:<10}\t {2:<15}\t {3:<10}\t {4:<15}\t {5:<7}\t\n'.format(str(item.itemId), str(item.dateLastPaid), 
-                       str(item.itemName), str(item.itemValue), str(item.expectedMonthlyValue), str(item.dueDate)))
+        result += ('{0:<8}\t {1:<10}\t {2:<15}\t {3:<10}\t {4:<15}\t {5:<7}\t {6:<7}\n'.format(str(item.itemId), str(item.dateLastPaid), 
+                       str(item.itemName), str(item.itemValue), str(item.expectedMonthlyValue), str(item.dueDate), str(item.itemNotes)))
    
     for item in budg:
         value += float(item.itemValue)
@@ -506,8 +511,8 @@ def getDbItemsIntoArray():
     budg = session.query(TheBudget).all()
     result = []
     for item in budg:
-        result.append([str(item.itemId), str(item.dateLastPaid), str(item.itemName), str(item.itemValue), 
-        str(item.expectedMonthlyValue), str(item.dueDate)])
+        result.append([str(item.itemId), str(item.dateLastPaid), str(item.itemName), '${:,.2f}'.format(float(item.itemValue)), 
+        '${:,.2f}'.format(float(item.expectedMonthlyValue)), str(item.dueDate)])
     return result
 
 def getTotalBudgeted():
@@ -569,7 +574,7 @@ def getTransactionsIntoArrayDescinding(theCat):
     result = []
     for item in trans:
         result.append([str(item.itemId), str(item.dateOfTransaction), str(item.purchaser), str(item.vendor), 
-        str(item.description), str(item.category), str(item.amount)])
+        str(item.description), str(item.category), '${:,.2f}'.format(float(item.amount))])
     return result
 
 def getTheTotalSpent(theCat):
@@ -592,7 +597,7 @@ def getTransactionsIntoArrayDescindingVendor(theVen):
     result = []
     for item in trans:
         result.append([str(item.itemId), str(item.dateOfTransaction), str(item.purchaser), str(item.vendor), 
-        str(item.description), str(item.category), str(item.amount)])
+        str(item.description), str(item.category), '${:,.2f}'.format(float(item.amount))])
     return result
 
 def getTheTotalSpentVendor(theVen):
@@ -615,7 +620,7 @@ def getTransactionsIntoArrayDescindingPurchaser(theP):
     result = []
     for item in trans:
         result.append([str(item.itemId), str(item.dateOfTransaction), str(item.purchaser), str(item.vendor), 
-        str(item.description), str(item.category), str(item.amount)])
+        str(item.description), str(item.category), '${:,.2f}'.format(float(item.amount))])
     return result
 
 def getTheTotalSpentPurchaser(theP):
@@ -637,7 +642,7 @@ def getTransactionsIntoArrayDescindingDate(theBegin, theEnd):
     result = []
     for item in trans:
         result.append([str(item.itemId), str(item.dateOfTransaction), str(item.purchaser), str(item.vendor), 
-        str(item.description), str(item.category), str(item.amount)])
+        str(item.description), str(item.category), '${:,.2f}'.format(float(item.amount))])
     return result
 
 def getTheTotalSpentDate(theBegin, theEnd):
@@ -660,7 +665,7 @@ def getTransactionsIntoArrayDescindingGeneral():
     result = []
     for item in trans:
         result.append([str(item.itemId), str(item.dateOfTransaction), str(item.purchaser), str(item.vendor), 
-        str(item.description), str(item.category), str(item.amount)])
+        str(item.description), str(item.category), '${:,.2f}'.format(float(item.amount))])
     return result
 
 def getTheTotalSpentGeneral():
