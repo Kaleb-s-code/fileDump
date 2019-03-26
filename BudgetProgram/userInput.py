@@ -10,6 +10,7 @@ relevance in the budget program.
 '''This method serves as the initial greeting and menu which will 
 determine the course of the program.'''
 from datetime import datetime
+
 def greeting():
     retry = True
     ans = "y"
@@ -57,16 +58,29 @@ def getAccountBalance():
 
 '''This just gets the start date for the budget'''
 def getStartDate():
-    date = input("Enter the start date(YYYY-MM-DD): ")
-    date = datetime.strptime(date, '%Y-%m-%d')
+    retry = True
+    while retry == True:
+        date = input("Enter the start date(YYYY-MM-DD): ")
+        try:
+            date = datetime.strptime(date, '%Y-%m-%d')
+            retry = False
+        except Exception as e:
+            print('Try again: ', e)
+            retry = True
     return date
 
 '''This just gets the end date for the budget'''
 def getEndDate():
-    date = input("Enter the end date(YYYY-MM-DD): ")
-    date = datetime.strptime(date, '%Y-%m-%d')
+    retry = True
+    while retry == True:
+        date = input("Enter the end date(YYYY-MM-DD): ")
+        try:
+            date = datetime.strptime(date, '%Y-%m-%d')
+            retry = False
+        except Exception as e:
+            print('Try again: ', e)
+            retry = True
     return date
-
 '''This method just gets the name of the purchaser'''
 def getPurchaser():
     who = input("Who made the transaction?: ")
@@ -119,12 +133,28 @@ def getTheNewDate():
     return date
 
 def getAValue():
-    value = float(input("Enter a value: "))
+    retry = True
+    value = 0
+    while retry == True:
+        try:
+            value = float(input("Enter a value: "))
+            retry = False
+        except Exception as e:
+            print('Try again: ', e)
+            retry = True
     return value
 
 def getAnID():
-    theId = int(input("Enter an ID: "))
-    return theId
+    retry = True
+    ID = 0
+    while retry == True:
+        try:
+            ID = float(input("Enter an ID: "))
+            retry = False
+        except Exception as e:
+            print('Try again: ', e)
+            retry = True
+    return ID
 
 def getNewMonthly():
     exp = float(input("Enter new monthly expected value: "))
@@ -139,7 +169,7 @@ def getCategory():
                "ipad", "car insurance", "medical dental", "sprint", "xfinity",
                "groceries", "donations", "allowance", "netflix", "ymca", "hp instant ink",
                "fuel", "pse", "home needs", "state farm", "healthy paws", "date night",
-               "wishlist", "buffer","other", "addition", "deduction"]
+               "wishlist", "buffer","other", "addition", "deduction", "adjustment"]
     while retry or cat not in options:
         try:
             cat = input("Enter a category: ")

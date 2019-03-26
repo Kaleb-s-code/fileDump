@@ -18,8 +18,9 @@ def generateGeneralReport():
     
     headingString = 'General Transaction Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
-    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsGeneral())
-    totalSpent = "Total spent: ${:,.2f}".format(dbMethods.getTheTotalSpentGeneral())
+    numberOfTransactions = "Total number of transactions: {}".format(
+        dbMethods.getTotalNumberOfTransactions(0, '', '', '', '', ''))
+    totalSpent = "Total spent: ${:,.2f}".format(dbMethods.getTheTotalSpent(0, '', '', '', '', ''))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -33,7 +34,7 @@ def generateGeneralReport():
         totalSpent
     )
     records = (
-        dbMethods.getTransactionsIntoArrayDescindingGeneral()
+        dbMethods.getTransactionsIntoArrayDescinding(0, '', '', '', '', '')
     )
     document.add_heading("Breakdown:", level=1)
     table = document.add_table(rows=1, cols=7)
@@ -64,8 +65,8 @@ def generateReportByDate(theBeginDate, theEndDate):
     
     headingString = 'Transactions by Date Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
-    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsDate(theBeginDate, theEndDate))
-    totalSpent = "Total spent in date range: ${:,.2f}".format(dbMethods.getTheTotalSpentDate(theBeginDate, theEndDate))
+    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(1, '', '', '', theBeginDate, theEndDate))
+    totalSpent = "Total spent in date range: ${:,.2f}".format(dbMethods.getTheTotalSpent(1,  '', '', '', theBeginDate, theEndDate))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -79,7 +80,7 @@ def generateReportByDate(theBeginDate, theEndDate):
         totalSpent
     )
     records = (
-        dbMethods.getTransactionsIntoArrayDescindingDate(theBeginDate, theEndDate)
+        dbMethods.getTransactionsIntoArrayDescinding(1,  '', '', '', theBeginDate, theEndDate)
     )
     document.add_heading("Breakdown:", level=1)
     table = document.add_table(rows=1, cols=7)
@@ -109,8 +110,8 @@ def generateReportByPurchaser(thePurchaser):
     
     headingString = 'Transactions by Purchaser Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
-    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsPurchaser(thePurchaser))
-    totalSpent = "Total spent by purchaser: ${:,.2f}".format(dbMethods.getTheTotalSpentPurchaser(thePurchaser))
+    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(2,  '', '', thePurchaser, '', ''))
+    totalSpent = "Total spent by purchaser: ${:,.2f}".format(dbMethods.getTheTotalSpent(2, '', '', thePurchaser, '', ''))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -125,7 +126,7 @@ def generateReportByPurchaser(thePurchaser):
         totalSpent
     )
     records = (
-        dbMethods.getTransactionsIntoArrayDescindingPurchaser(thePurchaser)
+        dbMethods.getTransactionsIntoArrayDescinding(2, '', '', thePurchaser, '', '')
     )
     document.add_heading("Breakdown:", level=1)
     table = document.add_table(rows=1, cols=7)
@@ -155,7 +156,7 @@ def generateReportByAmount(theFile, theAmount):
     theFile.write('Transaction Summary:\n')
     theFile.write('Date: ' + str(time) + '\n')
     theFile.write('=' * 40 + '\n\n')
-    theFile.write(str(dbMethods.viewTransactionsByAmount(theAmount)))
+    theFile.write(str(dbMethods.viewTransactions(3, '', '', '', theAmount, '', '')))
     theFile.close()
     print('\n**Session Report Generated**')
 
@@ -164,8 +165,8 @@ def generateReportByVendor(theVendor):
     
     headingString = 'Transactions by Vendor Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
-    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactionsVendor(theVendor))
-    totalSpent = "Total spent by vendor: ${:,.2f}".format(dbMethods.getTheTotalSpentVendor(theVendor))
+    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(3, '', theVendor, '', '', ''))
+    totalSpent = "Total spent by vendor: ${:,.2f}".format(dbMethods.getTheTotalSpent(3, '', theVendor, '', '', ''))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -179,7 +180,7 @@ def generateReportByVendor(theVendor):
         totalSpent
     )
     records = (
-        dbMethods.getTransactionsIntoArrayDescindingVendor(theVendor)
+        dbMethods.getTransactionsIntoArrayDescinding(3, '', theVendor, '', '', '')
     )
     document.add_heading("Breakdown:", level=1)
     table = document.add_table(rows=1, cols=7)
@@ -210,8 +211,8 @@ def generateReportByCategory(theCat):
     
     headingString = 'Transactions by Category Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
-    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.totalNumberOfTransactions(theCat))
-    totalSpent = "Total spent in category: ${:,.2f}".format(dbMethods.getTheTotalSpent(theCat))
+    numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(4, theCat, '', '', '', ''))
+    totalSpent = "Total spent in category: ${:,.2f}".format(dbMethods.getTheTotalSpent(4, theCat, '', '', '', ''))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -225,7 +226,7 @@ def generateReportByCategory(theCat):
         totalSpent
     )
     records = (
-        dbMethods.getTransactionsIntoArrayDescinding(theCat)
+        dbMethods.getTransactionsIntoArrayDescinding(4, theCat, '', '', '', '')
     )
     document.add_heading("Breakdown:", level=1)
     table = document.add_table(rows=1, cols=7)

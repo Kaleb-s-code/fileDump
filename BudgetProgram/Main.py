@@ -15,7 +15,7 @@ from userInput import getDateLastPaid, getItem, getAmount, \
     getExpectedMonthly, getDueDate, getNotes, updateAnItem, getTheName, \
     getTheNewDate, getOldName, getAValue, getNewMonthly, \
     getAnID, getStartDate, getEndDate, getAccountBalance, getDesc
-from dbMethods import addAccountToDb
+from dbMethods import addANewAccount
 from SpendingReport import generateReportByCategory, \
     generateReportByDate, generateReportByPurchaser, \
     generateReportByAmount
@@ -36,7 +36,7 @@ def Main():
             if createAccount == 'y':
                 account = getAccountBalance()
                 aType = getDesc()
-                dbMethods.addAccountToDb(account, aType)
+                dbMethods.addANewAccount(account, aType)
             print("\n")
         elif choice == 2:
             theDate = date.today()
@@ -46,7 +46,7 @@ def Main():
                 desc = userInput.getDesc()
                 cat = userInput.getCategory()
                 price = userInput.getAmount()
-                dbMethods.addTransaction(theDate, purchaser, ven, desc, cat, price)
+                dbMethods.addANewTransaction(theDate, purchaser, ven, desc, cat, price)
                 ans = input("Input another(y/n)? ")
                 print("\n")
         elif choice == 3:
@@ -91,13 +91,13 @@ def Main():
                 elif ans2 == 7:
                     while ans == 'y':
                         anId = userInput.getAnID()
-                        dbMethods.deleteTransactionByID(anId)
+                        dbMethods.deleteFromTransaction(anId)
                         ans = input("Delete another(y/n)? ")
                 elif ans2 == 8:
                     pass
                 print("\n")
         elif choice == 4:
-            print(dbMethods.viewTransactions())
+            print(dbMethods.viewTransactions(0, '', '','', '', '', ''))
         elif choice == 5:
             ans = 'y'
             while ans == 'y':
@@ -141,7 +141,7 @@ def Main():
                 expected = getExpectedMonthly()
                 due = getDueDate()
                 note = getNotes()
-                dbMethods.addItemToDb(aDate, name, anAmount, expected, due, note)
+                dbMethods.addLineItemToBudget(aDate, name, anAmount, expected, due, note)
                 ans = input("Input another(y/n)? ")
                 print("\n")
         elif choice == 7:
@@ -188,12 +188,12 @@ def Main():
             elif ans2 == 7:
                 while ans == 'y':
                     name = getTheName()
-                    dbMethods.deleteFromDbByName(name)
+                    dbMethods.deleteFromBudget(0, name, '')
                     ans = input("Delete another item by name(y/n)? ")
             elif ans2 == 8:
                 while ans == 'y':
                     theId = getAnID()
-                    dbMethods.deleteFromDbByID(theId)
+                    dbMethods.deleteFromBudget(1, '', theId)
                     ans = input("Delete another item by ID(y/n)? ")
             elif ans2 == 9:
                 pass
@@ -206,7 +206,7 @@ def Main():
                 while ans == 'y':
                     anID = getAnID()
                     newBalance = getAValue()
-                    dbMethods.AddToAccountBalance(anID, newBalance)
+                    dbMethods.addToAccountBalance(anID, newBalance)
                     ans = input("Add more(y/n)? ")
             elif ans2 == 2:
                 while ans == 'y':
@@ -229,7 +229,7 @@ def Main():
             elif ans2 == 5:
                 while ans == 'y':
                     anID = getAnID()
-                    dbMethods.deleteAccountFromDbByID(anID)
+                    dbMethods.deleteFromAccount(anID)
                     ans = input("Delete another account(y/n)? ")
             elif ans2 == 6:
                 pass

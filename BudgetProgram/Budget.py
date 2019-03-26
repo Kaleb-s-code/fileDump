@@ -32,7 +32,8 @@ class TheBudget(myBase):
     # YYYY-MM-DD
     dateLastPaid = Column(Date, nullable=True)
     itemName = Column(String(100), nullable=False)
-    itemValue = Column(Float, nullable=False)
+    currentValue = Column(Float, nullable=False)
+    budgetedValue = Column(Float, nullable=False)
     expectedMonthlyValue = Column(Float, nullable=False)
     dueDate = Column(Date, nullable=True)
     itemNotes = Column(String(500), nullable=True)
@@ -43,7 +44,8 @@ class TheBudget(myBase):
         else:
             self.dateLastPaid = theDate
         self.itemName = theName
-        self.itemValue = theValue
+        self.currentValue = theValue
+        self.budgetedValue = theValue
         self.expectedMonthlyValue = theExpectedMonthly
         if theDueDate == '':
             self.dueDate = '0000-00-00'
@@ -67,8 +69,10 @@ class Transactions(myBase):
     description = Column(String(500), nullable=True)
     category = Column(String(100), nullable=False)
     amount = Column(Float, nullable=False)
+    accountBalance = Column(Float, nullable=False)
+    accountId = Column(Integer, nullable=False)
     
-    def __init__(self, theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount):
+    def __init__(self, theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount, theAccountBalance, theAccountId):
         if theDate == '':
             self.dateOfTransaction = '0000-00-00'
         else:
@@ -78,6 +82,8 @@ class Transactions(myBase):
         self.description = theDesc
         self.category = theCategory
         self.amount = float(theAmount)
+        self.accountBalance = theAccountBalance
+        self.accountId = theAccountId
 
 '''
 The purpose of this class is to take on the characteristics of a bank 
