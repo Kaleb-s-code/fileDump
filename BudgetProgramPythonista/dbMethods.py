@@ -30,7 +30,7 @@ def addLineItemToBudget(theDateLastPaid, theName, theValue, theExpected, theDueD
 def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount):
     newBalance = 0
     anId = 0
-    session = newSession();
+    session = newSession()
 
     print("\n\n")
     print(viewAccounts())
