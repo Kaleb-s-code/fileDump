@@ -234,8 +234,6 @@ def getTheNewDate():
     date = input("Enter the new date(YYYY-MM-DD): ")
     return date
 
-
-
 # String getters
 #=======================================================================
 '''This method just gets the name of the purchaser'''
@@ -263,7 +261,7 @@ def getItem():
 def getNotes():
     note = input("Enter a note associated with this line item\
     (If this item does not need a note, enter ''): ")
-    return note
+    return note.lower()
 
 def getOldName():
     itemName = input("Enter the old name: ")
