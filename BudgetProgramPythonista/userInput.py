@@ -22,14 +22,13 @@ def greeting():
           "1.) Add an account\n",
           "2.) Enter a transaction\n",
           "3.) Edit a transaction\n",
-          "4.) View transactions\n", 
-          "5.) Generate a report\n", 
-          "6.) Add a line item to a budget\n",
-          "7.) View a budget\n", 
-          "8.) Edit the budget\n",
-          "9.) View Accounts\n",
-          "10.) Edit Accounts\n",
-          "11.) Exit program")
+          "4.) View transactions\n",  
+          "5.) Add a line item to a budget\n",
+          "6.) View a budget\n", 
+          "7.) Edit the budget\n",
+          "8.) View Accounts\n",
+          "9.) Edit Accounts\n",
+          "10.) Exit program")
     while retry or ans == "n":
         try:
             greet = int(input('Enter a number: '))
