@@ -20,7 +20,7 @@ Addition methods
 ===================================================================
 '''     
 def addLineItemToBudget(theDateLastPaid, theName, theValue, theExpected, theDueDate, theNotes):
-    session = newSession();
+    session = newSession()
     newItem = TheBudget(theDateLastPaid, theName, theValue, theExpected, theDueDate, theNotes)
     session.add(newItem)
     session.commit()
@@ -58,7 +58,7 @@ def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, t
     print("**Transaction recorded**")
     
 def addANewAccount(theBalance, theType):
-    session = newSession();
+    session = newSession()
     newAccount = Accounts(theBalance, theType)
     session.add(newAccount)
     session.commit()
@@ -66,7 +66,7 @@ def addANewAccount(theBalance, theType):
     print("**Account added**")
     
 def addToAccountBalance(theID, theValue):
-    session = newSession();
+    session = newSession()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.balance: Accounts.balance + theValue})
     session.commit()
@@ -78,7 +78,7 @@ Update methods
 ''' 
 # Account Updates 
 def updateAccountBalance(theID, theNewValue):
-    session = newSession();
+    session = newSession()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.balance: theNewValue})
     session.commit()
@@ -86,7 +86,7 @@ def updateAccountBalance(theID, theNewValue):
     print("**Balance updated**")
     
 def updateAccountType(theID, theType):
-    session = newSession();
+    session = newSession()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.type: theType})
     session.commit()
@@ -95,7 +95,7 @@ def updateAccountType(theID, theType):
     
 # Budget Updates
 def updateBudgetItemName(theOldName, theName):
-    session = newSession();
+    session = newSession()
     session.query(TheBudget).filter(TheBudget.itemName == theOldName).update(
         {TheBudget.itemName: theName})
     session.commit()
@@ -103,7 +103,7 @@ def updateBudgetItemName(theOldName, theName):
     print("**item updated**")
     
 def updateBudgetItemValue(theName, theNewValue):
-    session = newSession();
+    session = newSession()
     session.query(TheBudget).filter(TheBudget.itemName == theName).update(
         {TheBudget.budgetedValue: theNewValue})
     session.commit()
@@ -111,7 +111,7 @@ def updateBudgetItemValue(theName, theNewValue):
     print("**item updated**")
     
 def updateBudgetDateLastPaid(theName, theNewDate):
-    session = newSession();
+    session = newSession()
     session.query(TheBudget).filter(
         TheBudget.itemName == theName).update(
             {TheBudget.dateLastPaid: theNewDate})
@@ -120,7 +120,7 @@ def updateBudgetDateLastPaid(theName, theNewDate):
     print("**item updated**")
     
 def updateBudgetExpectedValue(theName, theNewExpectedValue):
-    session = newSession();
+    session = newSession()
     session.query(TheBudget).filter(TheBudget.itemName == theName).update(
         {TheBudget.expectedMonthlyValue: theNewExpectedValue})
     session.commit()
@@ -128,7 +128,7 @@ def updateBudgetExpectedValue(theName, theNewExpectedValue):
     print("**item updated**")
     
 def updateBudgetItemDueDate(theName, theNewDate):
-    session = newSession();
+    session = newSession()
     session.query(TheBudget).filter(
         TheBudget.itemName == theName).update(
             {TheBudget.dueDate: theNewDate})
@@ -137,7 +137,7 @@ def updateBudgetItemDueDate(theName, theNewDate):
     print("**item updated**")
     
 def updateBudgetItemNotes(theName, theNewNotes):
-    session = newSession();
+    session = newSession()
     session.query(TheBudget).filter(TheBudget.itemName == theName).update(
         {TheBudget.itemNotes: theNewNotes})
     session.commit()
@@ -146,7 +146,7 @@ def updateBudgetItemNotes(theName, theNewNotes):
     
 # Transaction Updates
 def updateTransactionDate(theID, theDate):
-    session = newSession();
+    session = newSession()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.dateOfTransaction: theDate})
     session.commit()
@@ -154,7 +154,7 @@ def updateTransactionDate(theID, theDate):
     print("**Transaction with ID: ",  theID, " updated**")
     
 def updateTransactionPurchaser(theID, thePurchaser):
-    session = newSession();
+    session = newSession()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.purchaser: thePurchaser})
     session.commit()
@@ -162,7 +162,7 @@ def updateTransactionPurchaser(theID, thePurchaser):
     print("**Transaction with ID: ",  theID, " updated**")
     
 def updateTransactionAmount(theID, theAmount):
-    session = newSession();
+    session = newSession()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.amount: theAmount})
     session.commit()
@@ -170,7 +170,7 @@ def updateTransactionAmount(theID, theAmount):
     print("**Transaction with ID: ",  theID, " updated**")
     
 def updateTransactionVendor(theID, theVen):
-    session = newSession();
+    session = newSession()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.vendor: theVen})
     session.commit()
@@ -178,7 +178,7 @@ def updateTransactionVendor(theID, theVen):
     print("**Transaction with ID: ",  theID, " updated**")
     
 def updateTransactionDesc(theID, theDesc):
-    session = newSession();
+    session = newSession()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.description: theDesc})
     session.commit()
@@ -186,7 +186,7 @@ def updateTransactionDesc(theID, theDesc):
     print("**Transaction with ID: ",  theID, " updated**") 
     
 def updateTransactionCategory(theID, theCat):
-    session = newSession();
+    session = newSession()
     session.query(Transactions).filter(Transactions.itemId == theID).update(
         {Transactions.category: theCat})
     session.commit()
@@ -199,7 +199,7 @@ Delete methods
 ''' 
 # Deletes a row from the budget db
 def deleteFromBudget(theMethID, theName, theID):
-    session = newSession();
+    session = newSession()
     if theMethID == 0:
         session.query(TheBudget).filter(TheBudget.itemName == theName).delete(synchronize_session=False)
         session.query(TheBudget).filter(TheBudget.itemName == theName).delete(synchronize_session='evaluate')
@@ -212,7 +212,7 @@ def deleteFromBudget(theMethID, theName, theID):
 
 # Deletes a row from the account db
 def deleteFromAccount(theId):
-    session = newSession();
+    session = newSession()
     session.query(Accounts).filter(Accounts.itemId == theId).delete(synchronize_session=False)
     session.query(Accounts).filter(Accounts.itemId == theId).delete(synchronize_session='evaluate')
     session.commit()
@@ -221,7 +221,7 @@ def deleteFromAccount(theId):
     
 # Deletes a row from the transaction db
 def deleteFromTransaction(theId):
-    session = newSession();
+    session = newSession()
     session.query(Transactions).filter(Transactions.itemId == theId).delete(
         synchronize_session=False)
     session.query(Transactions).filter(Transactions.itemId == theId).delete(
@@ -236,7 +236,7 @@ Subtraction methods
 ''' 
 # Subtracts a given amount from the 'currentValue' column in the budget db
 def subtractFromBudgetItemValue(theCategory, theValue):
-    session = newSession();
+    session = newSession()
     session.query(TheBudget).filter(TheBudget.itemName == theCategory).update(
         {TheBudget.currentValue: TheBudget.currentValue - theValue})
     session.commit()
@@ -244,7 +244,7 @@ def subtractFromBudgetItemValue(theCategory, theValue):
 
 # Subtracts the given amount from a specified account
 def subtractFromAccountBalance(theID, theValue):
-    session = newSession();
+    session = newSession()
     session.query(Accounts).filter(Accounts.itemId == theID).update(
         {Accounts.balance: Accounts.balance - theValue})
     session.commit()
@@ -256,7 +256,7 @@ View methods
 ''' 
 def viewAccounts():
     result = ""
-    session = newSession();
+    session = newSession()
     account = session.query(Accounts).all()
     for acc in account:
         result += ("Account ID: [{}]\nAccount Balance: ${:,.2f}\nAccount Type: {}\n\n".format(acc.itemId, acc.balance, acc.type))
@@ -267,7 +267,7 @@ def viewAccounts():
 def viewTransactions(theMethNum, theBeginDate, theEndDate, thePurchaser, theAmount,
                      theVendor, theCat):
     result = ""
-    session = newSession();
+    session = newSession()
     # General Transactions
     if theMethNum == 0:
         trans = session.query(Transactions).all()
@@ -309,7 +309,7 @@ def viewBudget():
     monthly = 0
     test = 0
     
-    session = newSession();
+    session = newSession()
     budg = session.query(TheBudget).all()
     noHealthInsurance = session.query(TheBudget).filter(TheBudget.itemName != 'medical & dental')
     accountBal = session.query(Accounts).all()
@@ -351,7 +351,7 @@ Get methods
 # Gets everything in the budget db into an array so that it can be
 # sent to the spending report when called.
 def getDbItemsIntoArray():
-    session = newSession();
+    session = newSession()
     budg = session.query(TheBudget).all()
     result = []
     for item in budg:
@@ -362,7 +362,7 @@ def getDbItemsIntoArray():
 # This gets all of the transactions into an array so that they
 # can be sent to a spending report in the proper format
 def getTransactionsIntoArrayDescinding(theMethNum, theCat, theVen, theP, theBegin, theEnd):
-    session = newSession();
+    session = newSession()
     result = []
     if theMethNum == 0:
         trans = session.query(Transactions).order_by(desc(Transactions.dateOfTransaction))
@@ -383,7 +383,7 @@ def getTransactionsIntoArrayDescinding(theMethNum, theCat, theVen, theP, theBegi
 # The sum of all budgeted items
 def getTotalBudgeted():
     value = 0
-    session = newSession();
+    session = newSession()
     budg = session.query(TheBudget).all()
 
     for item in budg:
@@ -393,7 +393,7 @@ def getTotalBudgeted():
 # The sum of all transaction amounts that match a criteria
 def getTheTotalSpent(theMethNum, theCat, theVen, theP, theBegin, theEnd):
     result = 0
-    session = newSession();
+    session = newSession()
     if theMethNum == 0:
         trans = session.query(Transactions).all()
     elif theMethNum == 1: 
@@ -411,7 +411,7 @@ def getTheTotalSpent(theMethNum, theCat, theVen, theP, theBegin, theEnd):
 # The sum of all transactions that match a criteria
 def getTotalNumberOfTransactions(theMethNum, theCat, theVen, theP, theBegin, theEnd):
     count = 0
-    session = newSession();
+    session = newSession()
     if theMethNum == 0:
         count = session.query(Transactions).count()  
     elif theMethNum == 1:
@@ -427,7 +427,7 @@ def getTotalNumberOfTransactions(theMethNum, theCat, theVen, theP, theBegin, the
 # Returns the current account balance
 def getCurrentBalance(theID):
     result = 0
-    session = newSession();
+    session = newSession()
     account = session.query(Accounts).filter(Accounts.itemId == theID)
     for acc in account:
         result += acc.balance
@@ -441,7 +441,7 @@ def getAmountNeeded():
     value = 0
     test = 0
     
-    session = newSession();
+    session = newSession()
     budg = session.query(TheBudget).all()
 
     for item in budg:
@@ -464,7 +464,7 @@ def getTotalSaved():
     result = ""
     value = 0
     test = 0
-    session = newSession();
+    session = newSession()
     budg = session.query(TheBudget).all()
     for item in budg:
         value += float(item.budgetedValue)
