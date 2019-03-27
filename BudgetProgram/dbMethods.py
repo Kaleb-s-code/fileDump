@@ -29,7 +29,7 @@ def addLineItemToBudget(theDateLastPaid, theName, theValue, theExpected, theDueD
     
 def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount):
     newBalance = 0
-    anID = 0
+    anId = 0
     session = newSession();
 
     print("\n\n")
@@ -38,7 +38,7 @@ def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, t
     if theCategory == 'addition':
         anId = int(input('Enter an account ID to add to: '))
         newBalance = float(getCurrentBalance(anId)) + theAmount
-        addToAccountBalance(anID, theAmount)
+        addToAccountBalance(anId, theAmount)
     elif theCategory == 'adjustment': 
         anId = int(input("Enter the ID for the account you'd like to adjust: "))
         newBalance = theAmount
@@ -47,9 +47,11 @@ def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, t
         if anId != 0:
             newBalance = float(getCurrentBalance(anId)) - theAmount
             subtractFromAccountBalance(anId, theAmount)
+        elif anId == 0 or anId == '':
             subtractFromBudgetItemValue(theCategory, theAmount)
+            newBalance = float(getCurrentBalance(anId))
             
-    newItem = Transactions(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount, newBalance, anID)
+    newItem = Transactions(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount, newBalance, anId)
     session.add(newItem)
     session.commit()
     session.close()
@@ -490,11 +492,5 @@ def resetBudgetValues():
         item.currentValue = item.budgetedValue
     session.commit()
     session.close()
-    
-resetBudgetValues()
-
-    
-    
-    
     
     
