@@ -55,7 +55,9 @@ def updateAnItem():
           "6.) Update an item's notes\n",
           "7.) Delete an item by name\n",
           "8.) Delete an item by ID\n",
-          "9.) Go back")
+          "9.) Set current values to budgeted values\n",
+          "10.) Set budget period\n",
+          "11.) Go back")
     while retry or ans == "n":
         try:
             choice = int(input('Enter a number: '))
@@ -136,19 +138,6 @@ def getAccountBalance():
             retry = True 
     return accountBal
 
-'''This just gets the start date for the budget'''
-def getStartDate():
-    retry = True
-    while retry == True:
-        date = input("Enter the start date(YYYY-MM-DD): ")
-        try:
-            date = datetime.strptime(date, '%Y-%m-%d')
-            retry = False
-        except Exception as e:
-            print('Try again: ', e)
-            retry = True
-    return date
-
 def getAValue():
     retry = True
     value = 0
@@ -203,6 +192,18 @@ def getExpectedMonthly():
 
 # Date getters
 #=======================================================================
+'''This just gets the start date for the budget'''
+def getStartDate():
+    retry = True
+    while retry == True:
+        date = input("Enter the start date(YYYY-MM-DD): ")
+        try:
+            date = datetime.strptime(date, '%Y-%m-%d')
+            retry = False
+        except Exception as e:
+            print('Try again: ', e)
+            retry = True
+    return date
 
 '''This just gets the end date for the budget'''
 def getEndDate():

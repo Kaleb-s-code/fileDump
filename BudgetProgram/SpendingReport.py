@@ -8,13 +8,19 @@ to generating the spending report.
 from datetime import datetime
 import dbMethods
 from docx import Document
+from docx.shared import Pt
 from docx.shared import Inches
 from Budget import Transactions
+
 
 '''This method should generate a simple .txt file 
 with a summary of the transactions for a given range'''
 def generateGeneralReport():
     document = Document()
+    
+    style = document.styles['Normal']
+    font = style.font
+    font.size = Pt(10)
     
     headingString = 'General Transaction Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
@@ -63,6 +69,10 @@ def generateGeneralReport():
 def generateReportByDate(theBeginDate, theEndDate):
     document = Document()
     
+    style = document.styles['Normal']
+    font = style.font
+    font.size = Pt(10)
+    
     headingString = 'Transactions by Date Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(1, '', '', '', theBeginDate, theEndDate))
@@ -107,6 +117,10 @@ def generateReportByDate(theBeginDate, theEndDate):
 
 def generateReportByPurchaser(thePurchaser):
     document = Document()
+    
+    style = document.styles['Normal']
+    font = style.font
+    font.size = Pt(10)
     
     headingString = 'Transactions by Purchaser Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
@@ -163,6 +177,10 @@ def generateReportByAmount(theFile, theAmount):
 def generateReportByVendor(theVendor):
     document = Document()
     
+    style = document.styles['Normal']
+    font = style.font
+    font.size = Pt(10)
+    
     headingString = 'Transactions by Vendor Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(3, '', theVendor, '', '', ''))
@@ -209,6 +227,10 @@ def generateReportByVendor(theVendor):
 def generateReportByCategory(theCat):
     document = Document()
     
+    style = document.styles['Normal']
+    font = style.font
+    font.size = Pt(10)
+    
     headingString = 'Transactions by Category Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(4, theCat, '', '', '', ''))
@@ -253,10 +275,16 @@ def generateReportByCategory(theCat):
     
 def createWordDocumentOfBudget():
     document = Document()
+    
+    style = document.styles['Normal']
+    font = style.font
+    font.size = Pt(10)
+    
     totalBudgeted = "Total Amount For Budgeted Items: ${:,.2f}".format(dbMethods.getTotalBudgeted())
     accounts = "Total In Accounts:\n{}".format(dbMethods.viewAccounts())
-    amountNeeded = "Amount Needed To cover Expenses: {}".format(dbMethods.getAmountNeeded())
+    amountNeeded = "Amount Needed To cover Expenses (3611): {}".format(dbMethods.getAmountNeeded())
     totalSaved = "Total Savings: {}".format(dbMethods.getTotalSaved())
+    totalCash = "Total Cash Withdrawal: ${:,.2f}".format(dbMethods.getTotalCashWithdrawal())
 
 
     headingString = 'The Budget'
@@ -278,26 +306,37 @@ def createWordDocumentOfBudget():
     document.add_paragraph (
         totalSaved
     )
+    document.add_paragraph (
+        totalCash
+    )
     records = (
         dbMethods.getDbItemsIntoArray()
     )
     document.add_heading("Breakdown:", level=1)
-    table = document.add_table(rows=1, cols=6)
+    table = document.add_table(rows=1, cols=8)
     hdr_cells = table.rows[0].cells
     hdr_cells[0].text = 'Item Id'
+    hdr_cells[0].width = Inches(0.5)
     hdr_cells[1].text = 'Date Last Paid'
+    hdr_cells[1].width = Inches(2)
     hdr_cells[2].text = 'Item Name'
-    hdr_cells[3].text = 'Item Value'
-    hdr_cells[4].text = 'Expected Monthly'
-    hdr_cells[5].text = 'Due Date'
-    for itemId, lastPaid, name, value, exp, due in records:
+    hdr_cells[3].text = 'Current Value'
+    hdr_cells[4].text = 'Budgeted Value'
+    hdr_cells[5].text = 'Expected Monthly'
+    hdr_cells[6].text = 'Due Date'
+    hdr_cells[6].width = Inches(2)
+    hdr_cells[7].text = 'Notes'
+    for itemId, lastPaid, name, current, budgValue, exp, due, notes in records:
         row_cells = table.add_row().cells
         row_cells[0].text = str(itemId)
         row_cells[1].text = lastPaid
         row_cells[2].text = name
-        row_cells[3].text = value
-        row_cells[4].text = exp
-        row_cells[5].text = due
+        row_cells[3].text = current
+        row_cells[4].text = budgValue
+        row_cells[5].text = exp
+        row_cells[6].text = due
+        row_cells[7].text = notes
+        
 
     document.save('TheBudget{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
     print('**Report Generated***')

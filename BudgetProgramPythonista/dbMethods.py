@@ -9,6 +9,7 @@ from Budget import Transactions
 from Budget import Accounts
 from sqlalchemy import desc
 from userInput import getAccountBalance
+from datetime import datetime
 
 def newSession():
 #     Budget.myBase.metadata.create_all(Budget.myEngine)
@@ -28,10 +29,18 @@ def addLineItemToBudget(theDateLastPaid, theName, theValue, theExpected, theDueD
     print("**item added to budget**")
     
 def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount):
+    today = datetime.today()
     newBalance = 0
     anId = 0
     session = newSession()
-
+    bills = ['mortgage', 'hoa', 'student loans', 'ipad', 'car insurance', 
+             'sprint', 'xfinity', 'medical & dental', 'donations', 'netflix', 
+             'hp instant ink', 'ymca', 'pse', 'healthy paws']
+    # This checks to see if a transaction is a bill,
+    # then sets the date paid to the current date if so
+    if theCategory in bills:
+        theDate = today.strftime('%Y-%m-%d')
+        updateBudgetDateLastPaid(theCategory, theDate)
     print("\n\n")
     print(viewAccounts())
     
@@ -313,11 +322,11 @@ def viewBudget():
     budg = session.query(TheBudget).all()
     noHealthInsurance = session.query(TheBudget).filter(TheBudget.itemName != 'medical & dental')
     accountBal = session.query(Accounts).all()
-    result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}\t |{2:<15}\t |{3:<10}|\t |{4:<15}|\t |{5:<7}|\t |{6:<7}|\t\n".format(
-        'itemId', 'dateLastPaid', 'itemName','currentValue', 'budgetedValue', 'expectedMonthly', 'dueDate', 'notes'))
+    result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}|\t |{3:<10}|\t |{4:<10}|\t\n".format(
+        'itemId', 'dateLastPaid', 'itemName','currentValue', 'budgetedValue'))
     for item in budg:
-        result += ('{0:<8}\t {1:<10}\t {2:<15}\t {2:<15}\t {3:<10}\t {4:<15}\t {5:<7}\t {6:<7}\n'.format(str(item.itemId), str(item.dateLastPaid), 
-                       str(item.itemName), str(item.currentValue), str(item.budgetedValue), str(item.expectedMonthlyValue), str(item.dueDate), str(item.itemNotes)))
+        result += ('{0:<8}\t {1:<10}\t {2:<15}\t {3:<10}\t {4:<10}\t\n'.format(str(item.itemId), str(item.dateLastPaid), 
+                       str(item.itemName), str(item.currentValue), str(item.budgetedValue)))
    
     for item in budg:
         value += float(item.budgetedValue)
@@ -348,37 +357,6 @@ def viewBudget():
 Get methods
 ===================================================================
 ''' 
-# Gets everything in the budget db into an array so that it can be
-# sent to the spending report when called.
-def getDbItemsIntoArray():
-    session = newSession()
-    budg = session.query(TheBudget).all()
-    result = []
-    for item in budg:
-        result.append([str(item.itemId), str(item.dateLastPaid), str(item.itemName), '${:,.2f}'.format(float(item.budgetedValue)), 
-        '${:,.2f}'.format(float(item.expectedMonthlyValue)), str(item.dueDate)])
-    return result
-
-# This gets all of the transactions into an array so that they
-# can be sent to a spending report in the proper format
-def getTransactionsIntoArrayDescinding(theMethNum, theCat, theVen, theP, theBegin, theEnd):
-    session = newSession()
-    result = []
-    if theMethNum == 0:
-        trans = session.query(Transactions).order_by(desc(Transactions.dateOfTransaction))
-    elif theMethNum == 1:
-        trans = session.query(Transactions).filter(Transactions.dateOfTransaction >= theBegin, Transactions.dateOfTransaction <= theEnd )
-    elif theMethNum == 2:
-        trans = session.query(Transactions).filter(Transactions.purchaser == theP).order_by(desc( Transactions.dateOfTransaction))
-    elif theMethNum == 3:
-        trans = session.query(Transactions).filter(Transactions.vendor == theVen).order_by(desc(Transactions.dateOfTransaction))
-    elif theMethNum == 4:
-        trans = session.query(Transactions).filter(Transactions.category == theCat).order_by(desc(Transactions.dateOfTransaction))
-    
-    for item in trans:
-        result.append([str(item.itemId), str(item.dateOfTransaction), str(item.purchaser), str(item.vendor), 
-        str(item.description), str(item.category), '${:,.2f}'.format(float(item.amount))])
-    return result
 
 # The sum of all budgeted items
 def getTotalBudgeted():
@@ -493,7 +471,34 @@ def resetBudgetValues():
         item.currentValue = item.budgetedValue
     session.commit()
     session.close()
-    
-# Need a method 
-    
+    print("**Current values reset**")
+
+# This method sets the values in the budget to a given period
+# It also sets the current values to the newly reset values
+def resetToBudgetPeriod(thePeriod):
+    i = 0
+    session = newSession()
+    budg = session.query(TheBudget).all()
+    if thePeriod == 1:
+        period = [879.17, 345, 0, 51.08, 0, 
+                         0, 0, 0, 85, 40, 
+                         35, 0, 0, 0, 30,
+                         100, 25, 77.72, 40, 0,
+                         25, 50]
+    else:
+        period = [0, 0, 20, 0, 209.87, 
+                     126.38, 94.04, 0, 85, 38, 
+                     35, 10.99, 3.29, 22.40, 30,
+                     0, 0, 0, 40, 0,
+                     25, 50]
+        
+    for item in budg:
+        item.budgetedValue = period[i]
+        item.currentValue = item.budgetedValue
+        i = i + 1
+    session.commit()
+    session.close()
+    print("**Budget reset to period: ", thePeriod, "**")
+     
+     
     

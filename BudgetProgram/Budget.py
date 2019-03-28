@@ -39,18 +39,12 @@ class TheBudget(myBase):
     itemNotes = Column(String(500), nullable=True)
     
     def __init__(self, theDate, theName, theValue, theExpectedMonthly, theDueDate, theNotes):
-        if theDate == '':
-            self.dateLastPaid = '0000-00-00'
-        else:
-            self.dateLastPaid = theDate
+        self.dateLastPaid = theDate
         self.itemName = theName
         self.currentValue = theValue
         self.budgetedValue = theValue
         self.expectedMonthlyValue = theExpectedMonthly
-        if theDueDate == '':
-            self.dueDate = '0000-00-00'
-        else:
-            self.dueDate = theDueDate
+        self.dueDate = theDueDate
         self.itemNotes = theNotes
 
 

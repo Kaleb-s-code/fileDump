@@ -8,17 +8,15 @@ this driver creates and manipulates a budget like program.
 '''
 import Budget
 import dbMethods
-import SpendingReport
+
 import userInput
 from _datetime import date, datetime
 from userInput import getDateLastPaid, getItem, getAmount, \
     getExpectedMonthly, getDueDate, getNotes, updateAnItem, getTheName, \
     getTheNewDate, getOldName, getAValue, getNewMonthly, \
     getAnID, getStartDate, getEndDate, getAccountBalance, getDesc
-from dbMethods import addANewAccount
-from SpendingReport import generateReportByCategory, \
-    generateReportByDate, generateReportByPurchaser, \
-    generateReportByAmount
+from dbMethods import addANewAccount, resetToBudgetPeriod
+
 
 '''This main method utilizes all of the imported modules to get user 
 input, store that input into a database and generate a report.'''
@@ -185,9 +183,14 @@ def Main():
                     theId = getAnID()
                     dbMethods.deleteFromBudget(1, '', theId)
                     ans = input("Delete another item by ID(y/n)? ")
-            # Exit the loop
+            # This resets the current values to the budgeted values
             elif ans2 == 9:
-                pass
+                dbMethods.resetBudgetValues()
+            # Reset a budget to a given period
+            # period of 0: sets to 0, 1: period 1, 2: period 2
+            elif ans2 == 10:
+                period = getAValue()
+                dbMethods.resetToBudgetPeriod(period)
         # View accounts
         elif choice == 8:
             print(dbMethods.viewAccounts(), '\n')
