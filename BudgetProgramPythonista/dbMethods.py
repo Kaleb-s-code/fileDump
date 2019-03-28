@@ -384,6 +384,7 @@ def getTheTotalSpent(theMethNum, theCat, theVen, theP, theBegin, theEnd):
         trans = session.query(Transactions).filter(Transactions.category == theCat)
     for item in trans:
         result += item.amount
+    session.close()
     return result
 
 # The sum of all transactions that match a criteria
@@ -400,6 +401,7 @@ def getTotalNumberOfTransactions(theMethNum, theCat, theVen, theP, theBegin, the
         count = session.query(Transactions).filter(Transactions.vendor == theVen).count()
     elif theMethNum == 4:
         count = session.query(Transactions).filter(Transactions.category == theCat).count()
+    session.close()
     return count
 
 # Returns the current account balance
@@ -435,6 +437,7 @@ def getAmountNeeded():
         result += "${:0,.2f}".format(abs(test.balance - value))
     else:
         result += "${:0,.2f}".format(0)
+    session.close()
     return result
 
 # The total potential savings amount
@@ -455,6 +458,7 @@ def getTotalSaved():
         result += "${:,.2f}".format(test.balance - value)
     else:
         result +="${:,.2f}".format(0)
+    session.close()
     return result
 
 '''
