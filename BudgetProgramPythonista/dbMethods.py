@@ -278,7 +278,7 @@ View methods
 def viewAccounts():
     result = ""
     session = newSession()
-    account = session.query(Accounts).all()
+    account = session.query(Accounts).order_by(Accounts.type).all()
     for acc in account:
         result += ("Account ID: [{}]\nAccount Balance: ${:,.2f}\nAccount Type: {}\n\n".format(acc.itemId, acc.balance, acc.type))
     session.close()
