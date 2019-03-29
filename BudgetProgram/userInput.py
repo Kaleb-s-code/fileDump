@@ -108,7 +108,8 @@ def updateATransaction():
           "5.) Change the description\n",
           "6.) Change the category\n",
           "7.) Delete a transaction by ID\n",
-          "8.) Go back")
+          "8.) Delete transactions by purchaser\n",
+          "9.) Go back")
     while retry or ans == "n":
         try:
             choice = int(input('Enter a number: '))
@@ -307,7 +308,7 @@ def getCategory():
                "ipad", "car insurance", "medical dental", "sprint", "xfinity",
                "groceries", "donations", "allowance", "netflix", "ymca", "hp instant ink",
                "fuel", "pse", "home needs", "state farm", "healthy paws", "date night",
-               "wishlist", "buffer","other", "addition", "deduction", "adjustment"]
+               "wishlist", "buffer","other", "addition", "deduction", "adjustment", "income"]
     while retry or cat not in options:
         try:
             cat = input("Enter a category: ")

@@ -56,6 +56,7 @@ def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, t
         if anId != 0:
             newBalance = float(getCurrentBalance(anId)) - theAmount
             subtractFromAccountBalance(anId, theAmount)
+            subtractFromBudgetItemValue(theCategory, theAmount)
         elif anId == 0 or anId == '':
             subtractFromBudgetItemValue(theCategory, theAmount)
             newBalance = float(getCurrentBalance(anId))
@@ -238,6 +239,17 @@ def deleteFromTransaction(theId):
     session.commit()
     session.close()
     print("**Transaction deleted**")
+    
+# Deletes a row from the transaction db
+def deleteFromTransactionByName(theP):
+    session = newSession()
+    session.query(Transactions).filter(Transactions.purchaser == theP).delete(
+        synchronize_session=False)
+    session.query(Transactions).filter(Transactions.purchaser == theP).delete(
+        synchronize_session='evaluate')
+    session.commit()
+    session.close()
+    print("**All transactions matching purchaser: ", theP, "deleted**")
 
 '''
 Subtraction methods
@@ -321,7 +333,7 @@ def viewBudget():
     session = newSession()
     budg = session.query(TheBudget).all()
     noHealthInsurance = session.query(TheBudget).filter(TheBudget.itemName != 'medical & dental')
-    accountBal = session.query(Accounts).all()
+    accountBal = session.query(Accounts).order_by(Accounts.type).all()
     result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}\t |{3:<7}\t |{4:<15}|\t |{5:<15}|\t |{6:<10}|\t |{7:<10}|\t\n".format(
         'itemId', 'dateLastPaid', 'itemName','currentValue', 'budgetedValue', 'expectedMonthly', 'dueDate', 'notes'))
     for item in budg:
@@ -334,6 +346,8 @@ def viewBudget():
         monthly += float(item.expectedMonthlyValue)
         
     result += '\nTOTAL BUDGETED: ${:0,.2f} | TOTAL MONTHLY: ${:1,.2f}\n'.format(value, monthly)
+    result += '\nTOTAL WITHDRAWAL AMOUNT: ${:,.2f}\n'.format(getTotalCashWithdrawal())
+    result += '\nTOTAL MONTHLY SAVINGS: ${:0,.2f}\n\n'.format(getTotalMonthlySaved())
     checkingAccount = session.query(Accounts).filter(Accounts.itemId == 1)
     for check in checkingAccount:
         test = check
@@ -342,13 +356,12 @@ def viewBudget():
         result += 'TOTAL IN ACCOUNT: ${:0,.2f}, TYPE: {}\n'.format(account.balance, account.type)
         
     if test.balance - value > 0:
-        result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}\nSAVINGS TOTAL: ${:1,.2f}".format(
+        result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}\nTOTAL PERIOD SAVINGS TOTAL: ${:1,.2f}".format(
             0, test.balance - value)
     elif test.balance - value < 0:
         result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}".format(abs(test.balance - value))
     else:
         result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}".format(0)
-        
     result += "\n\n"
     session.close()
     return result
@@ -407,6 +420,29 @@ def getTotalBudgeted():
         value += float(item.budgetedValue)
     session.close()
     return value
+
+# Gets the total income minus the total expenses
+def getTotalMonthlySaved():
+    result = 0
+    totalMonthly = getTotalMonthlyExpenses()
+    session = newSession()
+    income = session.query(Transactions).filter(
+        Transactions.category == 'income')
+    size = income.count()
+    for item in income:
+        result += item.amount
+    total = ((result / size) * 2) - totalMonthly
+    return total
+
+# Gets the total monthly expenses
+def getTotalMonthlyExpenses():
+    result = 0
+    session = newSession()
+    trans = session.query(TheBudget).filter(TheBudget.expectedMonthlyValue, TheBudget.itemName != 'medical & dental')
+    for item in trans:
+        result += item.expectedMonthlyValue
+    session.close()
+    return result
 
 # The sum of all transaction amounts that match a criteria
 def getTheTotalSpent(theMethNum, theCat, theVen, theP, theBegin, theEnd):
@@ -544,13 +580,13 @@ def resetToBudgetPeriod(thePeriod):
                          0, 0]
     elif thePeriod == 1:
         period = [879.17, 345, 0, 51.08, 0, 
-                         0, 0, 0, 85, 40, 
+                         0, 0, 0, 170, 40, 
                          35, 0, 0, 0, 30,
                          100, 25, 77.72, 40, 0,
                          25, 50]
     else:
         period = [0, 0, 20, 0, 209.87, 
-                     126.38, 94.04, 0, 85, 38, 
+                     126.38, 94.04, 0, 170, 38, 
                      35, 10.99, 3.29, 22.40, 30,
                      0, 0, 0, 40, 0,
                      25, 50]

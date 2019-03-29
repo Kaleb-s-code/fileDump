@@ -102,8 +102,15 @@ def Main():
                         anId = userInput.getAnID()
                         dbMethods.deleteFromTransaction(anId)
                         ans = input("Delete another(y/n)? ")
-                # Exit the loop
+                # Delete transaction by purchaser
                 elif ans2 == 8:
+                    while ans == 'y':
+                        aP = userInput.getPurchaser()
+                        dbMethods.deleteFromTransactionByName(aP)
+                        ans = input("Delete another(y/n)? ")
+                # Exit the loop
+                elif ans2 == 9:
+                    ans = 'n'
                     pass
                 print("\n")
         # View transactions
@@ -127,70 +134,75 @@ def Main():
             print(dbMethods.viewBudget())
         # Edit the budget
         elif choice == 7:
-            ans = 'y'
-            ans2 = userInput.updateAnItem()
-            # Change date last paid
-            if ans2 == 1:
-                while ans == 'y':
-                    name = getTheName()
-                    newDate = getTheNewDate()
-                    dbMethods.updateBudgetDateLastPaid(name, newDate)
-                    ans = input("Update another date last paid(y/n)? ")
-            # Change item name
-            elif ans2 == 2:
-                while ans == 'y':
-                    oldName = getOldName()
-                    newName = getTheName()
-                    dbMethods.updateBudgetItemName(oldName, newName)
-                    ans = input("Update another item name(y/n)? ")
-            # Change item's value
-            elif ans2 == 3:
-                while ans == 'y':
-                    name = getTheName()
-                    value = getAValue()
-                    dbMethods.updateBudgetItemValue(name, value)
-                    ans = input("Update another item value(y/n)? ")
-            # Change expected monthly
-            elif ans2 == 4:
-                while ans == 'y':
-                    name = getTheName()
-                    exp = getNewMonthly()
-                    dbMethods.updateBudgetExpectedValue(name, exp)
-                    ans = input("Update another expected value(y/n)? ")
-            # Change due date
-            elif ans2 == 5:
-                while ans == 'y':
-                    name = getTheName()
-                    newDate = getTheNewDate()
-                    dbMethods.updateBudgetItemDueDate(name, newDate)
-                    ans = input("Update another item due date(y/n)? ")
-            # Change item notes
-            elif ans2 == 6:
-                while ans == 'y':
-                    name = getTheName()
-                    note = getNotes()
-                    dbMethods.updateBudgetItemNotes(name, note)
-                    ans = input("Update another item's notes(y/n)? ")
-            # Change item name
-            elif ans2 == 7:
-                while ans == 'y':
-                    name = getTheName()
-                    dbMethods.deleteFromBudget(0, name, '')
-                    ans = input("Delete another item by name(y/n)? ")
-            # Delete an item by ID
-            elif ans2 == 8:
-                while ans == 'y':
-                    theId = getAnID()
-                    dbMethods.deleteFromBudget(1, '', theId)
-                    ans = input("Delete another item by ID(y/n)? ")
-            # This resets the current values to the budgeted values
-            elif ans2 == 9:
-                dbMethods.resetBudgetValues()
-            # Reset a budget to a given period
-            # period of 0: sets to 0, 1: period 1, 2: period 2
-            elif ans2 == 10:
-                period = getAValue()
-                dbMethods.resetToBudgetPeriod(period)
+            while ans == 'y':
+                ans = 'y'
+                ans2 = userInput.updateAnItem()
+                # Change date last paid
+                if ans2 == 1:
+                    while ans == 'y':
+                        name = getTheName()
+                        newDate = getTheNewDate()
+                        dbMethods.updateBudgetDateLastPaid(name, newDate)
+                        ans = input("Update another date last paid(y/n)? ")
+                # Change item name
+                elif ans2 == 2:
+                    while ans == 'y':
+                        oldName = getOldName()
+                        newName = getTheName()
+                        dbMethods.updateBudgetItemName(oldName, newName)
+                        ans = input("Update another item name(y/n)? ")
+                # Change item's value
+                elif ans2 == 3:
+                    while ans == 'y':
+                        name = getTheName()
+                        value = getAValue()
+                        dbMethods.updateBudgetItemValue(name, value)
+                        ans = input("Update another item value(y/n)? ")
+                # Change expected monthly
+                elif ans2 == 4:
+                    while ans == 'y':
+                        name = getTheName()
+                        exp = getNewMonthly()
+                        dbMethods.updateBudgetExpectedValue(name, exp)
+                        ans = input("Update another expected value(y/n)? ")
+                # Change due date
+                elif ans2 == 5:
+                    while ans == 'y':
+                        name = getTheName()
+                        newDate = getTheNewDate()
+                        dbMethods.updateBudgetItemDueDate(name, newDate)
+                        ans = input("Update another item due date(y/n)? ")
+                # Change item notes
+                elif ans2 == 6:
+                    while ans == 'y':
+                        name = getTheName()
+                        note = getNotes()
+                        dbMethods.updateBudgetItemNotes(name, note)
+                        ans = input("Update another item's notes(y/n)? ")
+                # Change item name
+                elif ans2 == 7:
+                    while ans == 'y':
+                        name = getTheName()
+                        dbMethods.deleteFromBudget(0, name, '')
+                        ans = input("Delete another item by name(y/n)? ")
+                # Delete an item by ID
+                elif ans2 == 8:
+                    while ans == 'y':
+                        theId = getAnID()
+                        dbMethods.deleteFromBudget(1, '', theId)
+                        ans = input("Delete another item by ID(y/n)? ")
+                # This resets the current values to the budgeted values
+                elif ans2 == 9:
+                    dbMethods.resetBudgetValues()
+                # Reset a budget to a given period
+                # period of 0: sets to 0, 1: period 1, 2: period 2
+                elif ans2 == 10:
+                    period = getAValue()
+                    dbMethods.resetToBudgetPeriod(period)
+                # Breaks the loop
+                elif ans2 == 11:
+                    ans = 'n'
+                    pass
         # View accounts
         elif choice == 8:
             print(dbMethods.viewAccounts(), '\n')
@@ -234,6 +246,7 @@ def Main():
                     ans = input("Delete another account(y/n)? ")
             # Break the loop
             elif ans2 == 6:
+                ans = 'n'
                 pass
     print("**Program terminated**")
 

@@ -123,7 +123,7 @@ def generateReportByPurchaser(thePurchaser):
     font.size = Pt(10)
     
     headingString = 'Transactions by Purchaser Report'
-    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
+    dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '| for: [', thePurchaser, ']'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(2,  '', '', thePurchaser, '', ''))
     totalSpent = "Total spent by purchaser: ${:,.2f}".format(dbMethods.getTheTotalSpent(2, '', '', thePurchaser, '', ''))
 
@@ -162,7 +162,7 @@ def generateReportByPurchaser(thePurchaser):
         row_cells[5].text = cat
         row_cells[6].text = amount
 
-    document.save('SpendingByPurchaser{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
+    document.save('SpendingByPurchaser{}[{}].docx'.format(str(datetime.now().strftime('%Y-%m-%d')), thePurchaser))
     print('**Report Generated**')
 
 def generateReportByAmount(theFile, theAmount):
@@ -280,10 +280,12 @@ def createWordDocumentOfBudget():
     font = style.font
     font.size = Pt(10)
     
-    totalBudgeted = "Total Amount For Budgeted Items: ${:,.2f}".format(dbMethods.getTotalBudgeted())
+    totalBudgeted = "Total Amount For Budgeted Items: ${:,.2f} | Total Monthly Expenses: ${:,.2f}".format(
+        dbMethods.getTotalBudgeted(), dbMethods.getTotalMonthlyExpenses())
     accounts = "Total In Accounts:\n{}".format(dbMethods.viewAccounts())
-    amountNeeded = "Amount Needed To cover Expenses (3611): {}".format(dbMethods.getAmountNeeded())
-    totalSaved = "Total Savings: {}".format(dbMethods.getTotalSaved())
+    amountNeeded = "Amount Needed To Cover Expenses (3611): {}".format(dbMethods.getAmountNeeded())
+    totalSaved = "Total Period Savings: {}".format(dbMethods.getTotalSaved())
+    expensesVsIncome = 'Monthly Expenses VS. Income: ${:,.2f}'.format(dbMethods.getTotalMonthlySaved())
     totalCash = "Total Cash Withdrawal: ${:,.2f}".format(dbMethods.getTotalCashWithdrawal())
 
 
@@ -304,7 +306,7 @@ def createWordDocumentOfBudget():
         amountNeeded
     )
     document.add_paragraph (
-        totalSaved
+        "{} | {}".format(totalSaved, expensesVsIncome)
     )
     document.add_paragraph (
         totalCash

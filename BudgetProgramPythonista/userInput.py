@@ -107,7 +107,8 @@ def updateATransaction():
           "5.) Change the description\n",
           "6.) Change the category\n",
           "7.) Delete a transaction by ID\n",
-          "8.) Go back")
+          "8.) Delete transactions by purchaser\n",
+          "9.) Go back")
     while retry or ans == "n":
         try:
             choice = int(input('Enter a number: '))
