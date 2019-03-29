@@ -44,7 +44,7 @@ def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, t
     print("\n\n")
     print(viewAccounts())
     
-    if theCategory == 'addition':
+    if theCategory == 'addition' or 'income':
         anId = int(input('Enter an account ID to add to: '))
         newBalance = float(getCurrentBalance(anId)) + theAmount
         addToAccountBalance(anId, theAmount)

@@ -44,7 +44,7 @@ def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, t
     print("\n\n")
     print(viewAccounts())
     
-    if theCategory == 'addition':
+    if theCategory == 'addition' or 'income':
         anId = int(input('Enter an account ID to add to: '))
         newBalance = float(getCurrentBalance(anId)) + theAmount
         addToAccountBalance(anId, theAmount)
@@ -334,10 +334,10 @@ def viewBudget():
     budg = session.query(TheBudget).all()
     noHealthInsurance = session.query(TheBudget).filter(TheBudget.itemName != 'medical & dental')
     accountBal = session.query(Accounts).order_by(Accounts.type).all()
-    result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}|\t |{3:<10}|\t |{4:<10}|\t\n".format(
+    result += ("|{0:<}|\t |{1:<}|\t |{2:<}|\t |{3:<}|\t |{4:<}|\t\n".format(
         'itemId', 'dateLastPaid', 'itemName','currentValue', 'budgetedValue'))
     for item in budg:
-        result += ('{0:<8}\t {1:<10}\t {2:<15}\t {3:<10}\t {4:<10}\t\n'.format(str(item.itemId), str(item.dateLastPaid), 
+        result += ('{0:<8}\t {1:<15}\t {2:<16}\t {3:<15}\t {4:^}\t\n'.format(str(item.itemId), str(item.dateLastPaid), 
                        str(item.itemName), str(item.currentValue), str(item.budgetedValue)))
    
     for item in budg:
