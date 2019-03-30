@@ -50,15 +50,17 @@ def updateAnItem():
           "Pick from one of the following menu options\n\n", 
           "1.) Update the date last paid\n", 
           "2.) Update the item name\n", 
-          "3.) Update the item value\n", 
-          "4.) Update the expected monthly value\n",
-          "5.) Update the due date\n", 
-          "6.) Update an item's notes\n",
-          "7.) Delete an item by name\n",
-          "8.) Delete an item by ID\n",
-          "9.) Set current values to budgeted values\n",
-          "10.) Set budget period\n",
-          "11.) Go back")
+          "3.) Update the item's budgeted value\n",
+          "4.) Update an item's current value\n", 
+          "5.) Update the expected monthly value\n",
+          "6.) Update the due date\n", 
+          "7.) Update an item's notes\n",
+          "8.) Delete an item by name\n",
+          "9.) Delete an item by ID\n",
+          "10.) Set current values to budgeted values\n",
+          "11.) Set budget period\n",
+          "12.) Withdrew the cash\n",
+          "13.) Go back")
     while retry or ans == "n":
         try:
             choice = int(input('Enter a number: '))
@@ -308,7 +310,7 @@ def getCategory():
                "ipad", "car insurance", "medical dental", "sprint", "xfinity",
                "groceries", "donations", "allowance", "netflix", "ymca", "hp instant ink",
                "fuel", "pse", "home needs", "state farm", "healthy paws", "date night",
-               "wishlist", "buffer","other", "addition", "deduction", "adjustment", "income"]
+               "wishlist", "buffer","other", "addition", "deduction", "adjustment", "income", "savings"]
     while retry or cat not in options:
         try:
             cat = input("Enter a category: ")

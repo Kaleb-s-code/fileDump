@@ -10,7 +10,6 @@ import dbMethods
 from docx import Document
 from docx.shared import Pt
 from docx.shared import Inches
-from Budget import Transactions
 
 
 '''This method should generate a simple .txt file 
@@ -26,8 +25,8 @@ def generateGeneralReport():
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(
         dbMethods.getTotalNumberOfTransactions(0, '', '', '', '', ''))
-    totalSpent = "Total spent: ${:,.2f}".format(dbMethods.getTheTotalSpent(0, '', '', '', '', ''))
-
+    totalPositive = "Total Positive: ${:,.2f}".format(dbMethods.getGeneralCashFlow(1))
+    totalNegative = 'Total Negative: -${:,.2f}'.format(dbMethods.getGeneralCashFlow(0))
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
 
@@ -37,7 +36,10 @@ def generateGeneralReport():
         numberOfTransactions
     )
     document.add_paragraph(
-        totalSpent
+        totalPositive
+    )
+    document.add_paragraph(
+        totalNegative
     )
     records = (
         dbMethods.getTransactionsIntoArrayDescinding(0, '', '', '', '', '')

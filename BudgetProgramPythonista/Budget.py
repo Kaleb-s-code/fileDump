@@ -12,8 +12,6 @@ import pymysql
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Date, Float
-from sqlalchemy.orm import sessionmaker
-from unicodedata import category
 
 # Establishing a connection to the database.
 myEngine = create_engine('mysql+pymysql://kalebsc1_theBoss:Cassandra1$@162.241.219.194/kalebsc1_MyBlueDataBase')
@@ -23,7 +21,6 @@ myBase = declarative_base()
 the purpose of this class is to represent a budget database through 
 witch users can add and remove budget line items.
 '''
-
 
 class TheBudget(myBase):
     __tablename__ = 'budget'

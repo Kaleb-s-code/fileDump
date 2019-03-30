@@ -6,19 +6,15 @@ this driver creates and manipulates a budget like program.
 
 @author: Kaleb
 '''
-import Budget
+
 import dbMethods
 import SpendingReport
 import userInput
-from _datetime import date, datetime
+from _datetime import date
 from userInput import getDateLastPaid, getItem, getAmount, \
-    getExpectedMonthly, getDueDate, getNotes, updateAnItem, getTheName, \
+    getExpectedMonthly, getDueDate, getNotes, getTheName, \
     getTheNewDate, getOldName, getAValue, getNewMonthly, \
-    getAnID, getStartDate, getEndDate, getAccountBalance, getDesc
-from dbMethods import addANewAccount
-from SpendingReport import generateReportByCategory, \
-    generateReportByDate, generateReportByPurchaser, \
-    generateReportByAmount
+    getAnID, getAccountBalance, getDesc
 
 '''This main method utilizes all of the imported modules to get user 
 input, store that input into a database and generate a report.'''
@@ -194,49 +190,59 @@ def Main():
                         value = getAValue()
                         dbMethods.updateBudgetItemValue(name, value)
                         ans = input("Update another item value(y/n)? ")
-                # Change expected monthly
+                # Change item's value
                 elif ans2 == 4:
+                    while ans == 'y':
+                        name = getTheName()
+                        value = getAValue()
+                        dbMethods.updateBudgetCurrentValue(name, value)
+                        ans = input("Update another item value(y/n)? ")
+                # Change expected monthly
+                elif ans2 == 5:
                     while ans == 'y':
                         name = getTheName()
                         exp = getNewMonthly()
                         dbMethods.updateBudgetExpectedValue(name, exp)
                         ans = input("Update another expected value(y/n)? ")
                 # Change due date
-                elif ans2 == 5:
+                elif ans2 == 6:
                     while ans == 'y':
                         name = getTheName()
                         newDate = getTheNewDate()
                         dbMethods.updateBudgetItemDueDate(name, newDate)
                         ans = input("Update another item due date(y/n)? ")
                 # Change item notes
-                elif ans2 == 6:
+                elif ans2 == 7:
                     while ans == 'y':
                         name = getTheName()
                         note = getNotes()
                         dbMethods.updateBudgetItemNotes(name, note)
                         ans = input("Update another item's notes(y/n)? ")
                 # Change item name
-                elif ans2 == 7:
+                elif ans2 == 8:
                     while ans == 'y':
                         name = getTheName()
                         dbMethods.deleteFromBudget(0, name, '')
                         ans = input("Delete another item by name(y/n)? ")
                 # Delete an item by ID
-                elif ans2 == 8:
+                elif ans2 == 9:
                     while ans == 'y':
                         theId = getAnID()
                         dbMethods.deleteFromBudget(1, '', theId)
                         ans = input("Delete another item by ID(y/n)? ")
                 # This resets the current values to the budgeted values
-                elif ans2 == 9:
+                elif ans2 == 10:
                     dbMethods.resetBudgetValues()
                 # Reset a budget to a given period
                 # period of 0: sets to 0, 1: period 1, 2: period 2
-                elif ans2 == 10:
+                elif ans2 == 11:
                     period = getAValue()
                     dbMethods.resetToBudgetPeriod(period)
+                # Sets the items 
+                elif ans2 == 12:
+                    dbMethods.doTheWithdrawal()
                 # Breaks the loop
-                elif ans2 == 11:
+                elif ans2 == 13:
                     ans = 'n'
                     pass
         # View accounts
