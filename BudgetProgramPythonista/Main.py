@@ -6,17 +6,15 @@ this driver creates and manipulates a budget like program.
 
 @author: Kaleb
 '''
-import Budget
+
 import dbMethods
-
+import SpendingReport
 import userInput
-from _datetime import date, datetime
+from _datetime import date
 from userInput import getDateLastPaid, getItem, getAmount, \
-    getExpectedMonthly, getDueDate, getNotes, updateAnItem, getTheName, \
+    getExpectedMonthly, getDueDate, getNotes, getTheName, \
     getTheNewDate, getOldName, getAValue, getNewMonthly, \
-    getAnID, getStartDate, getEndDate, getAccountBalance, getDesc
-from dbMethods import addANewAccount, resetToBudgetPeriod
-
+    getAnID, getAccountBalance, getDesc
 
 '''This main method utilizes all of the imported modules to get user 
 input, store that input into a database and generate a report.'''
