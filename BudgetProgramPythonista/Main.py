@@ -8,7 +8,6 @@ this driver creates and manipulates a budget like program.
 '''
 
 import dbMethods
-import SpendingReport
 import userInput
 from _datetime import date
 from userInput import getDateLastPaid, getItem, getAmount, \
