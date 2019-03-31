@@ -589,6 +589,8 @@ def doTheWithdrawal():
     budg = session.query(TheBudget).filter(TheBudget.itemName.in_(items))
     for item in budg:
         item.currentValue = 0
+    theCash = getTotalCashWithdrawal()
+    addANewTransaction('mutual', 'Wells fargo', 'Pulled the money out', 'deduction', theCash)
     session.commit()
     session.close()
     print("**All envelope categories set to 0**")
