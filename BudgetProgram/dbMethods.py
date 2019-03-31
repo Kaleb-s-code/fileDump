@@ -30,6 +30,7 @@ def addLineItemToBudget(theDateLastPaid, theName, theValue, theExpected, theDueD
 def addANewTransaction(thePurchaser, theVendor, theDesc, theCategory, theAmount):
     theAmount = abs(theAmount)
     today = datetime.today()
+    theDate = today.strftime('%Y-%m-%d')
     newBalance = 0
     anId = 0
     session = newSession()
@@ -39,7 +40,6 @@ def addANewTransaction(thePurchaser, theVendor, theDesc, theCategory, theAmount)
     # This checks to see if a transaction is a bill,
     # then sets the date paid to the current date if so
     if theCategory in bills:
-        theDate = today.strftime('%Y-%m-%d')
         updateBudgetDateLastPaid(theCategory, theDate)
     print("\n\n")
     print(viewAccounts())
@@ -345,40 +345,42 @@ def viewTransactions(theMethNum, theBeginDate, theEndDate, thePurchaser, theAmou
 # possible
 def viewBudget():
     result = ""
-    value = 0
+    budgetedValue = 0
+    currentValue = 0
     monthly = 0
-    test = 0
     
     session = newSession()
     budg = session.query(TheBudget).all()
     noHealthInsurance = session.query(TheBudget).filter(TheBudget.itemName != 'medical & dental')
-    accountBal = session.query(Accounts).order_by(Accounts.type).all()
+    allAccounts = session.query(Accounts).order_by(Accounts.type).all()
+    checkingAccount = session.query(Accounts).filter(Accounts.itemId == 1)
+    
     result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}\t |{3:<7}\t |{4:<15}|\t |{5:<15}|\t |{6:<10}|\t |{7:<10}|\t\n".format(
         'itemId', 'dateLastPaid', 'itemName','currentValue', 'budgetedValue', 'expectedMonthly', 'dueDate', 'notes'))
     for item in budg:
         result += ('{0:<8}\t {1:<10}\t {2:<15}\t {3:<7}\t {4:<15}\t {5:<15}\t {6:<10}\t {7:<10}\n'.format(str(item.itemId), str(item.dateLastPaid), 
                        str(item.itemName), str(item.currentValue), str(item.budgetedValue), str(item.expectedMonthlyValue), str(item.dueDate), str(item.itemNotes)))
-   
-    for item in budg:
-        value += float(item.currentValue)
+        budgetedValue += float(item.budgetedValue)
+        currentValue += float(item.currentValue)
+        
     for item in noHealthInsurance:
         monthly += float(item.expectedMonthlyValue)
         
-    result += '\nTOTAL BUDGETED: ${:0,.2f} | TOTAL MONTHLY: ${:1,.2f}\n'.format(value, monthly)
+    result += '\nTOTAL BUDGETED: ${:0,.2f} | TOTAL REMAINING: $ {:0,.2f} |TOTAL MONTHLY: ${:1,.2f}\n'.format(budgetedValue, currentValue, monthly)
     result += '\nTOTAL WITHDRAWAL AMOUNT: ${:,.2f}\n'.format(getTotalCashWithdrawal())
     result += '\nTOTAL MONTHLY SAVINGS: ${:0,.2f}\n\n'.format(getTotalMonthlySaved())
-    checkingAccount = session.query(Accounts).filter(Accounts.itemId == 1)
-    for check in checkingAccount:
-        test = check
     
-    for account in accountBal:
+    for check in checkingAccount:
+        firstAccount = check
+    
+    for account in allAccounts:
         result += 'TOTAL IN ACCOUNT: ${:0,.2f}, TYPE: {}\n'.format(account.balance, account.type)
         
-    if test.balance - value > 0:
+    if firstAccount.balance - abs(currentValue) > 0:
         result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}\nTOTAL PERIOD SAVINGS: ${:1,.2f}".format(
-            0, test.balance - value)
-    elif test.balance - value < 0:
-        result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}".format(abs(test.balance - value))
+            0, firstAccount.balance - abs(budgetedValue))
+    elif firstAccount.balance - abs(currentValue) < 0:
+        result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}".format(abs(firstAccount.balance - currentValue))
     else:
         result += "\nAMOUNT NEEDED TO COVER EXPENSES (3611): ${:0,.2f}".format(0)
     result += "\n\n"

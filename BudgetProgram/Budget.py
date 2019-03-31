@@ -15,7 +15,7 @@ from sqlalchemy import Column, Integer, String, Date, Float
 from sqlalchemy.orm import sessionmaker
 
 # Establishing a connection to the database.
-myEngine = create_engine('mysql+pymysql://kalebsc1_theBoss:Cassandra1$@162.241.219.194/kalebsc1_MyBlueDataBase', pool_recycle=1).connect()
+myEngine = create_engine('mysql+pymysql://kalebsc1_theBoss:Cassandra1$@162.241.219.194/kalebsc1_MyBlueDataBase', pool_recycle=.5)
 myBase = declarative_base()
 
 '''
