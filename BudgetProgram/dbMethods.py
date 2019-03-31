@@ -27,7 +27,7 @@ def addLineItemToBudget(theDateLastPaid, theName, theValue, theExpected, theDueD
     session.close()
     print("**item added to budget**")
     
-def addANewTransaction(theDate, thePurchaser, theVendor, theDesc, theCategory, theAmount):
+def addANewTransaction(thePurchaser, theVendor, theDesc, theCategory, theAmount):
     theAmount = abs(theAmount)
     today = datetime.today()
     newBalance = 0
@@ -413,7 +413,7 @@ def getTransactionsIntoArrayDescinding(theMethNum, theCat, theVen, theP, theBegi
     session = newSession();
     result = []
     if theMethNum == 0:
-        trans = session.query(Transactions).order_by(desc(Transactions.dateOfTransaction))
+        trans = session.query(Transactions).order_by(desc(Transactions.itemId))
     elif theMethNum == 1:
         trans = session.query(Transactions).filter(
             Transactions.dateOfTransaction >= theBegin, Transactions.dateOfTransaction <= theEnd).order_by(
@@ -646,6 +646,8 @@ def doTheWithdrawal():
     budg = session.query(TheBudget).filter(TheBudget.itemName.in_(items))
     for item in budg:
         item.currentValue = 0
+    theCash = getTotalCashWithdrawal()
+    addANewTransaction('mutual', 'Wells fargo', 'Pulled the money out', 'deduction', theCash)
     session.commit()
     session.close()
     print("**All envelope categories set to 0**")

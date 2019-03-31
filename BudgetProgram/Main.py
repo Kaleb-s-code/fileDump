@@ -37,14 +37,13 @@ def Main():
             print("\n")
         # Enter a transaction
         elif choice == 2:
-            theDate = date.today()
             while ans == 'y':
                 purchaser = userInput.getPurchaser()
                 ven = userInput.getVendor()
                 desc = userInput.getDesc()
                 cat = userInput.getCategory()
                 price = userInput.getAmount()
-                dbMethods.addANewTransaction(theDate, purchaser, ven, desc, cat, price)
+                dbMethods.addANewTransaction(purchaser, ven, desc, cat, price)
                 ans = input("Input another(y/n)? ")
                 print("\n")
         # Edit a transaction
