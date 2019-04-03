@@ -355,10 +355,10 @@ def viewBudget():
     allAccounts = session.query(Accounts).order_by(Accounts.type).all()
     checkingAccount = session.query(Accounts).filter(Accounts.itemId == 1)
     
-    result += ("|{0:<8}|\t |{1:<10}|\t |{2:<15}\t |{3:<7}\t |{4:<15}|\t |{5:<15}|\t |{6:<10}|\t |{7:<10}|\t\n".format(
+    result += ("|{0:<8}|\t |{1:<15}|\t |{2:<16}|\t |{3:<15}|\t |{4:<15}|\t |{5:<15}|\t |{6:<10}|\t |{7:<10}|\t\n".format(
         'itemId', 'dateLastPaid', 'itemName','currentValue', 'budgetedValue', 'expectedMonthly', 'dueDate', 'notes'))
     for item in budg:
-        result += ('{0:<8}\t {1:<10}\t {2:<15}\t {3:<7}\t {4:<15}\t {5:<15}\t {6:<10}\t {7:<10}\n'.format(str(item.itemId), str(item.dateLastPaid), 
+        result += ('{0:<8}\t {1:<15}\t {2:<16}\t {3:<15}\t {4:<15}\t {5:<15}\t {6:<10}\t {7:<10}\n'.format(str(item.itemId), str(item.dateLastPaid),
                        str(item.itemName), str(item.currentValue), str(item.budgetedValue), str(item.expectedMonthlyValue), str(item.dueDate), str(item.itemNotes)))
         budgetedValue += float(item.budgetedValue)
         currentValue += float(item.currentValue)
@@ -527,7 +527,7 @@ def getAmountNeeded():
     budg = session.query(TheBudget).all()
 
     for item in budg:
-        value += float(item.budgetedValue)
+        value += float(item.currentValue)
 
     checkingAccount = session.query(Accounts).filter(Accounts.itemId == 1)
     for check in checkingAccount:

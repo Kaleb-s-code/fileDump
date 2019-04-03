@@ -78,7 +78,7 @@ def generateReportByDate(theBeginDate, theEndDate):
     headingString = 'Transactions by Date Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(1, '', '', '', theBeginDate, theEndDate))
-    totalSpent = "Total spent in date range: ${:,.2f}".format(dbMethods.getTheTotalSpent(1,  '', '', '', theBeginDate, theEndDate))
+    totalSpent = "Total spent in date range: ${:,.2f}".format(abs(dbMethods.getTheTotalSpent(1,  '', '', '', theBeginDate, theEndDate)))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -127,7 +127,7 @@ def generateReportByPurchaser(thePurchaser):
     headingString = 'Transactions by Purchaser Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '| for: [', thePurchaser, ']'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(2,  '', '', thePurchaser, '', ''))
-    totalSpent = "Total spent by purchaser: ${:,.2f}".format(dbMethods.getTheTotalSpent(2, '', '', thePurchaser, '', ''))
+    totalSpent = "Total spent by purchaser: ${:,.2f}".format(abs(dbMethods.getTheTotalSpent(2, '', '', thePurchaser, '', '')))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -186,7 +186,7 @@ def generateReportByVendor(theVendor):
     headingString = 'Transactions by Vendor Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(3, '', theVendor, '', '', ''))
-    totalSpent = "Total spent by vendor: ${:,.2f}".format(dbMethods.getTheTotalSpent(3, '', theVendor, '', '', ''))
+    totalSpent = "Total spent by vendor: ${:,.2f}".format(abs(dbMethods.getTheTotalSpent(3, '', theVendor, '', '', '')))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -236,7 +236,7 @@ def generateReportByCategory(theCat):
     headingString = 'Transactions by Category Report'
     dateString = 'Generated on: ', str(datetime.now().strftime('%Y-%m-%d')), '.'
     numberOfTransactions = "Total number of transactions: {}".format(dbMethods.getTotalNumberOfTransactions(4, theCat, '', '', '', ''))
-    totalSpent = "Total spent in category: ${:,.2f}".format(dbMethods.getTheTotalSpent(4, theCat, '', '', '', ''))
+    totalSpent = "Total spent in category: ${:,.2f}".format(abs(dbMethods.getTheTotalSpent(4, theCat, '', '', '', '')))
 
     document.add_heading(headingString, 0)
     document.add_heading(dateString)
@@ -340,7 +340,6 @@ def createWordDocumentOfBudget():
         row_cells[5].text = exp
         row_cells[6].text = due
         row_cells[7].text = notes
-        
 
     document.save('TheBudget{}.docx'.format(str(datetime.now().strftime('%Y-%m-%d'))))
     print('**Report Generated***')
