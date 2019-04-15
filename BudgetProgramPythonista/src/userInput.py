@@ -280,7 +280,7 @@ def getCategory():
     retry = True
     cat = ''
     options = ["additions", "deductions", "mortgage", "hoa", "student loans",
-               "ipad", "car insurance", "medical dental", "sprint", "xfinity",
+               "ipad", "car insurance", "medical & dental", "sprint", "xfinity",
                "groceries", "donations", "allowance", "netflix", "ymca", "hp instant ink",
                "fuel", "pse", "home needs", "state farm", "healthy paws", "date night",
                "wishlist", "buffer","other", "addition", "deduction", "adjustment", "income", "savings"]
